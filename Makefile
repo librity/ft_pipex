@@ -6,7 +6,7 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 16:25:08 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/02/25 10:59:52 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/02/25 18:10:16 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ SOURCES = $(wildcard $(SOURCES_PATH)/**/*.c) $(wildcard $(SOURCES_PATH)/*.c)
 OBJECTS = $(patsubst $(SOURCES_PATH)/%.c, $(OBJECTS_PATH)/%.o, $(SOURCES))
 OBJECT_DIRECTORIES = $(sort $(dir $(OBJECTS)))
 
-ARCHIVES = $(PIPEX_ARCHIVE)
+ARCHIVES = $(PIPEX_ARCHIVE) $(FT_PRINTF_ARCHIVE)
 
 ################################################################################
 # REQUIRED
@@ -55,7 +55,6 @@ $(NAME): $(PIPEX_ARCHIVE)
 		-I $(INCLUDES_PATH) \
 		$(REQUIRED_MAIN) \
 		$(ARCHIVES) \
-		$(CCF_LIBS) \
 		-o $(NAME)
 
 $(PIPEX_ARCHIVE): initialize $(PIPEX_HEADER) $(OBJECTS)
@@ -70,7 +69,7 @@ re: fclean all
 # INITIALIZE
 ################################################################################
 
-initialize: make_dirs
+initialize: make_dirs build_libs
 
 make_dirs: $(ARCHIVES_PATH) $(OBJECTS_PATH) $(OBJECT_DIRECTORIES)
 
@@ -83,6 +82,8 @@ $(OBJECTS_PATH):
 $(OBJECT_DIRECTORIES):
 	$(SAFE_MAKEDIR) $@
 
+build_libs: build_ft_printf
+
 ################################################################################
 # CLEAN
 ################################################################################
@@ -94,7 +95,29 @@ clean:
 fclean: clean
 	$(REMOVE) $(NAME)
 
-tclean: fclean tests_clean example_clean vglog_clean
+tclean: clean_libs fclean tests_clean example_clean vglog_clean
+
+################################################################################
+# LIBS
+################################################################################
+
+LIBS_PATH = ./libs
+
+FT_PRINTF = ft_printf.a
+FT_PRINTF_PATH = $(LIBS_PATH)/ft_printf
+FT_PRINTF_ARCHIVE = $(ARCHIVES_PATH)/$(FT_PRINTF)
+FT_PRINTF_HEADER = $(FT_PRINTF_PATH)/includes/ft_printf.h
+
+build_ft_printf:
+	$(MAKE_EXTERNAL) $(FT_PRINTF_PATH) all
+	$(COPY) $(FT_PRINTF_PATH)/$(FT_PRINTF) $(FT_PRINTF_ARCHIVE)
+	$(COPY) $(FT_PRINTF_HEADER) $(INCLUDES_PATH)
+
+ft_printf_clean:
+	$(MAKE_EXTERNAL) $(FT_PRINTF_PATH) fclean
+	$(REMOVE) $(FT_PRINTF_ARCHIVE)
+
+clean_libs: ft_printf_clean
 
 ################################################################################
 # TESTS
@@ -111,7 +134,7 @@ build_tests: re
 		-I $(INCLUDES_PATH) \
 		$(TEST_SOURCES) \
 		$(ARCHIVES) \
-		$(CCF_LIBS) $(CCF_TEST_LIBS) \
+		$(CCF_TEST_LIBS) \
 		-o $(EXECUTE_TESTS)
 
 test: build_tests
@@ -136,8 +159,8 @@ example: build_example
 build_example: $(PIPEX_ARCHIVE)
 	$(CC) $(CCF_DEBUG) \
 		-I $(INCLUDES_PATH) \
-		$(EXAMPLE_MAIN) $(PIPEX_ARCHIVE) \
-		$(CCF_LIBS)
+		$(EXAMPLE_MAIN) \
+		$(ARCHIVES)
 
 example_clean: fclean
 	$(REMOVE_RECURSIVE) $(EXAMPLE_GARBAGE)
@@ -167,7 +190,6 @@ vg_build: $(PIPEX_ARCHIVE)
 		-I $(INCLUDES_PATH) \
 		$(REQUIRED_MAIN) \
 		$(ARCHIVES) \
-		$(CCF_LIBS) \
 		-o $(NAME)
 
 vglog_clean: fclean
@@ -200,13 +222,15 @@ gitm:
 ################################################################################
 
 .PHONY: all required clean fclean re \
-	initialize make_dirs \
+	initialize make_dirs build_libs \
+\
+	build_ft_printf ft_printf_clean \
 \
 	build_tests test tests_clean \
 	build_example example example_clean \
 	vg vglog vg_build vglog_clean \
 \
-	tclean \
+	tclean clean_libs \
 	norm git gitm
 
 ################################################################################
