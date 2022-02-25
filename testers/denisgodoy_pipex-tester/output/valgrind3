@@ -1,0 +1,31 @@
+==208202== Memcheck, a memory error detector
+==208202== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==208202== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==208202== Command: ./pipex infile
+==208202== Parent PID: 208140
+==208202== 
+==208202== Warning: set address range perms: large range [0x600000000000, 0x640000003000) (noaccess)
+==208202== 
+==208202== Process terminating with default action of signal 2 (SIGINT)
+==208202==    at 0x488A7CE: internal_syscall<long unsigned int, int, unsigned int> (sanitizer_syscall_linux_x86_64.inc:41)
+==208202==    by 0x488A7CE: __sanitizer::internal_open(char const*, int, unsigned int) (sanitizer_linux.cpp:211)
+==208202==    by 0x488D853: __sanitizer::OpenFile(char const*, __sanitizer::FileAccessMode, int*) (sanitizer_posix.cpp:162)
+==208202==    by 0x4886E95: __sanitizer::ReadFileToBuffer(char const*, char**, unsigned long*, unsigned long*, unsigned long, int*) (sanitizer_file.cpp:113)
+==208202==    by 0x4891397: __sanitizer::ReadProcMaps(__sanitizer::ProcSelfMapsBuff*) (sanitizer_procmaps_linux.cpp:20)
+==208202==    by 0x4890BFF: __sanitizer::MemoryMappingLayout::CacheMemoryMappings() (sanitizer_procmaps_common.cpp:104)
+==208202==    by 0x4890D04: __sanitizer::MemoryMappingLayout::MemoryMappingLayout(bool) (sanitizer_procmaps_common.cpp:75)
+==208202==    by 0x488C956: __sanitizer::GetThreadStackTopAndBottom(bool, unsigned long*, unsigned long*) (sanitizer_linux_libcdep.cpp:107)
+==208202==    by 0x488CDC9: __sanitizer::GetThreadStackAndTls(bool, unsigned long*, unsigned long*, unsigned long*, unsigned long*) (sanitizer_linux_libcdep.cpp:543)
+==208202==    by 0x48806CB: __lsan::ThreadStart(unsigned int, unsigned long long, __sanitizer::ThreadType) (lsan_posix.cpp:51)
+==208202==    by 0x4879B80: __lsan_init (lsan.cpp:105)
+==208202==    by 0x4011C5D: _dl_init (dl-init.c:102)
+==208202==    by 0x4001109: ??? (in /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2)
+==208202== 
+==208202== HEAP SUMMARY:
+==208202==     in use at exit: 0 bytes in 0 blocks
+==208202==   total heap usage: 0 allocs, 0 frees, 0 bytes allocated
+==208202== 
+==208202== All heap blocks were freed -- no leaks are possible
+==208202== 
+==208202== For lists of detected and suppressed errors, rerun with: -s
+==208202== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

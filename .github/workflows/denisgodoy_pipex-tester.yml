@@ -1,0 +1,13 @@
+name: denisgodoy_pipex-tester
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run tests
+        run: make
+        working-directory: ./testers/denisgodoy_pipex-tester

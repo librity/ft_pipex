@@ -1,0 +1,13 @@
+name: vfurmane_pipex-tester
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run tests
+        run: ./run.sh
+        working-directory: ./testers/vfurmane_pipex-tester
