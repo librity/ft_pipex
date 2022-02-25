@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ftctemplate.h                                      :+:      :+:    :+:   */
+/*   pipex.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FTCTEMPLATE_H
-# define FTCTEMPLATE_H
+#ifndef PIPEX_H
+# define PIPEX_H
 
 int	plus(int a, int b);
 int	minus(int a, int b);

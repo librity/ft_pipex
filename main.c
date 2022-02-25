@@ -6,11 +6,11 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 10:34:20 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/02/25 10:47:33 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:05:55 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ftctemplate.h>
+#include <pipex.h>
 #include <stdio.h>
 
 int	main(void)

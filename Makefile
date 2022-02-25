@@ -6,14 +6,14 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 16:25:08 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/02/25 10:42:15 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/02/25 10:59:52 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ftctemplate
+NAME = pipex
 
-FTCTEMPLATE_HEADER = $(INCLUDES_PATH)/ftctemplate.h
-FTCTEMPLATE_ARCHIVE = $(ARCHIVES_PATH)/ftctemplate.a
+PIPEX_HEADER = $(INCLUDES_PATH)/pipex.h
+PIPEX_ARCHIVE = $(ARCHIVES_PATH)/pipex.a
 
 CC = gcc
 CC_STRICT = $(CC) $(CCF_STRICT) $(CCF_OPTIMIZATION)
@@ -40,7 +40,7 @@ SOURCES = $(wildcard $(SOURCES_PATH)/**/*.c) $(wildcard $(SOURCES_PATH)/*.c)
 OBJECTS = $(patsubst $(SOURCES_PATH)/%.c, $(OBJECTS_PATH)/%.o, $(SOURCES))
 OBJECT_DIRECTORIES = $(sort $(dir $(OBJECTS)))
 
-ARCHIVES = $(FTCTEMPLATE_ARCHIVE)
+ARCHIVES = $(PIPEX_ARCHIVE)
 
 ################################################################################
 # REQUIRED
@@ -50,7 +50,7 @@ REQUIRED_MAIN = ./main.c
 
 all: $(NAME)
 
-$(NAME): $(FTCTEMPLATE_ARCHIVE)
+$(NAME): $(PIPEX_ARCHIVE)
 	$(CC_STRICT) $(CCF_DEBUG) \
 		-I $(INCLUDES_PATH) \
 		$(REQUIRED_MAIN) \
@@ -58,8 +58,8 @@ $(NAME): $(FTCTEMPLATE_ARCHIVE)
 		$(CCF_LIBS) \
 		-o $(NAME)
 
-$(FTCTEMPLATE_ARCHIVE): initialize $(FTCTEMPLATE_HEADER) $(OBJECTS)
-	$(ARCHIVE_AND_INDEX) $(FTCTEMPLATE_ARCHIVE) $(OBJECTS)
+$(PIPEX_ARCHIVE): initialize $(PIPEX_HEADER) $(OBJECTS)
+	$(ARCHIVE_AND_INDEX) $(PIPEX_ARCHIVE) $(OBJECTS)
 
 $(OBJECTS_PATH)/%.o: $(SOURCES_PATH)/%.c
 	$(CC_STRICT) -I $(INCLUDES_PATH) -c -o $@ $<
@@ -89,7 +89,7 @@ $(OBJECT_DIRECTORIES):
 
 clean:
 	$(REMOVE) $(OBJECTS)
-	$(REMOVE) $(FTCTEMPLATE_ARCHIVE)
+	$(REMOVE) $(PIPEX_ARCHIVE)
 
 fclean: clean
 	$(REMOVE) $(NAME)
@@ -133,10 +133,10 @@ EXAMPLE_GARBAGE = a.out a.out.dSYM
 example: build_example
 	$(EXECUTE_EXAMPLE)
 
-build_example: $(FTCTEMPLATE_ARCHIVE)
+build_example: $(PIPEX_ARCHIVE)
 	$(CC) $(CCF_DEBUG) \
 		-I $(INCLUDES_PATH) \
-		$(EXAMPLE_MAIN) $(FTCTEMPLATE_ARCHIVE) \
+		$(EXAMPLE_MAIN) $(PIPEX_ARCHIVE) \
 		$(CCF_LIBS)
 
 example_clean: fclean
@@ -162,7 +162,7 @@ vg: vg_build
 vglog: vg_build
 	$(VALGRIND) $(VALGRIND_LOG_FLAGS) $(VALGRIND_TARGET)
 
-vg_build: $(FTCTEMPLATE_ARCHIVE)
+vg_build: $(PIPEX_ARCHIVE)
 	$(CC_STRICT) \
 		-I $(INCLUDES_PATH) \
 		$(REQUIRED_MAIN) \

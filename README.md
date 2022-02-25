@@ -1,18 +1,18 @@
-<h3 align="center">42 São Paulo - 42 C Template</h3>
+<h3 align="center">42 São Paulo - Pipex</h3>
 
 <div align="center">
 
-[![Norminette v3](https://github.com/librity/ft_c_template/actions/workflows/norminette_v3.yml/badge.svg)](https://github.com/librity/ft_c_template/actions/workflows/norminette_v3.yml)
+[![Norminette v3](https://github.com/librity/ft_pipex/actions/workflows/norminette_v3.yml/badge.svg)](https://github.com/librity/ft_pipex/actions/workflows/norminette_v3.yml)
 ![42 São Paulo](https://img.shields.io/badge/42-SP-1E2952)
-![License](https://img.shields.io/github/license/librity/ft_c_template?color=yellow)
-![Code size in bytes](https://img.shields.io/github/languages/code-size/librity/ft_c_template?color=blue)
-![Lines of code](https://img.shields.io/tokei/lines/github/librity/ft_c_template?color=blueviolet)
-![Top language](https://img.shields.io/github/languages/top/librity/ft_c_template?color=ff69b4)
-![Last commit](https://img.shields.io/github/last-commit/librity/ft_c_template?color=orange)
+![License](https://img.shields.io/github/license/librity/ft_pipex?color=yellow)
+![Code size in bytes](https://img.shields.io/github/languages/code-size/librity/ft_pipex?color=blue)
+![Lines of code](https://img.shields.io/tokei/lines/github/librity/ft_pipex?color=blueviolet)
+![Top language](https://img.shields.io/github/languages/top/librity/ft_pipex?color=ff69b4)
+![Last commit](https://img.shields.io/github/last-commit/librity/ft_pipex?color=orange)
 
 </div>
 
-<p align="center">  A template repo for 42 São Paulo's C projects.
+<p align="center"> A simple implementation of UNIX `|`, `<` and `>` in pure C.
   <br>
 </p>
 
@@ -38,8 +38,8 @@
 Clone the repo and build with `make`:
 
 ```bash
-$ git clone https://github.com/librity/ft_c_template.git
-$ cd ft_c_template
+$ git clone https://github.com/librity/ft_pipex.git
+$ cd ft_pipex
 $ make
 ```
 

@@ -55,7 +55,7 @@ dkms.conf
 *.log
 
 # Build
-ftctemplate
+pipex
 
 # Tests
 test

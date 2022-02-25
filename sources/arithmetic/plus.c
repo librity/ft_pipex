@@ -6,11 +6,11 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 10:29:21 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/02/25 10:31:45 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:05:55 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ftctemplate.h>
+#include <pipex.h>
 
 int	plus(int a, int b)
 {
