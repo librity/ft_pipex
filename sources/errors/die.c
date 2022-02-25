@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   die.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 10:34:20 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/02/25 18:15:15 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/02/16 00:17:03 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/02/25 18:20:06 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-int	main(int argc, char **argv)
+void	help_and_die(void)
 {
-	t_pipex	ctl;
+	ft_putstr(HELP_MSG);
+	exit(EXIT_FAILURE);
+}
 
-	handle_arguments(&ctl, argc, argv);
-	return (EXIT_SUCCESS);
+void	die(void)
+{
+	perror("ERROR!\n");
+	exit(EXIT_FAILURE);
+}
+
+void	die_if_null(void *ptr)
+{
+	if (ptr == NULL)
+		die();
 }

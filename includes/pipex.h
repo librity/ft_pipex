@@ -13,7 +13,20 @@
 #ifndef PIPEX_H
 # define PIPEX_H
 
-int	plus(int a, int b);
-int	minus(int a, int b);
+# include <defines.h>
+# include <ft_printf.h>
+# include <stdio.h>
+# include <stdlib.h>
+
+typedef struct s_pipex
+{
+	int	x;
+}		t_pipex;
+
+void	handle_arguments(t_pipex *ctl, int argc, char **argv);
+
+void	help_and_die(void);
+void	die(void);
+void	die_if_null(void *ptr);
 
 #endif

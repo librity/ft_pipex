@@ -6,7 +6,7 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 16:25:08 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/02/25 18:10:16 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/02/25 18:31:49 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,10 @@ $(OBJECTS_PATH)/%.o: $(SOURCES_PATH)/%.c
 	$(CC_STRICT) -I $(INCLUDES_PATH) -c -o $@ $<
 
 re: fclean all
+
+run: re
+	./pipex infile "ls -l" "wc -l" outfile
+#	./pipex infile "grep a1" "wc -w" outfile
 
 ################################################################################
 # INITIALIZE

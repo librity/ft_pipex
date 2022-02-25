@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minus.c                                            :+:      :+:    :+:   */
+/*   handle_arguments.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 10:30:04 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/02/25 11:05:55 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/02/17 15:39:11 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/02/25 18:28:28 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-int	minus(int a, int b)
+void	handle_arguments(t_pipex *ctl, int argc, char **argv)
 {
-	return (a - b);
+	ctl = ctl;
+	argv = argv;
+	if (argc != 5)
+		help_and_die();
 }
