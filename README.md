@@ -12,10 +12,7 @@
 
 </div>
 
-<p align="center">
-
-A simple implementation of UNIX `|`, `<` and `>` in pure C.
-
+<p align="center"> A simple implementation of UNIX <code>|</code>, <code><</code> and <code>></code> in pure C.
   <br>
 </p>
 
