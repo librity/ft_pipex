@@ -38,9 +38,22 @@
 Clone the repo and build with `make`:
 
 ```bash
-$ git clone https://github.com/librity/ft_pipex.git
+$ git clone --recurse-submodules https://github.com/librity/ft_pipex.git
 $ cd ft_pipex
 $ make
+```
+
+It works exactly like `< infile cmd1 | cmd2 > outfile`:
+
+```bash
+./pipex infile "ls" "wc" outfile
+
+./pipex infile "ls -l" "wc -l" outfile
+./pipex infile "grep a1" "wc -w" outfile
+
+./pipex .gitignore "tr a b" "tr b c" outfile
+./pipex EOF "tr a b" "tr b c" outfile
+./pipex .gitignore "ping 8.8.8.8" "grep ms" outfile
 ```
 
 ## 📝 Notes <a name = "notes"></a>

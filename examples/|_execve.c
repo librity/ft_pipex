@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   |.c                                                :+:      :+:    :+:   */
+/*   |_execve.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 23:21:12 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/02/27 23:14:25 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/02/28 13:17:48 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// gcc "|.c" && ./a.out "ls" "wc"
+// gcc "|_execve.c" && ./a.out "ls" "wc"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,6 +18,8 @@
 #include <unistd.h>
 
 #define CHILD_PROCESS_ID 0
+
+char **g_env_vars;
 
 static void	die(void)
 {
@@ -90,23 +92,28 @@ static void	pipe_to_stdin(int pipe_fds[2])
 /*
 ** Executes a file in PATH without any arguments.
 */
-static void	execute_no_args(char *command)
+static void	execute_or_die(char *command)
 {
-	execlp(command, command, NULL);
+	int execve_return;
+
+
+	execve_return = execve(command, command, g_env_vars);
+	if (execve_return < 0)
+		die();
 }
 
 static void	run_left(int pipe_fds[2], char *left_command)
 {
 	stdout_to_pipe(pipe_fds);
 	close_pipes_fds(pipe_fds);
-	execute_no_args(left_command);
+	execute_or_die(left_command);
 }
 
 static void	run_right(int pipe_fds[2], char *right_command)
 {
 	pipe_to_stdin(pipe_fds);
 	close_pipes_fds(pipe_fds);
-	execute_no_args(right_command);
+	execute_or_die(right_command);
 }
 
 static void	handle_arguments(
@@ -123,6 +130,7 @@ static void	handle_arguments(
 
 }
 
+// TODO: HANDLE COMMAND ARGUMENTS WITH ft_split.
 int	main(int argc, char **argv, char **envp)
 {
 	int		pipe_fds[2];
@@ -132,6 +140,7 @@ int	main(int argc, char **argv, char **envp)
 	int		right_pid;
 
 	handle_arguments(argc, argv, &left_command, &right_command);
+	g_env_vars = envp;
 	pipe_or_die(pipe_fds);
 
 	left_pid = fork_or_die();
