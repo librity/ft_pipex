@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ping_pipe_grep.c                                   :+:      :+:    :+:   */
+/*   |.c                                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 23:21:12 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/02/27 21:07:08 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/02/27 21:13:42 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// gcc ping_pipe_grep.c && ./a.out
+// gcc "|.c" && ./a.out
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -34,6 +34,7 @@ static void	ping_google(int	pipe_descriptors[2])
 	close(pipe_descriptors[0]);
 	close(pipe_descriptors[1]);
 	// Executes ping
+
 	execlp("ping", "ping", "-c", "5", "google.com", NULL);
 }
 
@@ -48,11 +49,20 @@ static void	grep_rtt(int	pipe_descriptors[2])
 	execlp("grep", "grep", "rtt", NULL);
 }
 
-int	main(int argc, char **argv)
+
+// TODO: Run to piped commands from argv
+int	main(int argc, char **argv, char **envp)
 {
 	int	pipe_descriptors[2];
-	int	ping_pid;
-	int	grep_pid;
+
+	char *left_command;
+	int	left_pid;
+
+	char *right_command;
+	int	right_pid;
+
+	if (argc != 3)
+		die();
 
 	// Creates a pipe:
 	// Bytes written on pipe_descriptors[1] can be read from pipe_descriptors[0]
@@ -60,18 +70,18 @@ int	main(int argc, char **argv)
 		die();
 
 	// Creates a clone of this process
-	ping_pid = fork();
-	if (ping_pid < 0)
+	left_pid = fork();
+	if (left_pid < 0)
 		die();
 
-	if (ping_pid == CHILD_PROCESS_ID)
+	if (left_pid == CHILD_PROCESS_ID)
 		ping_google(pipe_descriptors);
 
-	grep_pid = fork();
-	if (grep_pid < 0)
+	right_pid = fork();
+	if (right_pid < 0)
 		die();
 
-	if (grep_pid == CHILD_PROCESS_ID)
+	if (right_pid == CHILD_PROCESS_ID)
 		grep_rtt(pipe_descriptors);
 
 	// Close file descriptors in parent process
@@ -79,8 +89,8 @@ int	main(int argc, char **argv)
 	close(pipe_descriptors[1]);
 
 	// Wait for child processes to finish executing
-	waitpid(ping_pid, NULL, 0);
-	waitpid(grep_pid, NULL, 0);
+	waitpid(left_pid, NULL, 0);
+	waitpid(right_pid, NULL, 0);
 
 	return (EXIT_SUCCESS);
 }
