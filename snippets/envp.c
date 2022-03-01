@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 21:13:08 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/02/28 13:16:23 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/02/28 13:34:20 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,49 @@
 
 #define PATH "PATH="
 
-static bool	starts_with_PATH(char *env_var)
+static bool	starts_with_PATH(char *full_path)
 {
-	char	*path;
+	char	*path_suffix;
 
-	path = PATH;
-	while (*env_var != NULL && *path != NULL)
+	path_suffix = PATH;
+	while (*full_path != NULL && *path_suffix != NULL)
 	{
-		if (*env_var != *path)
+		if (*full_path != *path_suffix)
 			return (false);
-		env_var++;
-		path++;
+		full_path++;
+		path_suffix++;
 	}
-	if (*path != NULL)
+	if (*path_suffix != NULL)
 		return (false);
 	return (true);
+}
+
+static char	*skip_PATH(char *full_path)
+{
+	char	*path_suffix;
+	char	*clean_path;
+
+	path_suffix = PATH;
+	clean_path = full_path;
+	while (*clean_path != NULL && *path_suffix != NULL)
+	{
+		if (*clean_path != *path_suffix)
+			return (NULL);
+		clean_path++;
+		path_suffix++;
+	}
+	return (clean_path);
+}
+
+static char	*get_full_path(char **envp)
+{
+	while (*envp)
+	{
+		if (starts_with_PATH(*envp))
+			return (*envp);
+		envp++;
+	}
+	return (NULL);
 }
 
 static void	print_environment_variables(char **environment_variables)
@@ -48,23 +76,13 @@ static void	print_environment_variables(char **environment_variables)
 	printf("COUNT: %i\n", ev_count);
 }
 
-static char	*get_path(char **envp)
-{
-	while (*envp)
-	{
-		if (starts_with_PATH(*envp))
-			return (*envp);
-		envp++;
-	}
-	return (NULL);
-}
-
 int	main(int argc, char **argv, char **envp)
 {
-	char	*path;
+	char	*paths;
 
 	print_environment_variables(envp);
-	path = get_path(envp);
-	printf("=== PATH ===\n");
-	printf("%s\n", path);
+	paths = get_full_path(envp);
+	paths = skip_PATH(paths);
+	printf("=== PATHS ===\n");
+	printf("%s\n", paths);
 }

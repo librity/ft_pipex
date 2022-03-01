@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 23:21:12 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/02/27 23:14:25 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/02/28 19:57:31 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ static void	handle_arguments(
 	*left_command = argv[1];
 	*right_command = argv[2];
 	printf("excuting \"%s | %s\"\n", *left_command, *right_command);
-
 }
 
 int	main(int argc, char **argv, char **envp)

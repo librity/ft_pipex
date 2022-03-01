@@ -12,6 +12,7 @@
   "files.associations": {
     "*.gohtml": "html",
     "cstdlib": "c",
-    "cstdio": "c"
+    "cstdio": "c",
+    "unistd.h": "c"
   }
 }
