@@ -17,10 +17,22 @@
 # include <ft_printf.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <utils.h>
+
+# define CHILD_PROCESS_ID 0
 
 typedef struct s_pipex
 {
-	int	x;
+	int		pipe_fds[2];
+
+	char	*infile;
+	int		infile_fd;
+
+	char	*left_cmd;
+	char	*right_cmd;
+
+	char	*outfile;
+	int		outfile_fd;
 }		t_pipex;
 
 void	handle_arguments(t_pipex *ctl, int argc, char **argv);

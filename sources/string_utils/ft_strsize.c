@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_arguments.c                                 :+:      :+:    :+:   */
+/*   ft_strsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/17 15:39:11 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/01 16:58:22 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2021/02/02 23:02:22 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/01 16:03:31 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-void	handle_arguments(t_pipex *ctl, int argc, char **argv)
+/*
+** Counts how many chars string s has including '\0'.
+*/
+size_t	ft_strsize(const char *s)
 {
-	if (argc != 5)
-		help_and_die();
-	ctl->infile = argv[1];
-	ctl->left_cmd = argv[2];
-	ctl->right_cmd = argv[3];
-	ctl->outfile = argv[4];
+	size_t	length;
+
+	if (s == NULL)
+		return (0);
+	length = 0;
+	while (s[length])
+		length++;
+	return (length + 1);
 }
