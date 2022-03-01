@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 23:21:12 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/02/28 13:17:48 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/02/28 22:28:26 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char **g_env_vars;
 
 static void	die(void)
 {
-	perror("ERROR!\n");
+	perror("ERROR!");
 	exit(EXIT_FAILURE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 23:21:12 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/02/28 22:23:56 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/02/28 22:30:45 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 static void	die(void)
 {
-	perror("ERROR!\n");
+	perror("ERROR!");
 	exit(EXIT_FAILURE);
 }
 
@@ -36,6 +36,14 @@ static int create_file_or_die(char *filename)
 	if (open_fd < 0)
 		die();
 	return (open_fd);
+}
+
+static int close_file_or_die(int close_fd)
+{
+	close_fd = close(close_fd);
+	if (close_fd < 0)
+		die();
+	return (close_fd);
 }
 
 static void	stdout_to_file(int outfile_fd)
@@ -73,6 +81,6 @@ int	main(int argc, char **argv, char **envp)
 	stdout_to_file(outfile_fd);
 	execute_no_args(command);
 
-	close(outfile_fd);
+	close_file_or_die(outfile_fd);
 	return (EXIT_SUCCESS);
 }
