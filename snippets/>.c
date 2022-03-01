@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 23:21:12 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/02/28 22:16:18 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/02/28 22:23:56 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ int	main(int argc, char **argv, char **envp)
 	stdout_to_file(outfile_fd);
 	execute_no_args(command);
 
+	close(outfile_fd);
 	return (EXIT_SUCCESS);
 }
