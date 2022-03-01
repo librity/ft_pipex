@@ -16,26 +16,51 @@
 # include <defines.h>
 # include <ft_printf.h>
 # include <stdio.h>
-# include <stdlib.h>
+// # include <stdlib.h>
+# include <sys/wait.h>
 # include <utils.h>
-
-# define CHILD_PROCESS_ID 0
 
 typedef struct s_pipex
 {
+	char	**envp;
+	char	*path;
+	char	**paths;
+
 	int		pipe_fds[2];
 
 	char	*infile;
 	int		infile_fd;
 
 	char	*left_cmd;
+	int		left_pid;
+
 	char	*right_cmd;
+	int		right_pid;
 
 	char	*outfile;
 	int		outfile_fd;
 }		t_pipex;
 
 void	handle_arguments(t_pipex *ctl, int argc, char **argv);
+void	handle_environment(t_pipex *ctl, char **envp);
+
+char	*get_clean_path_or_die(char **envp);
+
+void	log_command(t_pipex *ctl);
+void	log_path(t_pipex *ctl);
+
+void	pipe_or_die(t_pipex *ctl);
+void	stdout_to_pipe(t_pipex *ctl);
+void	pipe_to_stdin(t_pipex *ctl);
+void	close_pipes_fds(t_pipex *ctl);
+
+int		fork_or_die(void);
+void	wait_for_children(t_pipex *ctl);
+
+void	execute_no_args(char *command);
+
+void	handle_left(t_pipex *ctl);
+void	handle_right(t_pipex *ctl);
 
 void	help_and_die(void);
 void	die(void);

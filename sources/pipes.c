@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   defines.h                                          :+:      :+:    :+:   */
+/*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 18:20:45 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/01 19:48:22 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/01 19:28:03 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/01 19:34:05 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
+#include <pipex.h>
 
-# define VERBOSE 1
+void	pipe_or_die(t_pipex *ctl)
+{
+	int	pipe_return;
 
-# define CHILD_PROCESS_ID 0
+	pipe_return = pipe(ctl->pipe_fds);
+	if (pipe_return < 0)
+		die();
+}
 
-# define PATH_PREFIX "PATH="
+void	stdout_to_pipe(t_pipex *ctl)
+{
+	dup2(ctl->pipe_fds[1], STDOUT_FILENO);
+}
 
-# define HELP_MSG "Welcome to lpaulo-m's pipex!\n\
-\n\
-USAGE:\n\
-	./pipex file1 cmd1 cmd2 file2\n\
-\n\
-EXAMPLES:\n\
-	./pipex infile \"ls -l\" \"wc -l\" outfile\n\
-	./pipex infile \"grep a1\" \"wc -w\" outfile\n\
-\n\
-"
+void	pipe_to_stdin(t_pipex *ctl)
+{
+	dup2(ctl->pipe_fds[0], STDIN_FILENO);
+}
 
-#endif
+void	close_pipes_fds(t_pipex *ctl)
+{
+	close(ctl->pipe_fds[0]);
+	close(ctl->pipe_fds[1]);
+}

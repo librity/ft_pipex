@@ -13,6 +13,7 @@
     "*.gohtml": "html",
     "cstdlib": "c",
     "cstdio": "c",
-    "unistd.h": "c"
+    "unistd.h": "c",
+    "pipex.h": "c"
   }
 }

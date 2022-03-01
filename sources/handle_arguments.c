@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   defines.h                                          :+:      :+:    :+:   */
+/*   handle_arguments.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 18:20:45 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/01 19:48:22 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/02/17 15:39:11 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/01 20:03:42 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
+#include <pipex.h>
 
-# define VERBOSE 1
+void	handle_arguments(t_pipex *ctl, int argc, char **argv)
+{
+	if (argc != 5)
+		help_and_die();
+	ctl->infile = argv[1];
+	ctl->left_cmd = argv[2];
+	ctl->right_cmd = argv[3];
+	ctl->outfile = argv[4];
+	log_command(ctl);
+}
 
-# define CHILD_PROCESS_ID 0
-
-# define PATH_PREFIX "PATH="
-
-# define HELP_MSG "Welcome to lpaulo-m's pipex!\n\
-\n\
-USAGE:\n\
-	./pipex file1 cmd1 cmd2 file2\n\
-\n\
-EXAMPLES:\n\
-	./pipex infile \"ls -l\" \"wc -l\" outfile\n\
-	./pipex infile \"grep a1\" \"wc -w\" outfile\n\
-\n\
-"
-
-#endif
+void	handle_environment(t_pipex *ctl, char **envp)
+{
+	ctl->envp = envp;
+	ctl->path = get_clean_path_or_die(envp);
+	ctl->paths = NULL;
+	log_path(ctl);
+}

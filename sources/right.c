@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   defines.h                                          :+:      :+:    :+:   */
+/*   right.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 18:20:45 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/01 19:48:22 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/01 20:08:13 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/01 20:12:13 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
+#include <pipex.h>
 
-# define VERBOSE 1
+static void	run_right(t_pipex *ctl)
+{
+	pipe_to_stdin(ctl);
+	close_pipes_fds(ctl);
+	execute_no_args(ctl->right_cmd);
+}
 
-# define CHILD_PROCESS_ID 0
-
-# define PATH_PREFIX "PATH="
-
-# define HELP_MSG "Welcome to lpaulo-m's pipex!\n\
-\n\
-USAGE:\n\
-	./pipex file1 cmd1 cmd2 file2\n\
-\n\
-EXAMPLES:\n\
-	./pipex infile \"ls -l\" \"wc -l\" outfile\n\
-	./pipex infile \"grep a1\" \"wc -w\" outfile\n\
-\n\
-"
-
-#endif
+void	handle_right(t_pipex *ctl)
+{
+	ctl->right_pid = fork_or_die();
+	if (ctl->right_pid == CHILD_PROCESS_ID)
+		run_right(ctl);
+}
