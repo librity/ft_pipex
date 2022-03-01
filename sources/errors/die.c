@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 00:17:03 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/02/28 22:28:26 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/02/28 22:35:47 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	help_and_die(void)
 
 void	die(void)
 {
-	perror("ERROR!");
+	perror("\033[0;31mERROR!\033[0m");
 	exit(EXIT_FAILURE);
 }
 

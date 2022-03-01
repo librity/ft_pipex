@@ -2,13 +2,21 @@
 
 <div align="center">
 
-[![Norminette v3](https://github.com/librity/ft_pipex/actions/workflows/norminette_v3.yml/badge.svg)](https://github.com/librity/ft_pipex/actions/workflows/norminette_v3.yml)
 ![42 São Paulo](https://img.shields.io/badge/42-SP-1E2952)
 ![License](https://img.shields.io/github/license/librity/ft_pipex?color=yellow)
 ![Code size in bytes](https://img.shields.io/github/languages/code-size/librity/ft_pipex?color=blue)
 ![Lines of code](https://img.shields.io/tokei/lines/github/librity/ft_pipex?color=blueviolet)
 ![Top language](https://img.shields.io/github/languages/top/librity/ft_pipex?color=ff69b4)
 ![Last commit](https://img.shields.io/github/last-commit/librity/ft_pipex?color=orange)
+
+</div>
+
+<div align="center">
+
+[![Build](https://github.com/librity/ft_pipex/actions/workflows/build.yml/badge.svg)](https://github.com/librity/ft_pipex/actions/workflows/build.yml)
+[![Norminette v3](https://github.com/librity/ft_pipex/actions/workflows/norminette_v3.yml/badge.svg)](https://github.com/librity/ft_pipex/actions/workflows/norminette_v3.yml)
+[![denisgodoy_pipex-tester](https://github.com/librity/ft_pipex/actions/workflows/denisgodoy_pipex-tester.yml/badge.svg)](https://github.com/librity/ft_pipex/actions/workflows/denisgodoy_pipex-tester.yml)
+[![vfurmane_pipex-tester](https://github.com/librity/ft_pipex/actions/workflows/vfurmane_pipex-tester.yml/badge.svg)](https://github.com/librity/ft_pipex/actions/workflows/vfurmane_pipex-tester.yml)
 
 </div>
 

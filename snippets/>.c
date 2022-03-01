@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 23:21:12 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/02/28 22:30:45 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/02/28 22:35:47 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 static void	die(void)
 {
-	perror("ERROR!");
+	perror("\033[0;31mERROR!\033[0m");
 	exit(EXIT_FAILURE);
 }
 
