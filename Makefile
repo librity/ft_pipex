@@ -6,7 +6,7 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 16:25:08 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/03/01 20:13:41 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/03/01 22:24:31 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,8 @@ build_libs: build_ft_printf
 ################################################################################
 
 run: re
-	./pipex infile "ls" "wc" outfile
+#	./pipex infile "ls" "wc" outfile
+	./pipex infile "cat" "wc" outfile
 #	./pipex infile "ls -l" "wc -l" outfile
 #	./pipex infile "grep a1" "wc -w" outfile
 #	./pipex .gitignore "tr a b" "tr b c" outfile

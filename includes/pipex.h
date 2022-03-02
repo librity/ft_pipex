@@ -14,9 +14,9 @@
 # define PIPEX_H
 
 # include <defines.h>
+# include <fcntl.h>
 # include <ft_printf.h>
 # include <stdio.h>
-// # include <stdlib.h>
 # include <sys/wait.h>
 # include <utils.h>
 
@@ -49,10 +49,17 @@ char	*get_clean_path_or_die(char **envp);
 void	log_command(t_pipex *ctl);
 void	log_path(t_pipex *ctl);
 
+int		create_file_or_die(char *filename);
+int		open_file_or_die(char *filename);
+int		close_or_die(int close_fd);
+
 void	pipe_or_die(t_pipex *ctl);
+void	close_pipes_fds(t_pipex *ctl);
+
 void	stdout_to_pipe(t_pipex *ctl);
 void	pipe_to_stdin(t_pipex *ctl);
-void	close_pipes_fds(t_pipex *ctl);
+void	file_to_stdin(int infile_fd);
+void	stdout_to_file(int outfile_fd);
 
 int		fork_or_die(void);
 void	wait_for_children(t_pipex *ctl);

@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 15:39:11 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/01 20:03:42 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/01 21:51:30 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,4 @@ void	handle_arguments(t_pipex *ctl, int argc, char **argv)
 	ctl->right_cmd = argv[3];
 	ctl->outfile = argv[4];
 	log_command(ctl);
-}
-
-void	handle_environment(t_pipex *ctl, char **envp)
-{
-	ctl->envp = envp;
-	ctl->path = get_clean_path_or_die(envp);
-	ctl->paths = NULL;
-	log_path(ctl);
 }

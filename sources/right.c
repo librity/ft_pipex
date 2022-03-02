@@ -6,22 +6,26 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 20:08:13 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/01 20:12:13 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/01 22:23:29 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-static void	run_right(t_pipex *ctl)
+static void	redirect_descriptors(t_pipex *ctl)
 {
+	ctl->outfile_fd = create_file_or_die(ctl->outfile);
+	stdout_to_file(ctl->outfile_fd);
 	pipe_to_stdin(ctl);
 	close_pipes_fds(ctl);
-	execute_no_args(ctl->right_cmd);
 }
 
 void	handle_right(t_pipex *ctl)
 {
 	ctl->right_pid = fork_or_die();
-	if (ctl->right_pid == CHILD_PROCESS_ID)
-		run_right(ctl);
+	if (ctl->right_pid != CHILD_PROCESS_ID)
+		return ;
+	redirect_descriptors(ctl);
+	execute_no_args(ctl->right_cmd);
+	close_or_die(ctl->outfile_fd);
 }

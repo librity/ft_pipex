@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:20:45 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/01 19:48:22 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/01 22:07:16 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # define VERBOSE 1
 
 # define CHILD_PROCESS_ID 0
+
+# define CREATE_PERMISSION 0000664
 
 # define PATH_PREFIX "PATH="
 
