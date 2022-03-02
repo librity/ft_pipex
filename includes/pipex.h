@@ -70,7 +70,8 @@ void	handle_left(t_pipex *ctl);
 void	handle_right(t_pipex *ctl);
 
 void	help_and_die(void);
-void	die(void);
 void	die_if_null(void *ptr);
+void	die(void);
+void	die_indicated(char *indicator);
 
 #endif
