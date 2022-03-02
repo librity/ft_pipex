@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 20:55:14 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/01 23:50:18 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/02 01:41:03 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	main(int argc, char **argv, char **envp)
 {
 	char *clean_path;
 	char **paths;
-	char *ls_args[] = {"-l", "-a",  NULL};
 
 	clean_path = get_clean_path_or_die(envp);
 	ft_printf(" => PATH: \"%s\"\n", clean_path);

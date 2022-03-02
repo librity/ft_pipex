@@ -17,6 +17,17 @@
     "pipex.h": "c",
     "defines.h": "c",
     "limits.h": "c",
-    "utils.h": "c"
+    "utils.h": "c",
+    "array": "c",
+    "*.tcc": "c",
+    "deque": "c",
+    "string": "c",
+    "vector": "c",
+    "string_view": "c",
+    "algorithm": "c",
+    "limits": "c",
+    "numeric": "c",
+    "streambuf": "c",
+    "functional": "c"
   }
 }
