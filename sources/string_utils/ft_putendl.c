@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsize.c                                       :+:      :+:    :+:   */
+/*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/02 23:02:22 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/02 01:23:44 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2021/02/07 00:35:37 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/02 01:26:13 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
 /*
-** Counts how many chars string s has including '\0'.
+** Writes string s to standard out followed by an endline.
 */
-size_t	ft_strsize(const char *s)
+void	ft_putendl(char *s)
 {
-	return (ft_strlen(s) + 1);
+	ft_putstr(s);
+	ft_putchar('\n');
 }

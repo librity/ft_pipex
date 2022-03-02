@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsize.c                                       :+:      :+:    :+:   */
+/*   ft_arrsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/02 23:02:22 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/02 01:23:44 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/01 17:15:15 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/02 01:27:21 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
 /*
-** Counts how many chars string s has including '\0'.
+** Counts how many pointers array has including NULL.
 */
-size_t	ft_strsize(const char *s)
+size_t	ft_arrsize(void **array)
 {
-	return (ft_strlen(s) + 1);
+	return (ft_arrlen(array) + 1);
 }

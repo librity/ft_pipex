@@ -45,9 +45,11 @@ void	handle_arguments(t_pipex *ctl, int argc, char **argv);
 void	handle_environment(t_pipex *ctl, char **envp);
 
 char	*get_clean_path_or_die(char **envp);
+char	**get_paths_or_die(char **envp);
 
 void	log_command(t_pipex *ctl);
 void	log_path(t_pipex *ctl);
+void	log_paths(t_pipex *ctl);
 
 int		create_file_or_die(char *filename);
 int		open_file_or_die(char *filename);

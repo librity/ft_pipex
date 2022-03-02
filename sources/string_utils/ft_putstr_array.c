@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsize.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_array.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/02 23:02:22 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/02 01:23:44 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/01 17:15:15 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/02 01:26:35 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
 /*
-** Counts how many chars string s has including '\0'.
+** Prints an array of strings to standard out.
 */
-size_t	ft_strsize(const char *s)
+void	ft_putstr_array(char **strings)
 {
-	return (ft_strlen(s) + 1);
+	while (*strings)
+		ft_putendl(*strings++);
 }
