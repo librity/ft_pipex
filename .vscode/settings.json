@@ -16,6 +16,7 @@
     "unistd.h": "c",
     "pipex.h": "c",
     "defines.h": "c",
-    "limits.h": "c"
+    "limits.h": "c",
+    "utils.h": "c"
   }
 }

@@ -64,3 +64,4 @@ test
 examples/example.c
 infile
 outfile
+no_permissions
