@@ -14,6 +14,7 @@
 # define PIPEX_H
 
 # include <defines.h>
+# include <errno.h>
 # include <fcntl.h>
 # include <ft_printf.h>
 # include <stdio.h>
@@ -47,7 +48,7 @@ void	handle_environment(t_pipex *ctl, char **envp);
 char	*get_clean_path_or_die(char **envp);
 char	**get_paths_or_die(char **envp);
 
-void	log_command(t_pipex *ctl);
+void	log_pipex(t_pipex *ctl);
 void	log_path(t_pipex *ctl);
 void	log_paths(t_pipex *ctl);
 
@@ -71,9 +72,11 @@ void	execute_no_args(char *command);
 void	handle_left(t_pipex *ctl);
 void	handle_right(t_pipex *ctl);
 
+void	cleanup(t_pipex *ctl);
+
 void	help_and_die(void);
 void	die_if_null(void *ptr);
 void	die(void);
-void	die_indicated(char *indicator);
+void	die2(char *location);
 
 #endif

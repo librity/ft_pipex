@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:20:45 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/01 22:07:16 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/05 17:14:31 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define CREATE_PERMISSION 0000664
 
 # define PATH_PREFIX "PATH="
+# define PATH_PREFIX_LENGTH 5
 
 # define HELP_MSG "Welcome to lpaulo-m's pipex!\n\
 \n\

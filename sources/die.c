@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 00:17:03 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/02 00:40:52 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/05 17:40:11 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	die(void)
 	exit(EXIT_FAILURE);
 }
 
-void	die_indicated(char *indicator)
+void	die2(char *location)
 {
 	ft_putstr("\033[0;31m");
-	perror(indicator);
+	perror(location);
 	exit(EXIT_FAILURE);
 }

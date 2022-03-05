@@ -6,16 +6,11 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 10:34:20 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/02 01:38:10 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/05 17:04:35 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
-
-static void	cleanup(t_pipex *ctl)
-{
-	ft_free_string_array(ctl->paths);
-}
 
 int	main(int argc, char **argv, char **envp)
 {

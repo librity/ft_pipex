@@ -6,13 +6,13 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 20:55:14 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/02 20:14:18 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/05 17:29:53 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-static char	**split_command(char *raw_command)
+static char	**split_command_or_die(char *raw_command)
 {
 	char	**split_command;
 
@@ -27,9 +27,8 @@ static char	*build_executable_path(char *path, char *command)
 	char	*executable;
 	char	*free_me;
 
-	free_me = ft_strjoin(path, "/");
-	executable = ft_strjoin(free_me, command);
-	free(free_me);
+	executable = ft_strjoin(path, "/");
+	executable = ft_strjoin_free(executable, command);
 	return (executable);
 }
 
@@ -50,11 +49,50 @@ static char	*find_executable(char *command, char **paths)
 	return (NULL);
 }
 
+static char	*find_executable_or_die(char *command, char **paths)
+{
+	char *command_executable;
+
+	command_executable = find_executable(command, paths);
+	if (command_executable == NULL)
+		die2("NO EXECUTABLE");
+	return (command_executable);
+}
+
 static void	cleanup(char *command, char **paths, char **split_cmd)
 {
 	free(command);
 	ft_free_string_array(paths);
 	ft_free_string_array(split_cmd);
+}
+
+static void	execute_command(char *command_executable, char **split_cmd, char **envp)
+{
+	int execve_return;
+
+	execve_return = execve(command_executable, split_cmd, envp);
+	if (execve_return < 0)
+		die2(command_executable);
+}
+
+static void log_command(char *command_executable, char **flags)
+{
+	if (VERBOSE)
+	{
+		ft_printf(" => EXECUTABLE: %s\n", command_executable);
+		ft_printf(" => FLAGS:\n");
+		ft_putstr_array(flags);
+	}
+}
+
+static void handle_command(char *command_executable, char **split_cmd, char **envp)
+{
+	int		fork_pid;
+
+	fork_pid = fork_or_die();
+	if (fork_pid != CHILD_PROCESS_ID)
+		return ;
+	execute_command(command_executable, split_cmd, envp);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -68,21 +106,16 @@ int	main(int argc, char **argv, char **envp)
 
 	raw_command = "ls -l -a -s";
 	paths = get_paths_or_die(envp);
-	split_cmd = split_command(raw_command);
+	split_cmd = split_command_or_die(raw_command);
 	command = split_cmd[0];
 	flags = split_cmd + 1;
 
 	if (ft_strlen(command) == 0)
-		die_indicated("NO COMMAND");
+		die2("NO COMMAND");
 
-	command_executable = find_executable(command, paths);
-	if (command_executable == NULL)
-		die_indicated("NO EXECUTABLE");
-
-	ft_printf("	=> EXECUTING: %s with flags:\n", command_executable);
-	ft_putstr_array(flags);
-	if (execve(command_executable, split_cmd, envp) == -1)
-		die_indicated("execve");
+	command_executable = find_executable_or_die(command, paths);
+	log_command(command_executable, flags);
+	handle_command(command_executable, split_cmd, envp);
 
 	cleanup(command_executable, paths, split_cmd);
 	return (EXIT_SUCCESS);

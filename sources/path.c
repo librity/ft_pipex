@@ -6,38 +6,21 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 21:13:08 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/02 01:09:15 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/05 17:30:10 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-static bool	starts_with_path(char *env_var)
-{
-	char	*path_suffix;
-
-	path_suffix = PATH_PREFIX;
-	while (*env_var != '\0' && *path_suffix != '\0')
-	{
-		if (*env_var != *path_suffix)
-			return (false);
-		env_var++;
-		path_suffix++;
-	}
-	if (*path_suffix != '\0')
-		return (false);
-	return (true);
-}
-
 static char	*get_clean_path(char **envp)
 {
-	size_t	suffix_lenght;
+	char	*candidate;
 
-	suffix_lenght = ft_strlen(PATH_PREFIX);
 	while (*envp)
 	{
-		if (starts_with_path(*envp))
-			return ((*envp) + suffix_lenght);
+		candidate = ft_strnstr(*envp, PATH_PREFIX, PATH_PREFIX_LENGTH);
+		if (candidate != NULL)
+			return (candidate + PATH_PREFIX_LENGTH);
 		envp++;
 	}
 	return (NULL);

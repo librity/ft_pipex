@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 20:08:13 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/01 22:23:29 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/03 08:35:05 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ void	handle_right(t_pipex *ctl)
 	if (ctl->right_pid != CHILD_PROCESS_ID)
 		return ;
 	redirect_descriptors(ctl);
-	execute_no_args(ctl->right_cmd);
 	close_or_die(ctl->outfile_fd);
+	execute_no_args(ctl->right_cmd);
 }

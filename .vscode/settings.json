@@ -28,6 +28,7 @@
     "limits": "c",
     "numeric": "c",
     "streambuf": "c",
-    "functional": "c"
+    "functional": "c",
+    "errno.h": "c"
   }
 }
