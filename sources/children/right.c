@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_environment.c                               :+:      :+:    :+:   */
+/*   right.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/17 15:39:11 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/02 01:33:05 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/01 20:08:13 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/05 21:11:43 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-void	handle_environment(t_pipex *ctl, char **envp)
+static void	redirect_descriptors(t_pipex *ctl)
 {
-	ctl->envp = envp;
-	ctl->path = get_clean_path_or_die(envp);
-	ctl->paths = get_paths_or_die(envp);
-	log_path(ctl);
-	log_paths(ctl);
+	ctl->outfile_fd = create_file_or_die(ctl->outfile);
+	stdout_to_file(ctl->outfile_fd);
+	pipe_to_stdin(ctl);
+	close_pipes_fds(ctl);
+}
+
+void	handle_right(t_pipex *ctl)
+{
+	ctl->right->pid = fork_or_die();
+	if (ctl->right->pid != CHILD_PROCESS_ID)
+		return ;
+	redirect_descriptors(ctl);
+	close_or_die(ctl->outfile_fd);
+	execute(ctl->right->path, ctl->right->split, ctl->envp);
 }

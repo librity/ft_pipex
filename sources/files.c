@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 22:04:01 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/05 17:29:40 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/05 17:47:10 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ int	open_file_or_die(char *filename)
 	return (open_fd);
 }
 
-int	close_or_die(int close_fd)
+int	close_or_die(int close_me)
 {
-	close_fd = close(close_fd);
-	if (close_fd < 0)
+	close_me = close(close_me);
+	if (close_me < 0)
 		die();
-	return (close_fd);
+	return (close_me);
 }

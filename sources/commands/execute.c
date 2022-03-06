@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 10:34:20 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/05 20:10:02 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/01 19:35:27 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/05 21:03:31 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-int	main(int argc, char **argv, char **envp)
+void	execute(char *command_path, char **split_cmd, char **envp)
 {
-	t_pipex	ctl;
-	t_child	left;
-	t_child	right;
+	int	execve_return;
 
-	initialize((t_initialize){argc, argv, envp, &ctl, &left, &right});
-	pipe_or_die(&ctl);
-	handle_left(&ctl);
-	handle_right(&ctl);
-	close_pipes_fds(&ctl);
-	wait_for_children(&ctl);
-	cleanup(&ctl);
-	return (EXIT_SUCCESS);
+	execve_return = execve(command_path, split_cmd, envp);
+	if (execve_return < 0)
+		die2(command_path);
 }

@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   forks.c                                            :+:      :+:    :+:   */
+/*   arguments.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/01 19:29:53 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/05 20:12:07 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/02/17 15:39:11 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/05 21:15:55 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-int	fork_or_die(void)
+static void	initialize_left(t_pipex *ctl, char **argv)
 {
-	int	pid;
-
-	pid = fork();
-	if (pid < 0)
-		die();
-	return (pid);
+	initialize_child(ctl, ctl->left, argv[2]);
 }
 
-void	wait_for_children(t_pipex *ctl)
+static void	initialize_right(t_pipex *ctl, char **argv)
 {
-	waitpid(ctl->left->pid, NULL, 0);
-	waitpid(ctl->right->pid, NULL, 0);
+	initialize_child(ctl, ctl->right, argv[3]);
+}
+
+void	initialize_arguments(t_pipex *ctl, int argc, char **argv)
+{
+	if (argc != 5)
+		help_and_die();
+	ctl->infile = argv[1];
+	ctl->outfile = argv[4];
+	initialize_left(ctl, argv);
+	initialize_right(ctl, argv);
+	log_pipex(ctl);
 }

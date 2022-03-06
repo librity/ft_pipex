@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:20:45 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/05 17:14:31 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/05 21:08:17 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 # define PATH_PREFIX "PATH="
 # define PATH_PREFIX_LENGTH 5
 
+/******************************************************************************\
+ * MESSAGES
+\******************************************************************************/
+
 # define HELP_MSG "Welcome to lpaulo-m's pipex!\n\
 \n\
 USAGE:\n\
@@ -32,5 +36,16 @@ EXAMPLES:\n\
 	./pipex infile \"grep a1\" \"wc -w\" outfile\n\
 \n\
 "
+
+/******************************************************************************\
+ * ERROR MESSAGES
+\******************************************************************************/
+
+# define ERR_GENERIC "ERROR"
+# define ERR_NULL_POINTER "ERROR: critical null pointer"
+# define ERR_NO_PATH "ERROR: PATH environment variable not found"
+# define ERR_SPLIT_PATH "ERROR: Failed to split PATH"
+# define ERR_SPLIT_CMD "ERROR: Failed to split command"
+# define ERR_NO_CMD "ERROR: No command"
 
 #endif

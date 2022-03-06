@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   left.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 10:34:20 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/05 20:10:02 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/01 20:08:04 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/05 21:11:36 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-int	main(int argc, char **argv, char **envp)
+static void	redirect_descriptors(t_pipex *ctl)
 {
-	t_pipex	ctl;
-	t_child	left;
-	t_child	right;
+	ctl->infile_fd = open_file_or_die(ctl->infile);
+	file_to_stdin(ctl->infile_fd);
+	stdout_to_pipe(ctl);
+	close_pipes_fds(ctl);
+}
 
-	initialize((t_initialize){argc, argv, envp, &ctl, &left, &right});
-	pipe_or_die(&ctl);
-	handle_left(&ctl);
-	handle_right(&ctl);
-	close_pipes_fds(&ctl);
-	wait_for_children(&ctl);
-	cleanup(&ctl);
-	return (EXIT_SUCCESS);
+void	handle_left(t_pipex *ctl)
+{
+	ctl->left->pid = fork_or_die();
+	if (ctl->left->pid != CHILD_PROCESS_ID)
+		return ;
+	redirect_descriptors(ctl);
+	close_or_die(ctl->infile_fd);
+	execute(ctl->left->path, ctl->left->split, ctl->envp);
 }

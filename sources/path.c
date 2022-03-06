@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 21:13:08 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/05 17:30:10 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/05 18:41:54 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ char	*get_clean_path_or_die(char **envp)
 	char	*clean_path;
 
 	clean_path = get_clean_path(envp);
-	if (clean_path == NULL)
-		die();
+	die_if_null(clean_path);
 	return (clean_path);
 }
 
@@ -43,7 +42,6 @@ char	**get_paths_or_die(char **envp)
 
 	clean_path = get_clean_path_or_die(envp);
 	paths = ft_split(clean_path, ':');
-	if (paths == NULL)
-		die();
+	die_if_null(paths);
 	return (paths);
 }

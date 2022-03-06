@@ -14,12 +14,22 @@
 # define PIPEX_H
 
 # include <defines.h>
-# include <errno.h>
 # include <fcntl.h>
 # include <ft_printf.h>
 # include <stdio.h>
 # include <sys/wait.h>
 # include <utils.h>
+
+typedef struct s_child
+{
+	int		pid;
+
+	char	*raw;
+	char	**split;
+	char	*cmd;
+	char	**flags;
+	char	*path;
+}		t_child;
 
 typedef struct s_pipex
 {
@@ -32,18 +42,29 @@ typedef struct s_pipex
 	char	*infile;
 	int		infile_fd;
 
-	char	*left_cmd;
-	int		left_pid;
-
-	char	*right_cmd;
-	int		right_pid;
+	t_child	*left;
+	t_child	*right;
 
 	char	*outfile;
 	int		outfile_fd;
 }		t_pipex;
 
-void	handle_arguments(t_pipex *ctl, int argc, char **argv);
-void	handle_environment(t_pipex *ctl, char **envp);
+typedef struct s_initialize
+{
+	int		argc;
+	char	**argv;
+	char	**envp;
+
+	t_pipex	*ctl;
+	t_child	*left;
+	t_child	*right;
+}		t_initialize;
+void	initialize(t_initialize args);
+
+void	initialize_pipex(t_pipex *ctl, t_child *left, t_child *right);
+void	initialize_environment(t_pipex *ctl, char **envp);
+void	initialize_arguments(t_pipex *ctl, int argc, char **argv);
+void	initialize_child(t_pipex *ctl, t_child *child, char *raw_command);
 
 char	*get_clean_path_or_die(char **envp);
 char	**get_paths_or_die(char **envp);
@@ -51,10 +72,11 @@ char	**get_paths_or_die(char **envp);
 void	log_pipex(t_pipex *ctl);
 void	log_path(t_pipex *ctl);
 void	log_paths(t_pipex *ctl);
+void	log_command(char *command_executable, char **flags);
 
 int		create_file_or_die(char *filename);
 int		open_file_or_die(char *filename);
-int		close_or_die(int close_fd);
+int		close_or_die(int close_me);
 
 void	pipe_or_die(t_pipex *ctl);
 void	close_pipes_fds(t_pipex *ctl);
@@ -67,7 +89,9 @@ void	stdout_to_file(int outfile_fd);
 int		fork_or_die(void);
 void	wait_for_children(t_pipex *ctl);
 
-void	execute_no_args(char *command);
+char	**split_command_or_die(char *raw_command);
+char	*find_executable_or_die(char *command, char **paths);
+void	execute(char *command_path, char **split_cmd, char **envp);
 
 void	handle_left(t_pipex *ctl);
 void	handle_right(t_pipex *ctl);
@@ -77,6 +101,6 @@ void	cleanup(t_pipex *ctl);
 void	help_and_die(void);
 void	die_if_null(void *ptr);
 void	die(void);
-void	die2(char *location);
+void	die2(char *details);
 
 #endif

@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/01 19:35:27 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/01 21:50:55 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/05 20:21:05 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/05 20:26:52 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-// TODO: REMOVE FORBIDDEN FUNCTION
-void	execute_no_args(char *command)
+char	**split_command_or_die(char *raw_command)
 {
-	// TODO: REPLACE WITH execve
-	execlp(command, command, NULL);
+	char	**split_command;
+
+	split_command = ft_split(raw_command, ' ');
+	die_if_null(split_command);
+	return (split_command);
 }

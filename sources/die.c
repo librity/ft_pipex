@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 00:17:03 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/05 17:40:11 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/05 17:50:06 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	help_and_die(void)
 void	die_if_null(void *ptr)
 {
 	if (ptr == NULL)
-		die();
+		die2(ERR_NULL_POINTER);
 }
 
 void	die(void)
@@ -30,9 +30,9 @@ void	die(void)
 	exit(EXIT_FAILURE);
 }
 
-void	die2(char *location)
+void	die2(char *details)
 {
 	ft_putstr("\033[0;31m");
-	perror(location);
+	perror(details);
 	exit(EXIT_FAILURE);
 }
