@@ -6,7 +6,7 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 16:25:08 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/03/05 21:40:20 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/03/05 22:49:59 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ CC = gcc
 CC_STRICT = $(CC) $(CCF_STRICT) $(CCF_OPTIMIZATION)
 
 CCF_STRICT = -Wall -Wextra -Werror
-CCF_OPTIMIZATION = -O3
-CCF_DEBUG = -g -fsanitize=leak
+# CCF_OPTIMIZATION = -O3
+# CCF_DEBUG = -g -fsanitize=leak
 
 MAKE_EXTERNAL = make -C
 SAFE_MAKEDIR = mkdir -p
@@ -91,8 +91,12 @@ build_libs: build_ft_printf
 run: re
 #	./pipex infile "ls" "wc" outfile && cat outfile
 #	./pipex infile "cat" "wc" outfile && cat outfile
+#	./pipex infile "cat -E" "wc -l" outfile && cat outfile
+	./pipex infile "cat -E" "wc -m" outfile && cat outfile
 #	./pipex infile "ls -l" "wc -l" outfile && cat outfile
-	./pipex infile "grep a" "wc -w" outfile && cat outfile
+#	./pipex infile "ls -l -a -s" "wc -l" outfile && cat outfile
+#	./pipex infile "ls -l -a -s" "wc -m" outfile && cat outfile
+#	./pipex infile "grep a" "wc -w" outfile && cat outfile
 #	./pipex .gitignore "tr a b" "tr b c" outfile && cat outfile
 #	./pipex EOF "tr a b" "tr b c" outfile && cat outfile
 #	./pipex .gitignore "ping 8.8.8.8" "grep ms" outfile && cat outfile
@@ -191,7 +195,7 @@ VALGRIND_LOG_FLAGS = --log-file=$(VALGRIND_LOG) \
 	--trace-children=yes \
 	--track-origins=yes \
 	--verbose
-VALGRIND_TARGET = ./$(NAME) infile "grep a" "wc -w" outfile
+VALGRIND_TARGET = ./$(NAME) infile "cat -E" "wc -m" outfile && cat outfile
 
 vg: vg_build
 	$(VALGRIND) $(VALGRIND_FLAGS) $(VALGRIND_TARGET)

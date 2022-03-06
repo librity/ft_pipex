@@ -91,7 +91,7 @@ void	wait_for_children(t_pipex *ctl);
 
 char	**split_command_or_die(char *raw_command);
 char	*find_executable_or_die(char *command, char **paths);
-void	execute(char *command_path, char **split_cmd, char **envp);
+void	execute_or_die(char *command_path, char **split_cmd, char **envp);
 
 void	handle_left(t_pipex *ctl);
 void	handle_right(t_pipex *ctl);

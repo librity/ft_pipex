@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 20:08:04 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/05 21:11:36 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/05 22:54:08 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void	handle_left(t_pipex *ctl)
 		return ;
 	redirect_descriptors(ctl);
 	close_or_die(ctl->infile_fd);
-	execute(ctl->left->path, ctl->left->split, ctl->envp);
+	execute_or_die(ctl->left->path, ctl->left->split, ctl->envp);
 }
