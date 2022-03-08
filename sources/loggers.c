@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 17:15:15 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/05 20:18:46 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/08 15:46:19 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	log_pipex(t_pipex *ctl)
 	if (VERBOSE)
 		ft_printf(
 			" => Executing \"< %s %s | %s > %s\"\n",
-			ctl->infile,
-			ctl->left->raw,
-			ctl->right->raw,
-			ctl->outfile);
+			ctl->infile.path,
+			ctl->left.raw,
+			ctl->right.raw,
+			ctl->outfile.path);
 }

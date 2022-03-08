@@ -20,6 +20,12 @@
 # include <sys/wait.h>
 # include <utils.h>
 
+typedef struct s_file
+{
+	char	*path;
+	int		fd;
+}		t_file;
+
 typedef struct s_child
 {
 	int		pid;
@@ -39,29 +45,13 @@ typedef struct s_pipex
 
 	int		pipe_fds[2];
 
-	char	*infile;
-	int		infile_fd;
+	t_file	infile;
+	t_child	left;
 
-	t_child	*left;
-	t_child	*right;
-
-	char	*outfile;
-	int		outfile_fd;
+	t_child	right;
+	t_file	outfile;
 }		t_pipex;
 
-typedef struct s_initialize
-{
-	int		argc;
-	char	**argv;
-	char	**envp;
-
-	t_pipex	*ctl;
-	t_child	*left;
-	t_child	*right;
-}		t_initialize;
-void	initialize(t_initialize args);
-
-void	initialize_pipex(t_pipex *ctl, t_child *left, t_child *right);
 void	initialize_environment(t_pipex *ctl, char **envp);
 void	initialize_arguments(t_pipex *ctl, int argc, char **argv);
 void	initialize_child(t_pipex *ctl, t_child *child, char *raw_command);
@@ -96,7 +86,7 @@ void	execute_or_die(char *command_path, char **split_cmd, char **envp);
 void	handle_left(t_pipex *ctl);
 void	handle_right(t_pipex *ctl);
 
-void	cleanup(t_pipex *ctl);
+void	free_memory(t_pipex *ctl);
 
 void	help_and_die(void);
 void	die_if_null(void *ptr);
