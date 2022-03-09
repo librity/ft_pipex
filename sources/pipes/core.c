@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipes.c                                            :+:      :+:    :+:   */
+/*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:28:03 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/01 22:14:07 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/08 21:53:19 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	pipe_or_die(t_pipex *ctl)
 
 void	close_pipes_fds(t_pipex *ctl)
 {
-	close_or_die(ctl->pipe_fds[0]);
-	close_or_die(ctl->pipe_fds[1]);
+	close_or_die(ctl->pipe_fds[PIPE_READ]);
+	close_or_die(ctl->pipe_fds[PIPE_WRITE]);
 }

@@ -52,9 +52,9 @@ typedef struct s_pipex
 	t_file	outfile;
 }		t_pipex;
 
+void	initialize_files(t_pipex *ctl, char **argv);
 void	initialize_environment(t_pipex *ctl, char **envp);
-void	initialize_arguments(t_pipex *ctl, int argc, char **argv);
-void	initialize_child(t_pipex *ctl, t_child *child, char *raw_command);
+void	initialize_children(t_pipex *ctl, char **argv);
 
 char	*get_clean_path_or_die(char **envp);
 char	**get_paths_or_die(char **envp);
@@ -89,8 +89,11 @@ void	handle_right(t_pipex *ctl);
 void	free_memory(t_pipex *ctl);
 
 void	help_and_die(void);
+void	check_argc(int argc);
+
 void	die_if_null(void *ptr);
 void	die(void);
 void	die2(char *details);
+void	die3(char *details, int exit_status);
 
 #endif

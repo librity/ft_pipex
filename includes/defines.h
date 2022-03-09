@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:20:45 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/08 15:54:39 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/08 21:50:59 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # define VERBOSE 0
 
 # define CHILD_PROCESS_ID 0
+
+# define PIPE_READ 0
+# define PIPE_WRITE 1
 
 # define CREATE_PERMISSION 0000664
 

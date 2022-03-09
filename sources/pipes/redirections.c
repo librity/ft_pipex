@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:28:03 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/01 22:00:43 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/08 21:51:50 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	stdout_to_pipe(t_pipex *ctl)
 {
-	dup2(ctl->pipe_fds[1], STDOUT_FILENO);
+	dup2(ctl->pipe_fds[PIPE_WRITE], STDOUT_FILENO);
 }
 
 void	pipe_to_stdin(t_pipex *ctl)
 {
-	dup2(ctl->pipe_fds[0], STDIN_FILENO);
+	dup2(ctl->pipe_fds[PIPE_READ], STDIN_FILENO);
 }
 
 void	file_to_stdin(int infile_fd)
