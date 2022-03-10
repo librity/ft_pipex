@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:20:45 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/08 21:50:59 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/10 18:50:52 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,13 @@ EXAMPLES:\n\
 "
 
 /******************************************************************************\
- * ERROR MESSAGES
+ * ERRORS
 \******************************************************************************/
 
-# define ERR_GENERIC "ERROR"
+# define EKEYEXPIRED 127
+
+# define ERR_GENERIC_RED "\033[0;31mERROR"
 # define ERR_NULL_POINTER "ERROR: critical null pointer"
-# define ERR_NO_PATH "ERROR: PATH environment variable not found"
-# define ERR_SPLIT_PATH "ERROR: Failed to split PATH"
-# define ERR_SPLIT_CMD "ERROR: Failed to split command"
-# define ERR_NO_CMD "ERROR: No command"
+# define ERR_NO_CMD "command not found"
 
 #endif
