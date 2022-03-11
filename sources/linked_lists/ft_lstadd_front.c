@@ -6,11 +6,11 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 15:09:06 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/02/19 21:34:23 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/11 15:13:52 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <pipex.h>
 
 /*
 ** Appends a node to the start of a linked list.

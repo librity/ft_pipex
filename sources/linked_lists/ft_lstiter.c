@@ -6,11 +6,11 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/07 17:50:09 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/02/19 21:43:27 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/11 15:13:52 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include <pipex.h>
 
 /*
 ** Trasverses every node of a linked list while running f on every content.

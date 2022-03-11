@@ -6,11 +6,11 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 03:17:38 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/02/25 11:40:57 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/11 15:13:40 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
+#include <pipex.h>
 
 /*
 ** Prints a string s up to an arbitrary position.

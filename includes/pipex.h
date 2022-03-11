@@ -18,7 +18,6 @@
 # include <ft_printf.h>
 # include <stdio.h>
 # include <sys/wait.h>
-# include <utils.h>
 
 typedef struct s_file
 {
