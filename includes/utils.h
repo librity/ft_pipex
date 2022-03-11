@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 16:00:14 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/05 17:08:47 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/11 01:03:35 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@
  * STRINGS
 \******************************************************************************/
 
+char	*ft_strdup(const char *s);
+char	*ft_strcpy(char *dest, char *src);
 size_t	ft_strsize(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strchr(const char *s, int c);
+char	*ft_strrchr(const char *s, int c);
 char	**ft_split(char const *s, char c);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);

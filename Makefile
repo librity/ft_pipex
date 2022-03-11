@@ -6,7 +6,7 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 16:25:08 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/03/05 22:49:59 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/03/11 01:05:55 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,7 @@ run: re
 #	./pipex infile "ls" "wc" outfile && cat outfile
 #	./pipex infile "cat" "wc" outfile && cat outfile
 #	./pipex infile "cat -E" "wc -l" outfile && cat outfile
-	./pipex infile "cat -E" "wc -m" outfile && cat outfile
+#	./pipex infile "cat -E" "wc -m" outfile && cat outfile
 #	./pipex infile "ls -l" "wc -l" outfile && cat outfile
 #	./pipex infile "ls -l -a -s" "wc -l" outfile && cat outfile
 #	./pipex infile "ls -l -a -s" "wc -m" outfile && cat outfile
@@ -100,6 +100,8 @@ run: re
 #	./pipex .gitignore "tr a b" "tr b c" outfile && cat outfile
 #	./pipex EOF "tr a b" "tr b c" outfile && cat outfile
 #	./pipex .gitignore "ping 8.8.8.8" "grep ms" outfile && cat outfile
+#	./pipex .gitignore "tr x ' '" "tr i ' '" outfile && cat outfile
+	./pipex .gitignore "tr ex ' X'" "tr pi 'P '" outfile && cat outfile
 
 ################################################################################
 # CLEAN

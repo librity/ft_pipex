@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 17:15:15 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/08 15:46:19 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/11 00:58:34 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	log_command(char *command_executable, char **flags)
 		ft_printf(" => EXECUTABLE: %s\n", command_executable);
 		ft_printf(" => FLAGS:\n");
 		ft_putstr_array(flags);
+		ft_printf("	TOTAL: %d\n", ft_arrlen((void **)flags));
 	}
 }
 
