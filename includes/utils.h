@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 16:00:14 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/11 14:57:33 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/11 15:07:05 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,5 +154,34 @@ unsigned int	ft_count_digits_ld(long double number, int precision);
 
 char			*ft_skip_number(char *digits);
 char			*ft_skip_whitespace(char *digits);
+
+/******************************************************************************\
+ * LINKED_LISTS
+\******************************************************************************/
+
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}					t_list;
+
+t_list			*ft_lstnew(void *content);
+t_list			*ft_lstnew_safe(void *content);
+
+t_list			*ft_lstmap(t_list *lst,
+					void *(*f)(void *),
+					void (*del)(void *));
+t_list			*ft_lstmap_safe(t_list *lst, void *(*f)(void *));
+void			ft_lstiter(t_list *lst, void (*f)(void *));
+
+t_list			*ft_lstlast(t_list *lst);
+
+int				ft_lstsize(t_list *lst);
+
+void			ft_lstadd_front(t_list **lst, t_list *new);
+void			ft_lstadd_back(t_list **lst, t_list *new);
+
+void			ft_lstdelone(t_list *lst, void (*del)(void *));
+void			ft_lstclear(t_list **lst, void (*del)(void *));
 
 #endif
