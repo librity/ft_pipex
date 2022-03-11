@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 20:21:05 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/11 01:04:41 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/11 14:03:49 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,17 @@
 static void	subvert_spaces(char *str)
 {
 	str = ft_strchr(str, '\'');
-	while (str != NULL)
+	while (str != NULL && *str != '\0')
 	{
 		str++;
 		while (*str != '\'' && *str != '\0')
 		{
 			if (*str == ' ')
-				*str = -30;
+				*str = NOT_ASCII;
 			str++;
 		}
-		str = ft_strchr(str, '\'');
+		if (*str == '\'')
+			str++;
 	}
 }
 
@@ -47,7 +48,7 @@ static void	restore_spaces(char **tokens)
 		token = *tokens;
 		while (*token != '\0')
 		{
-			if (*token == -30)
+			if (*token == NOT_ASCII)
 				*token = ' ';
 			token++;
 		}
