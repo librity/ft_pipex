@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnchr.c                                       :+:      :+:    :+:   */
+/*   loggers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/30 23:59:17 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/11 15:13:40 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/01 17:15:15 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/11 18:25:03 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-/*
-** Returns first occurence of char c in string up to limit or NULL.
-*/
-char	*ft_strnchr(const char *s, int c, unsigned int limit)
+void	log_command(char *command_executable, char **flags)
 {
-	unsigned int	current;
-
-	current = 0;
-	while (s[current] != (char)c)
+	if (VERBOSE)
 	{
-		if (s[current] == '\0' || current >= limit)
-			return (NULL);
-		current++;
+		ft_printf(" => EXECUTABLE: %s\n", command_executable);
+		ft_printf(" => FLAGS:\n");
+		ft_putstr_array(flags);
+		ft_printf("	TOTAL: %d\n", ft_arrlen((void **)flags));
 	}
-	return ((char *)(s + current));
+}
+
+void	log_pipex(t_pipex *ctl)
+{
+	if (VERBOSE)
+		ft_printf(
+			" => Executing \"< %s %s | %s > %s\"\n",
+			ctl->infile.path,
+			ctl->left.raw,
+			ctl->right.raw,
+			ctl->outfile.path);
 }

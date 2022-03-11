@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puthex_lowercase.c                              :+:      :+:    :+:   */
+/*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/03 07:38:23 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/11 15:13:40 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/02/27 21:13:08 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/11 18:23:22 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-/*
-** Prints an unsigned int in lowercase hexadecimal.
-*/
-void	ft_puthex_lowercase(unsigned int number)
+char	**get_paths_or_die(char **envp)
 {
-	ft_putnbr_base_ui(number, LOWERCASE_HEX_BASE);
+	char	*clean_path;
+	char	**paths;
+
+	clean_path = get_clean_path_or_die(envp);
+	paths = ft_split(clean_path, ':');
+	die_if_null(paths);
+	return (paths);
 }

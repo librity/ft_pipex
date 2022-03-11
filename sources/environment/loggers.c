@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_whitespace.c                                 :+:      :+:    :+:   */
+/*   loggers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/30 23:59:17 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/11 15:13:40 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/01 17:15:15 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/11 18:24:56 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-/*
-** Checks if character is an ASCII whitespace character.
-*/
-bool	ft_is_whitespace(char character)
+void	log_path(t_pipex *ctl)
 {
-	return (character == '\n'
-		|| character == '\t'
-		|| character == '\v'
-		|| character == '\r'
-		|| character == '\f'
-		|| character == ' '
-	);
+	if (VERBOSE)
+		ft_printf(" => PATH: \"%s\"\n", ctl->path);
+}
+
+void	log_paths(t_pipex *ctl)
+{
+	if (VERBOSE)
+	{
+		ft_printf(" => PATHS:\n");
+		ft_putstr_array(ctl->paths);
+		ft_printf("	TOTAL: %d\n", ft_arrlen((void **)ctl->paths));
+	}
 }

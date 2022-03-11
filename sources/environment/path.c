@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_handled_no_conversion.c                         :+:      :+:    :+:   */
+/*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/03 03:18:48 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/11 15:17:34 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/02/27 21:13:08 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/11 18:23:14 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
+#include <pipex.h>
 
-/*
-** Handles printf's empty conversion.
-*/
-bool	pf_handled_no_conversion(t_printf *print_control)
+static char	*get_clean_path(char **envp)
 {
-	if (*(print_control->format) == '%')
-		return (false);
-	ft_putchar(*(print_control->format));
-	(print_control->format)++;
-	(print_control->chars_printed)++;
-	return (true);
+	char	*candidate;
+
+	while (*envp)
+	{
+		candidate = ft_strnstr(*envp, PATH_PREFIX, PATH_PREFIX_LENGTH);
+		if (candidate != NULL)
+			return (candidate + PATH_PREFIX_LENGTH);
+		envp++;
+	}
+	return (NULL);
+}
+
+char	*get_clean_path_or_die(char **envp)
+{
+	char	*clean_path;
+
+	clean_path = get_clean_path(envp);
+	die_if_null(clean_path);
+	return (clean_path);
 }
