@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open.c                                             :+:      :+:    :+:   */
+/*   open_infile.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 22:04:01 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/10 19:49:22 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/10 20:34:03 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-int	open_file_or_die(char *path)
+static void	exists_or_die(t_pipex *ctl)
 {
-	int	open_fd;
-	int	open_flags;
+	int	exists;
 
-	open_flags = O_RDONLY;
-	open_fd = open(path, open_flags);
-	if (open_fd < 0)
-		die2(path);
-	return (open_fd);
+	exists = access(ctl->infile.path, F_OK);
+	if (exists < 0)
+		die3(ctl->infile.path, EXIT_FAILURE);
+}
+
+static void	read_or_die(t_pipex *ctl)
+{
+	int	can_read;
+
+	can_read = access(ctl->infile.path, R_OK);
+	if (can_read < 0)
+		die3(ctl->infile.path, EXIT_SUCCESS);
+}
+
+int	open_infile_or_die(t_pipex *ctl)
+{
+	exists_or_die(ctl);
+	read_or_die(ctl);
+	return (open_file_or_die(ctl->infile.path));
 }

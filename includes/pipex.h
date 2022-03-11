@@ -68,6 +68,8 @@ int		create_file_or_die(char *path);
 int		open_file_or_die(char *path);
 int		close_or_die(int close_me);
 
+int		open_infile_or_die(t_pipex *ctl);
+
 void	pipe_or_die(t_pipex *ctl);
 void	close_pipes_fds(t_pipex *ctl);
 
@@ -101,5 +103,7 @@ void	die2(char *location);
 void	die3(char *location, int exit_status);
 void	die4(int exit_status);
 void	die5(char *location, char *message, int exit_status);
+
+void	print_error(char *location, char *message);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 20:21:05 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/10 19:34:44 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/10 20:50:53 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	free_lingering(t_pipex *ctl)
 
 static void	free_and_die(t_pipex *ctl)
 {
-	ft_printf("\033[0;31m%s: %s\n", ctl->right.cmd, ERR_NO_CMD);
+	print_error(ctl->right.cmd, ERR_NO_CMD);
 	free_lingering(ctl);
 	exit(EKEYEXPIRED);
 }

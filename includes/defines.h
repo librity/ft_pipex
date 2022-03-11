@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:20:45 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/10 19:16:25 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/10 19:59:06 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ EXAMPLES:\n\
 \******************************************************************************/
 
 # define EXIT_SUCCESS_STR "0\n"
+# define EXIT_FAILURE_STR "1\n"
 
 # define EKEYEXPIRED 127
 # define EKEYEXPIRED_STR "127\n"
