@@ -6,7 +6,7 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 16:25:08 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/03/11 01:28:41 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/03/11 14:59:42 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ SOURCES = $(wildcard $(SOURCES_PATH)/**/*.c) $(wildcard $(SOURCES_PATH)/*.c)
 OBJECTS = $(patsubst $(SOURCES_PATH)/%.c, $(OBJECTS_PATH)/%.o, $(SOURCES))
 OBJECT_DIRECTORIES = $(sort $(dir $(OBJECTS)))
 
-ARCHIVES = $(PIPEX_ARCHIVE) $(FT_PRINTF_ARCHIVE)
+ARCHIVES = $(PIPEX_ARCHIVE)
 
 ################################################################################
 # REQUIRED
@@ -69,7 +69,7 @@ re: fclean all
 # INITIALIZE
 ################################################################################
 
-initialize: make_dirs build_libs
+initialize: make_dirs
 
 make_dirs: $(ARCHIVES_PATH) $(OBJECTS_PATH) $(OBJECT_DIRECTORIES)
 
@@ -82,27 +82,26 @@ $(OBJECTS_PATH):
 $(OBJECT_DIRECTORIES):
 	$(SAFE_MAKEDIR) $@
 
-build_libs: build_ft_printf
-
 ################################################################################
 # RUN
 ################################################################################
 
 run: re
-#	./pipex infile "ls" "wc" outfile && cat outfile
-#	./pipex infile "cat" "wc" outfile && cat outfile
-#	./pipex infile "cat -E" "wc -l" outfile && cat outfile
-#	./pipex infile "cat -E" "wc -m" outfile && cat outfile
-#	./pipex infile "ls -l" "wc -l" outfile && cat outfile
-#	./pipex infile "ls -l -a -s" "wc -l" outfile && cat outfile
-#	./pipex infile "ls -l -a -s" "wc -m" outfile && cat outfile
-#	./pipex infile "grep a" "wc -w" outfile && cat outfile
-#	./pipex .gitignore "tr a b" "tr b c" outfile && cat outfile
-#	./pipex EOF "tr a b" "tr b c" outfile && cat outfile
-#	./pipex .gitignore "ping 8.8.8.8" "grep ms" outfile && cat outfile
-#	./pipex .gitignore "tr x ' '" "tr i ' '" outfile && cat outfile
-#	./pipex .gitignore "tr ex ' X'" "tr pi 'P '" outfile && cat outfile
-	./pipex infile "tr a ' '" "tr ' ' x" outfile && cat outfile
+#	./pipex infile "ls" "wc" outfile; cat outfile
+#	./pipex infile "cat" "wc" outfile; cat outfile
+#	./pipex infile "cat -E" "wc -l" outfile; cat outfile
+#	./pipex infile "cat -E" "wc -m" outfile; cat outfile
+#	./pipex infile "ls -l" "wc -l" outfile; cat outfile
+#	./pipex infile "ls -l -a -s" "wc -l" outfile; cat outfile
+#	./pipex infile "ls -l -a -s" "wc -m" outfile; cat outfile
+#	./pipex infile "grep a" "wc -w" outfile; cat outfile
+#	./pipex .gitignore "tr a b" "tr b c" outfile; cat outfile
+#	./pipex EOF "tr a b" "tr b c" outfile; cat outfile
+#	./pipex .gitignore "ping 8.8.8.8" "grep ms" outfile; cat outfile
+#	./pipex .gitignore "tr x ' '" "tr i ' '" outfile; cat outfile
+#	./pipex .gitignore "tr ex ' X'" "tr pi 'P '" outfile; cat outfile
+#	./pipex infile "tr a ' '" "tr ' ' x" outfile; cat outfile
+	./pipex infile "notexisting" "wc" outfile; cat outfile
 
 ################################################################################
 # CLEAN
@@ -115,29 +114,7 @@ clean:
 fclean: clean
 	$(REMOVE) $(NAME)
 
-tclean: clean_libs fclean tests_clean example_clean vglog_clean
-
-################################################################################
-# LIBS
-################################################################################
-
-LIBS_PATH = ./libs
-
-FT_PRINTF = ft_printf.a
-FT_PRINTF_PATH = $(LIBS_PATH)/ft_printf
-FT_PRINTF_ARCHIVE = $(ARCHIVES_PATH)/$(FT_PRINTF)
-FT_PRINTF_HEADER = $(FT_PRINTF_PATH)/includes/ft_printf.h
-
-build_ft_printf:
-	$(MAKE_EXTERNAL) $(FT_PRINTF_PATH) all
-	$(COPY) $(FT_PRINTF_PATH)/$(FT_PRINTF) $(FT_PRINTF_ARCHIVE)
-	$(COPY) $(FT_PRINTF_HEADER) $(INCLUDES_PATH)
-
-ft_printf_clean:
-	$(MAKE_EXTERNAL) $(FT_PRINTF_PATH) fclean
-	$(REMOVE) $(FT_PRINTF_ARCHIVE)
-
-clean_libs: ft_printf_clean
+tclean: fclean tests_clean example_clean vglog_clean
 
 ################################################################################
 # TESTS
@@ -243,17 +220,15 @@ gitm:
 ################################################################################
 
 .PHONY: all required clean fclean re \
-	initialize make_dirs build_libs \
+	initialize make_dirs \
 \
 	run \
-\
-	build_ft_printf ft_printf_clean \
 \
 	build_tests test tests_clean \
 	build_example example example_clean \
 	vg vglog vg_build vglog_clean \
 \
-	tclean clean_libs \
+	tclean \
 	norm git gitm
 
 ################################################################################

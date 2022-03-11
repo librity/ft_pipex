@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 21:58:19 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/02/25 13:17:44 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/11 15:00:35 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,124 +17,7 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include <unistd.h>
-
-/******************************************************************************\
- * BOOLEANS
-\******************************************************************************/
-
-bool				unless(bool condition);
-
-/******************************************************************************\
- * MATH
-\******************************************************************************/
-
-int					ft_pow(int number, int power);
-int					ft_pow_i(int number, int power);
-
-/******************************************************************************\
- * MEMORY
-\******************************************************************************/
-
-# define MALLOC_ERROR_MESSAGE "ERROR: Unable to allocate required memory.\n"
-
-void				*ft_salloc(size_t size);
-void				*ft_memcpy(void *dest, const void *src, size_t n);
-
-/******************************************************************************\
- * CHARS
-\******************************************************************************/
-
-bool				ft_is_decimal_char(char character);
-bool				ft_is_plus_or_minus(char character);
-bool				ft_is_whitespace(char character);
-bool				ft_isdigit(int c);
-
-/******************************************************************************\
- * STRINGS
-\******************************************************************************/
-
-size_t				ft_strlen(const char *s);
-char				*ft_strnchr(const char *s, int c, unsigned int limit);
-
-/******************************************************************************\
- * STRING TO NUMBER
-\******************************************************************************/
-
-int					ft_atoi(const char *number_pointer);
-unsigned int		ft_atoui(const char *number_pointer);
-
-/******************************************************************************\
- * NUMBER TO STRING
-\******************************************************************************/
-
-unsigned int		ft_i_to_buffer(int n, char *buffer);
-
-/******************************************************************************\
- * PRINT STRINGS
-\******************************************************************************/
-
-void				ft_putchar_fd(char c, int fd);
-void				ft_putstr_fd(char *s, int fd);
-
-void				ft_putchar(char c);
-void				ft_putstr(char *s);
-void				ft_putstr_up_to(char *s, size_t up_to);
-
-/******************************************************************************\
- * PRINT NUMBERS
-\******************************************************************************/
-
-# define DEFAULT_PRINT_FLOAT_PRECISION 6
-
-# define DECIMAL_BASE "0123456789"
-# define LOWERCASE_HEX_BASE "0123456789abcdef"
-# define UPPERCASE_HEX_BASE "0123456789ABCDEF"
-
-bool				ft_is_valid_base(const char *base,
-						const size_t base_length);
-
-void				ft_aux_handle_minus_sign_l(long *number_pointer);
-void				ft_aux_handle_minus_sign_ll(long long *number_pointer);
-
-void				ft_aux_handle_minus_sign_d(double *number_pointer);
-void				ft_aux_handle_minus_sign_ld(long double *number_pointer);
-
-void				ft_putnbr_ui(unsigned int number);
-void				ft_putnbr_l(long number);
-void				ft_putnbr_ll(long long number);
-
-void				ft_putnbr_base_ui(unsigned int number, const char *base);
-void				ft_putnbr_base_l(long number, const char *base);
-void				ft_putnbr_base_ul(unsigned long number, const char *base);
-void				ft_putnbr_base_ll(long long number, const char *base);
-
-void				ft_putnbr_precise_d(double n, int precision);
-void				ft_putnbr_precise_ld(long double n, int precision);
-
-void				ft_puthex_uppercase(unsigned int number);
-void				ft_puthex_lowercase(unsigned int number);
-
-unsigned int		ft_count_digits(int number);
-unsigned int		ft_count_digits_i(int number);
-unsigned int		ft_count_digits_ui(unsigned int number);
-unsigned int		ft_count_digits_ull(unsigned long long number);
-
-unsigned int		ft_count_digits_hex_ul(unsigned long number);
-
-unsigned int		ft_count_chars_i(int number);
-
-unsigned int		ft_count_chars_d(double number, int precision);
-unsigned int		ft_count_digits_d(double number, int precision);
-
-unsigned int		ft_count_chars_ld(long double number, int precision);
-unsigned int		ft_count_digits_ld(long double number, int precision);
-
-char				*ft_skip_number(char *digits);
-char				*ft_skip_whitespace(char *digits);
-
-/******************************************************************************\
- * FT_PRINTF
-\******************************************************************************/
+# include <utils.h>
 
 # ifndef ARG_MAX
 #  define ARG_MAX 131072

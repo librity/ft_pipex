@@ -24,3 +24,6 @@
 echo "DIFFERENT EXIT CODES"
 < bad cat | grep x > outfile; echo $?
 < bad grep x | cat > outfile; echo $?
+
+echo "RUNS LAST COMMAND DESPITE ERROR"
+< infile notexisting | wc > outfile; echo $?

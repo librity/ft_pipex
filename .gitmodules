@@ -1,3 +1,0 @@
-[submodule "libs/ft_printf"]
-	path = libs/ft_printf
-	url = https://github.com/librity/ft_printf
