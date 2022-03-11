@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environment.c                                      :+:      :+:    :+:   */
+/*   ft_lst_append.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/17 15:39:11 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/11 18:15:39 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2021/02/07 15:57:45 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/11 16:27:47 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-static void	set_paths(t_pipex *ctl, char **envp)
+/*
+** Creates a node and appends it to the end of a linked list.
+*/
+void	ft_lst_append(t_list **lst, void *content)
 {
-	ctl->paths = get_paths_or_die(envp);
-	ft_add_lalloc_array(&ctl->free_me, (void **)ctl->paths);
-}
+	t_list	*new;
 
-void	initialize_environment(t_pipex *ctl, char **envp)
-{
-	ctl->envp = envp;
-	ctl->path = get_clean_path_or_die(envp);
-	set_paths(ctl, envp);
-	log_path(ctl);
-	log_paths(ctl);
+	if (lst == NULL || *lst == NULL)
+		return ;
+	new = ft_lstnew_safe(content);
+	ft_lstadd_back(lst, new);
 }

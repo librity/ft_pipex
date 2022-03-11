@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 10:34:20 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/08 20:21:24 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/11 18:11:40 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	ctl;
 
+	ctl.free_me = NULL;
 	check_argc(argc);
 	initialize(&ctl, argv, envp);
 	handle_children(&ctl);

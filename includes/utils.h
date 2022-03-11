@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 16:00:14 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/11 15:07:05 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/11 18:08:16 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,19 @@ int				ft_lstsize(t_list *lst);
 void			ft_lstadd_front(t_list **lst, t_list *new);
 void			ft_lstadd_back(t_list **lst, t_list *new);
 
+void			ft_lst_append(t_list **lst, void *content);
+void			ft_lst_prepend(t_list **lst, void *content);
+
 void			ft_lstdelone(t_list *lst, void (*del)(void *));
 void			ft_lstclear(t_list **lst, void (*del)(void *));
+
+/******************************************************************************\
+ * LISTED MEMORY ALLOCATION
+\******************************************************************************/
+
+void			*ft_lalloc(t_list **alloc, size_t size);
+void			ft_add_lalloc(t_list **alloc, void *pointer);
+void			ft_add_lalloc_array(t_list **alloc, void **pointer);
+void			ft_free_lalloc(t_list **free_me);
 
 #endif

@@ -49,6 +49,8 @@ typedef struct s_pipex
 
 	t_child	right;
 	t_file	outfile;
+
+	t_list	*free_me;
 }		t_pipex;
 
 void	initialize_files(t_pipex *ctl, char **argv);
