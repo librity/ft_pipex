@@ -27,3 +27,4 @@ echo "DIFFERENT EXIT CODES"
 
 echo "RUNS LAST COMMAND DESPITE ERROR"
 < infile notexisting | wc > outfile; echo $?
+< infile catzado | wc -w > outfile ; echo $? ; cat outfile

@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:20:45 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/11 01:23:35 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/12 18:32:10 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,32 @@ EXAMPLES:\n\
 # define ERR_GENERIC_RED "\033[0;31mERROR"
 # define ERR_NULL_POINTER "ERROR: critical null pointer"
 # define ERR_NO_CMD "command not found"
+
+/******************************************************************************\
+ * COLORS
+\******************************************************************************/
+
+/* Black, Red, Green, Yellow, Blue, Purple, Cyan, White */
+# define BK "\033[0;30m"
+# define R "\033[0;31m"
+# define G "\033[0;32m"
+# define Y "\033[0;33m"
+# define B "\033[0;34m"
+# define P "\033[0;35m"
+# define C "\033[0;36m"
+# define W "\033[0;37m"
+
+/* Bold */
+# define BKB "\033[1;30m"
+# define RB "\033[1;31m"
+# define GB "\033[1;32m"
+# define YB "\033[1;33m"
+# define BB "\033[1;34m"
+# define PB "\033[1;35m"
+# define CB "\033[1;36m"
+# define WB "\033[1;37m"
+
+/* Reset Color */
+# define RC "\033[0m"
 
 #endif

@@ -6,7 +6,7 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 16:25:08 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/03/11 19:23:44 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/03/12 19:03:05 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,27 +83,6 @@ $(OBJECT_DIRECTORIES):
 	$(SAFE_MAKEDIR) $@
 
 build_libs: build_ft_printf
-
-################################################################################
-# RUN
-################################################################################
-
-run: re
-#	./pipex infile "ls" "wc" outfile; cat outfile
-#	./pipex infile "cat" "wc" outfile; cat outfile
-#	./pipex infile "cat -E" "wc -l" outfile; cat outfile
-#	./pipex infile "cat -E" "wc -m" outfile; cat outfile
-#	./pipex infile "ls -l" "wc -l" outfile; cat outfile
-#	./pipex infile "ls -l -a -s" "wc -l" outfile; cat outfile
-#	./pipex infile "ls -l -a -s" "wc -m" outfile; cat outfile
-#	./pipex infile "grep a" "wc -w" outfile; cat outfile
-#	./pipex .gitignore "tr a b" "tr b c" outfile; cat outfile
-#	./pipex EOF "tr a b" "tr b c" outfile; cat outfile
-#	./pipex .gitignore "ping 8.8.8.8" "grep ms" outfile; cat outfile
-#	./pipex .gitignore "tr x ' '" "tr i ' '" outfile; cat outfile
-#	./pipex .gitignore "tr ex ' X'" "tr pi 'P '" outfile; cat outfile
-#	./pipex infile "tr a ' '" "tr ' ' x" outfile; cat outfile
-	./pipex infile "notexisting" "wc" outfile; cat outfile
 
 ################################################################################
 # CLEAN
@@ -246,8 +225,6 @@ gitm:
 .PHONY: all required clean fclean re \
 	initialize make_dirs build_libs \
 \
-	run \
-\
 	build_ft_printf ft_printf_clean \
 \
 	build_tests test tests_clean \
@@ -262,7 +239,7 @@ gitm:
 ################################################################################
 
 # Black, Red, Green, Yellow, Blue, Purple, Cyan, White
-Bk = \033[0;30m
+BK = \033[0;30m
 R = \033[0;31m
 G = \033[0;32m
 Y = \033[0;33m
@@ -271,7 +248,7 @@ P = \033[0;35m
 C = \033[0;36m
 W = \033[0;37m
 # Bold
-BkB = \033[1;30m
+BKB = \033[1;30m
 RB = \033[1;31m
 GB = \033[1;32m
 YB = \033[1;33m
@@ -280,4 +257,4 @@ PB = \033[1;35m
 CB = \033[1;36m
 WB = \033[1;37m
 # Reset Color
-RC	= \033[0m
+RC = \033[0m

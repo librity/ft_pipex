@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:48:28 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/10 20:50:30 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/12 18:33:22 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	print_error(char *location, char *message)
 {
-	ft_printf("\033[0;31m%s: %s\n", location, message);
+	ft_printf("%s%s: %s%s\n", R, location, message, RC);
 }

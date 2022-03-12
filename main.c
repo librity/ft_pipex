@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 10:34:20 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/11 23:49:15 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/12 00:44:14 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	main(int argc, char **argv, char **envp)
 	t_pipex	ctl;
 
 	check_argc(argc);
+
+	// initialize(&ctl, argv, envp);
 	initialize_pipex(&ctl);
 	initialize_files(&ctl, argv);
 	initialize_environment(&ctl, envp);
@@ -47,6 +49,7 @@ int	main(int argc, char **argv, char **envp)
 	pipe_or_die(ctl.pipe_fds);
 	log_pipex(&ctl);
 
+	// handle_children(&ctl);
 	handle_left(&ctl);
 	handle_right(&ctl);
 	close_pipes_fds(ctl.pipe_fds);
