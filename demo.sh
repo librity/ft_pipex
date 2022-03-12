@@ -6,7 +6,7 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 18:00:58 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/03/12 20:25:29 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/03/12 20:42:22 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,22 @@ WB="\033[1;37m"
 # Reset Color
 RC="\033[0m"
 
-compare() {
+print_exit_code() {
+	printf "${C}Exit Code: "
+	echo $1
+	printf "${RC}"
+}
+
+print_outfile() {
+	printf "${Y}Outfile:"
+	echo
+	echo "\"\"\""
+	cat $1
+	printf "\"\"\"${RC}"
+	echo
+}
+
+run_pipex() {
 	rm $4
 	printf "${P}========================= PIPEX =======================${RC}\n"
 	printf "${G}Command: ./pipex $1 $2 $3 $4${RC}"
@@ -40,20 +55,15 @@ compare() {
 	printf "${B}Output:"
 	echo
 	./pipex "$1" "$2" "$3" "$4"
+	exit_code=$?
 	printf "${RC}"
 	echo
 
-	printf "${C}Exit Code: "
-	echo $?
-	printf "${RC}"
+	print_exit_code "$exit_code"
+	print_outfile "$4"
+}
 
-	printf "${Y}Outfile:"
-	echo
-	echo "\"\"\""
-	cat $4
-	printf "\"\"\"${RC}"
-	echo
-
+run_shell() {
 	rm $4
 	printf "${P}========================= SHELL =======================${RC}\n"
 	printf "${G}Command: < $1 $2 | $3 > $4${RC}"
@@ -62,23 +72,25 @@ compare() {
 	printf "${B}Output:"
 	echo
 	eval "< $1 $2 | $3 > $4"
+	exit_code=$?
 	printf "${RC}"
 	echo
 
-	printf "${C}Exit Code: "
-	echo $?
-	printf "${RC}"
+	print_exit_code "$exit_code"
+	print_outfile "$4"
+}
 
-	printf "${Y}Outfile:"
-	echo
-	echo "\"\"\""
-	cat $4
-	printf "\"\"\"${RC}"
-	echo
-
+print_terminator() {
 	printf "${P}=======================================================${RC}\n"
 	echo
 	echo
+}
+
+compare() {
+	run_pipex "$1" "$2" "$3" "$4"
+	run_shell "$1" "$2" "$3" "$4"
+
+	print_terminator
 }
 
 make --silent re
