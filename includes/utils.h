@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 16:00:14 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/11 19:29:43 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/11 20:00:09 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
  * LISTED MEMORY ALLOCATION
 \******************************************************************************/
 
-void	*ft_lalloc(t_list **alloc, size_t size);
-void	ft_add_lalloc(t_list **alloc, void *pointer);
-void	ft_add_lalloc_array(t_list **alloc, void **pointer);
+void	*ft_lalloc(t_list **lalloc, size_t size);
+void	ft_add_lalloc(t_list **lalloc, void *pointer);
+void	ft_add_lalloc_array(t_list **lalloc, void **pointer);
 void	ft_free_lalloc(t_list **free_me);
 
 #endif

@@ -31,7 +31,7 @@ typedef struct s_child
 	int		pid;
 
 	char	*raw;
-	char	**split;
+	char	**tokens;
 	char	*cmd;
 	char	**flags;
 	char	*path;
@@ -54,9 +54,16 @@ typedef struct s_pipex
 	t_list	*free_me;
 }		t_pipex;
 
-void	initialize_files(t_pipex *ctl, char **argv);
+void	initialize_pipex(t_pipex *ctl);
 void	initialize_environment(t_pipex *ctl, char **envp);
+
 void	initialize_children(t_pipex *ctl, char **argv);
+void	initialize_right(t_pipex *ctl, char **argv);
+void	initialize_left(t_pipex *ctl, char **argv);
+
+void	initialize_files(t_pipex *ctl, char **argv);
+void	initialize_outfile(t_pipex *ctl, char **argv);
+void	initialize_infile(t_pipex *ctl, char **argv);
 
 char	*get_clean_path_or_die(char **envp);
 char	**get_paths_or_die(char **envp);
@@ -72,11 +79,11 @@ int		close_or_die(int close_me);
 
 int		open_infile_or_die(t_pipex *ctl);
 
-void	pipe_or_die(t_pipex *ctl);
-void	close_pipes_fds(t_pipex *ctl);
+void	pipe_or_die(int pipe_fds[2]);
+void	close_pipes_fds(int pipe_fds[2]);
 
-void	stdout_to_pipe(t_pipex *ctl);
-void	pipe_to_stdin(t_pipex *ctl);
+void	stdout_to_pipe(int pipe_fds[2]);
+void	pipe_to_stdin(int pipe_fds[2]);
 void	file_to_stdin(int infile_fd);
 void	stdout_to_file(int outfile_fd);
 

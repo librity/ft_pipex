@@ -29,6 +29,7 @@
     "numeric": "c",
     "streambuf": "c",
     "functional": "c",
-    "errno.h": "c"
+    "errno.h": "c",
+    "ft_printf.h": "c"
   }
 }
