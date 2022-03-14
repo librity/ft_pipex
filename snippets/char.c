@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 21:13:08 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/10 23:44:38 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/14 16:54:14 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,20 @@
 
 static void	explore_chars(void)
 {
-	int		i;
-	char	c;
+	int	i;
 
-	i = 0;
-	c = 0;
+	i = -300;
 	while (i < 300)
 	{
-		printf("%i: |%c|\n", i, c);
-		c++;
+		printf("|%03d|%02x|%c|\n", i, i, i);
 		i++;
 	}
 }
 
 int	main(void)
 {
-	printf("\n=============\n");
+	printf("=============\n");
 	explore_chars();
-	printf("\n=============\n");
+	printf("=============\n");
 	return (0);
 }
