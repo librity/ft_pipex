@@ -30,6 +30,7 @@
     "streambuf": "c",
     "functional": "c",
     "errno.h": "c",
-    "ft_printf.h": "c"
+    "ft_printf.h": "c",
+    "wait.h": "c"
   }
 }

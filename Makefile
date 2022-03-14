@@ -6,7 +6,7 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 16:25:08 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/03/12 19:03:05 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/03/14 17:12:56 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ SOURCES = $(wildcard $(SOURCES_PATH)/**/*.c) $(wildcard $(SOURCES_PATH)/*.c)
 OBJECTS = $(patsubst $(SOURCES_PATH)/%.c, $(OBJECTS_PATH)/%.o, $(SOURCES))
 OBJECT_DIRECTORIES = $(sort $(dir $(OBJECTS)))
 
-ARCHIVES = $(PIPEX_ARCHIVE) $(FT_PRINTF_ARCHIVE)
+ARCHIVES = $(PIPEX_ARCHIVE) $(LIBFT_ARCHIVE)
 
 ################################################################################
 # REQUIRED
@@ -82,7 +82,7 @@ $(OBJECTS_PATH):
 $(OBJECT_DIRECTORIES):
 	$(SAFE_MAKEDIR) $@
 
-build_libs: build_ft_printf
+build_libs: build_libft
 
 ################################################################################
 # CLEAN
@@ -103,21 +103,21 @@ tclean: clean_libs fclean tests_clean example_clean vglog_clean
 
 LIBS_PATH = ./libs
 
-FT_PRINTF = ft_printf.a
-FT_PRINTF_PATH = $(LIBS_PATH)/ft_printf
-FT_PRINTF_ARCHIVE = $(ARCHIVES_PATH)/$(FT_PRINTF)
-FT_PRINTF_HEADER = $(FT_PRINTF_PATH)/includes/ft_printf.h
+LIBFT = libft.a
+LIBFT_PATH = $(LIBS_PATH)/libft
+LIBFT_ARCHIVE = $(ARCHIVES_PATH)/$(LIBFT)
+LIBFT_HEADER = $(LIBFT_PATH)/includes/libft.h
 
-build_ft_printf:
-	$(MAKE_EXTERNAL) $(FT_PRINTF_PATH) all
-	$(COPY) $(FT_PRINTF_PATH)/$(FT_PRINTF) $(FT_PRINTF_ARCHIVE)
-	$(COPY) $(FT_PRINTF_HEADER) $(INCLUDES_PATH)
+build_libft:
+	$(MAKE_EXTERNAL) $(LIBFT_PATH) all
+	$(COPY) $(LIBFT_PATH)/$(LIBFT) $(LIBFT_ARCHIVE)
+	$(COPY) $(LIBFT_HEADER) $(INCLUDES_PATH)
 
-ft_printf_clean:
-	$(MAKE_EXTERNAL) $(FT_PRINTF_PATH) fclean
-	$(REMOVE) $(FT_PRINTF_ARCHIVE)
+libft_clean:
+	$(MAKE_EXTERNAL) $(LIBFT_PATH) fclean
+	$(REMOVE) $(LIBFT_ARCHIVE)
 
-clean_libs: ft_printf_clean
+clean_libs: libft_clean
 
 ################################################################################
 # TESTS
@@ -225,7 +225,7 @@ gitm:
 .PHONY: all required clean fclean re \
 	initialize make_dirs build_libs \
 \
-	build_ft_printf ft_printf_clean \
+	build_libft libft_clean \
 \
 	build_tests test tests_clean \
 	build_example example example_clean \
