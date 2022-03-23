@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:20:45 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/12 18:32:10 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/21 11:42:39 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define HELP_MSG "Welcome to lpaulo-m's pipex!\n\
 \n\
 USAGE:\n\
-	./pipex file1 cmd1 cmd2 file2\n\
+	./pipex file1 \"cmd1\" \"cmd2\" file2\n\
 \n\
 EXAMPLES:\n\
 	./pipex infile \"ls -l\" \"wc -l\" outfile\n\
