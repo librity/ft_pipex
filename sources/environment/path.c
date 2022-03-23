@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 21:13:08 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/11 18:23:14 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/23 15:46:34 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 static char	*get_clean_path(char **envp)
 {
-	char	*candidate;
-
 	while (*envp)
 	{
-		candidate = ft_strnstr(*envp, PATH_PREFIX, PATH_PREFIX_LENGTH);
-		if (candidate != NULL)
-			return (candidate + PATH_PREFIX_LENGTH);
+		if (ft_starts_with(*envp, PATH_PREFIX))
+			return (*envp + PATH_PREFIX_LENGTH);
 		envp++;
 	}
 	return (NULL);
