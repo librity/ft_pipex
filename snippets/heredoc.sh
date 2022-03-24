@@ -13,7 +13,7 @@
 # **************************************************************************** #
 
 # cmd1 << LIMITER | cmd2 >> outfile
-grep a <<33 | grep d >>outfile
+grep a <<3 | grep d >>outfile
 a
 a
 aa
@@ -27,9 +27,7 @@ sf
 a
 
 ads
-33a
-333
-33
+3
 
 grep a <<k | grep f >>outfile
 a

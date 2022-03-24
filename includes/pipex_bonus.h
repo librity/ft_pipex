@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include <defines.h>
+# include <defines_bonus.h>
 # include <fcntl.h>
 # include <libft.h>
 # include <stdio.h>
@@ -36,6 +37,19 @@ typedef struct s_child
 	char	*path;
 }		t_child;
 
+typedef struct s_hdoc
+{
+	int		pid;
+
+	char	*raw;
+	char	**tokens;
+	char	*cmd;
+	char	**flags;
+	char	*path;
+
+	char	*limiter;
+}		t_hdoc;
+
 typedef struct s_pipex
 {
 	int		argc;
@@ -47,18 +61,31 @@ typedef struct s_pipex
 
 	int		pipe_fds[2];
 
+	int		pipes_count;
+	t_list	*pipes;
+
+	t_hdoc	hdoc;
+
 	t_file	infile;
 	t_child	left;
 
 	t_child	right;
 	t_file	outfile;
 
+	int		children_count;
+	t_list	*children;
+
 	t_list	*free_me;
 }		t_pipex;
 
 int		fourex(int argc, char **argv, char **envp);
+int		nex(int argc, char **argv, char **envp);
+int		hdoc(int argc, char **argv, char **envp);
 
 void	initialize_fourex(t_pipex *ctl, int argc, char **argv, char **envp);
+void	initialize_hdoc(t_pipex *ctl, int argc, char **argv, char **envp);
+void	initialize_nex(t_pipex *ctl, int argc, char **argv, char **envp);
+
 void	initialize_environment(t_pipex *ctl);
 
 void	initialize_children(t_pipex *ctl);
@@ -89,6 +116,8 @@ int		create_outfile_or_die(t_pipex *ctl);
 void	pipe_or_die(int pipe_fds[2]);
 void	close_pipes_fds(int pipe_fds[2]);
 
+void	stdin_to_pipe(int pipe_fds[2]);
+
 void	stdout_to_pipe(int pipe_fds[2]);
 void	pipe_to_stdin(int pipe_fds[2]);
 void	file_to_stdin(int infile_fd);
@@ -110,10 +139,13 @@ char	*find_left_executable_or_die(t_pipex *ctl);
 
 void	handle_left(t_pipex *ctl);
 void	handle_right(t_pipex *ctl);
+void	handle_hdoc(t_pipex *ctl);
 
 void	free_memory(t_pipex *ctl);
 
 void	check_argc(int argc);
+void	check_argc_hdoc(int argc);
+void	check_argc_nex(int argc);
 
 void	die_if_null(void *ptr);
 void	die(void);
