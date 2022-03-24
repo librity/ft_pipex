@@ -29,8 +29,8 @@ cd tt_3
 ./pipex_tester.sh a
 cd ..
 
-# ATENCAO: NAO FUNCIONA NO WORKSPACE (NAO DA PARA INSTALAR PING)
 # RUN tt_4
 cd tt_4
+sed -i 's/\"ping\"//g' run.sh # Remove ping
 ./run.sh
 cd ..
