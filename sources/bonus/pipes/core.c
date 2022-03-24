@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   core.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 10:34:20 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 19:20:59 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/01 19:28:03 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/24 19:12:30 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include <pipex_bonus.h>
 
-int	main(int argc, char **argv, char **envp)
+void	pipe_or_die(int pipe_fds[2])
 {
-	check_argc(argc);
-	return (fourex(argc, argv, envp));
+	int	pipe_return;
+
+	pipe_return = pipe(pipe_fds);
+	if (pipe_return < 0)
+		die();
+}
+
+void	close_pipes_fds(int pipe_fds[2])
+{
+	close_or_die(pipe_fds[PIPE_READ]);
+	close_or_die(pipe_fds[PIPE_WRITE]);
 }

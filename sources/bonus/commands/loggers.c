@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   loggers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 10:34:20 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 19:24:28 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/01 17:15:15 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/24 19:12:30 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex_bonus.h>
 
-int	main(int argc, char **argv, char **envp)
+void	log_command(char *command_executable, char **flags)
 {
-	check_argc(argc);
-	if (ft_starts_with(argv[1], HDOC_IDENTIFIER))
-		return (hdoc(argc, argv, envp));
-	// if (argc < 6)
-	// 	return (fourex(argc, argv, envp));
-	return (nex(argc, argv, envp));
+	if (VERBOSE)
+	{
+		ft_printf(" => EXECUTABLE: %s\n", command_executable);
+		ft_printf(" => FLAGS:\n");
+		ft_putstr_array(flags);
+		ft_printf("	TOTAL: %d\n", ft_arrlen((void **)flags));
+	}
+}
+
+void	log_pipex(t_pipex *ctl)
+{
+	if (VERBOSE)
+		ft_printf(
+			" => Executing \"< %s %s | %s > %s\"\n",
+			ctl->infile.path,
+			ctl->left.raw,
+			ctl->right.raw,
+			ctl->outfile.path);
 }

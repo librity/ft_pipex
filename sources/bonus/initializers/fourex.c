@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fourex.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 10:34:20 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 19:20:59 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/02/17 15:39:11 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/24 19:12:30 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include <pipex_bonus.h>
 
-int	main(int argc, char **argv, char **envp)
+void	initialize_fourex(t_pipex *ctl, int argc, char **argv, char **envp)
 {
-	check_argc(argc);
-	return (fourex(argc, argv, envp));
+	ctl->argc = argc;
+	ctl->argv = argv;
+	ctl->envp = envp;
+	ctl->free_me = NULL;
+	pipe_or_die(ctl->pipe_fds);
+	initialize_environment(ctl);
 }

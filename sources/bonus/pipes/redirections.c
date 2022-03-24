@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 10:34:20 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 19:24:28 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/01 19:28:03 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/24 19:22:00 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex_bonus.h>
 
-int	main(int argc, char **argv, char **envp)
+void	stdout_to_pipe(int pipe_fds[2])
 {
-	check_argc(argc);
-	if (ft_starts_with(argv[1], HDOC_IDENTIFIER))
-		return (hdoc(argc, argv, envp));
-	// if (argc < 6)
-	// 	return (fourex(argc, argv, envp));
-	return (nex(argc, argv, envp));
+	dup2(pipe_fds[PIPE_WRITE], STDOUT_FILENO);
+}
+
+void	pipe_to_stdin(int pipe_fds[2])
+{
+	dup2(pipe_fds[PIPE_READ], STDIN_FILENO);
+}
+
+void	file_to_stdin(int infile_fd)
+{
+	dup2(infile_fd, STDIN_FILENO);
+}
+
+void	stdout_to_file(int outfile_fd)
+{
+	dup2(outfile_fd, STDOUT_FILENO);
+}
+
+void	stdin_to_pipe(int pipe_fds[2])
+{
+	dup2(pipe_fds[PIPE_WRITE], STDIN_FILENO);
 }

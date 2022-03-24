@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   create_outfile.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 10:34:20 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 19:20:59 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/01 22:04:01 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/24 19:12:30 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include <pipex_bonus.h>
 
-int	main(int argc, char **argv, char **envp)
+int	create_outfile_or_die(t_pipex *ctl)
 {
-	check_argc(argc);
-	return (fourex(argc, argv, envp));
+	int	open_fd;
+	int	create_flags;
+
+	create_flags = O_CREAT | O_WRONLY | O_TRUNC;
+	open_fd = open(ctl->outfile.path, create_flags, CREATE_PERMISSION);
+	if (open_fd < 0)
+	{
+		free_memory(ctl);
+		die2(ctl->outfile.path);
+	}
+	return (open_fd);
 }

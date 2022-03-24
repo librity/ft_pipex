@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   loggers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 10:34:20 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 19:20:59 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/01 17:15:15 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/24 19:12:30 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include <pipex_bonus.h>
 
-int	main(int argc, char **argv, char **envp)
+void	log_path(t_pipex *ctl)
 {
-	check_argc(argc);
-	return (fourex(argc, argv, envp));
+	if (VERBOSE)
+		ft_printf(" => PATH: \"%s\"\n", ctl->path);
+}
+
+void	log_paths(t_pipex *ctl)
+{
+	if (VERBOSE)
+	{
+		ft_printf(" => PATHS:\n");
+		ft_putstr_array(ctl->paths);
+		ft_printf("	TOTAL: %d\n", ft_arrlen((void **)ctl->paths));
+	}
 }

@@ -6,14 +6,11 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 16:25:08 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/03/24 07:10:16 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/03/24 19:58:17 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
-
-PIPEX_HEADER = $(INCLUDES_PATH)/pipex.h
-PIPEX_ARCHIVE = $(ARCHIVES_PATH)/pipex.a
 
 CC = gcc
 CC_STRICT = $(CC) $(CCF_STRICT) $(CCF_OPTIMIZATION)
@@ -35,33 +32,47 @@ SOURCES_PATH = ./sources
 INCLUDES_PATH = ./includes
 ARCHIVES_PATH = ./archives
 
-SOURCES = $(wildcard $(SOURCES_PATH)/**/*.c) $(wildcard $(SOURCES_PATH)/*.c)
-
-OBJECTS = $(patsubst $(SOURCES_PATH)/%.c, $(OBJECTS_PATH)/%.o, $(SOURCES))
-OBJECT_DIRECTORIES = $(sort $(dir $(OBJECTS)))
-
-ARCHIVES = $(PIPEX_ARCHIVE) $(LIBFT_ARCHIVE)
-
 ################################################################################
 # MANDATORY
 ################################################################################
 
-MANDATORY_MAIN = ./main.c
+M_HEADER = $(INCLUDES_PATH)/pipex.h
+M_ARCHIVE = $(ARCHIVES_PATH)/pipex.a
+
+M_SOURCES_PATH = $(SOURCES_PATH)/mandatory
+M_OBJECTS_PATH = $(OBJECTS_PATH)/mandatory
+
+M_SOURCES = $(wildcard $(M_SOURCES_PATH)/**/*.c) \
+	$(wildcard $(M_SOURCES_PATH)/*.c)
+
+M_OBJECTS = $(patsubst $(M_SOURCES_PATH)/%.c, $(M_OBJECTS_PATH)/%.o, $(M_SOURCES))
+M_OBJECT_DIRECTORIES = $(sort $(dir $(M_OBJECTS)))
+
+M_MAIN = ./main.c
+
+M_ARCHIVES = $(M_ARCHIVE) $(LIBFT_ARCHIVE)
 
 all: $(NAME)
 
-$(NAME): $(PIPEX_ARCHIVE)
+$(NAME): $(M_ARCHIVE)
 	$(CC_STRICT) $(CCF_DEBUG) \
 		-I $(INCLUDES_PATH) \
-		$(MANDATORY_MAIN) \
-		$(ARCHIVES) \
+		$(M_MAIN) \
+		$(M_ARCHIVES) \
 		-o $(NAME)
 
-$(PIPEX_ARCHIVE): initialize $(PIPEX_HEADER) $(OBJECTS)
-	$(ARCHIVE_AND_INDEX) $(PIPEX_ARCHIVE) $(OBJECTS)
+$(M_ARCHIVE): initialize $(M_HEADER) $(M_OBJECTS)
+	$(ARCHIVE_AND_INDEX) $(M_ARCHIVE) $(M_OBJECTS)
 
-$(OBJECTS_PATH)/%.o: $(SOURCES_PATH)/%.c
+$(M_OBJECTS_PATH)/%.o: $(M_SOURCES_PATH)/%.c
 	$(CC_STRICT) -I $(INCLUDES_PATH) -c -o $@ $<
+
+clean:
+	$(REMOVE) $(M_OBJECTS)
+	$(REMOVE) $(M_ARCHIVE)
+
+fclean: clean
+	$(REMOVE) $(NAME)
 
 re: fclean all
 
@@ -69,17 +80,48 @@ re: fclean all
 # BONUS
 ################################################################################
 
-BONUS_MAIN = ./main_bonus.c
+B_HEADER = $(INCLUDES_PATH)/pipex_bonus.h
+B_ARCHIVE = $(ARCHIVES_PATH)/pipex_bonus.a
 
-bonus: $(PIPEX_ARCHIVE)
+B_SOURCES_PATH = $(SOURCES_PATH)/bonus
+B_OBJECTS_PATH = $(OBJECTS_PATH)/bonus
+
+B_SOURCES = $(wildcard $(B_SOURCES_PATH)/**/*.c) \
+	$(wildcard $(B_SOURCES_PATH)/*.c)
+
+B_OBJECTS = $(patsubst $(B_SOURCES_PATH)/%.c, $(B_OBJECTS_PATH)/%.o, $(B_SOURCES))
+B_OBJECT_DIRECTORIES = $(sort $(dir $(B_OBJECTS)))
+
+B_ARCHIVES = $(B_ARCHIVE) $(LIBFT_ARCHIVE)
+
+B_MAIN = ./main_bonus.c
+
+B_ARCHIVES = $(B_ARCHIVE) $(LIBFT_ARCHIVE)
+
+allb: bonus
+
+bonus: $(B_ARCHIVE)
 	$(CC_STRICT) $(CCF_DEBUG) \
 		-I $(INCLUDES_PATH) \
-		$(BONUS_MAIN) \
-		$(ARCHIVES) \
+		$(B_MAIN) \
+		$(B_ARCHIVES) \
 		-o $(NAME)
 
-runb: re bonus
-	./pipex
+$(B_ARCHIVES): initialize $(B_HEADER) $(B_OBJECTS)
+	$(ARCHIVE_AND_INDEX) $(B_ARCHIVE) $(B_OBJECTS)
+
+$(B_OBJECTS_PATH)/%.o: $(B_SOURCES_PATH)/%.c
+	$(CC_STRICT) -I $(INCLUDES_PATH) -c -o $@ $<
+
+
+cleanb:
+	$(REMOVE) $(B_OBJECTS)
+	$(REMOVE) $(B_ARCHIVE)
+
+fcleanb: cleanb
+	$(REMOVE) $(NAME)
+
+reb: fcleanb bonus
 
 ################################################################################
 # INITIALIZE
@@ -87,7 +129,8 @@ runb: re bonus
 
 initialize: make_dirs build_libs
 
-make_dirs: $(ARCHIVES_PATH) $(OBJECTS_PATH) $(OBJECT_DIRECTORIES)
+make_dirs: $(ARCHIVES_PATH) $(OBJECTS_PATH) \
+	$(M_OBJECT_DIRECTORIES) $(B_OBJECT_DIRECTORIES)
 
 $(ARCHIVES_PATH):
 	$(SAFE_MAKEDIR) $@
@@ -95,7 +138,10 @@ $(ARCHIVES_PATH):
 $(OBJECTS_PATH):
 	$(SAFE_MAKEDIR) $@
 
-$(OBJECT_DIRECTORIES):
+$(M_OBJECT_DIRECTORIES):
+	$(SAFE_MAKEDIR) $@
+
+$(B_OBJECT_DIRECTORIES):
 	$(SAFE_MAKEDIR) $@
 
 build_libs: build_libft
@@ -104,14 +150,7 @@ build_libs: build_libft
 # CLEAN
 ################################################################################
 
-clean:
-	$(REMOVE) $(OBJECTS)
-	$(REMOVE) $(PIPEX_ARCHIVE)
-
-fclean: clean
-	$(REMOVE) $(NAME)
-
-tclean: clean_libs fclean tests_clean example_clean vglog_clean
+tclean: clean_libs fclean fcleanb tests_clean example_clean vglog_clean
 
 ################################################################################
 # LIBS
@@ -149,7 +188,7 @@ build_tests: re
 	$(CC) $(CCF_DEBUG) \
 		-I $(INCLUDES_PATH) \
 		$(TEST_SOURCES) \
-		$(ARCHIVES) \
+		$(M_ARCHIVES) \
 		$(CCF_TEST_LIBS) \
 		-o $(EXECUTE_TESTS)
 
@@ -172,11 +211,11 @@ EXAMPLE_GARBAGE = a.out a.out.dSYM
 example: build_example
 	$(EXECUTE_EXAMPLE)
 
-build_example: $(PIPEX_ARCHIVE)
+build_example: $(M_ARCHIVE)
 	$(CC) $(CCF_DEBUG) \
 		-I $(INCLUDES_PATH) \
 		$(EXAMPLE_MAIN) \
-		$(ARCHIVES)
+		$(M_ARCHIVES)
 
 example_clean: fclean
 	$(REMOVE_RECURSIVE) $(EXAMPLE_GARBAGE)
@@ -202,11 +241,11 @@ vg: vg_build
 vglog: vg_build
 	$(VALGRIND) $(VALGRIND_LOG_FLAGS) $(VALGRIND_TARGET)
 
-vg_build: $(PIPEX_ARCHIVE)
+vg_build: $(M_ARCHIVE)
 	$(CC_STRICT) \
 		-I $(INCLUDES_PATH) \
-		$(MANDATORY_MAIN) \
-		$(ARCHIVES) \
+		$(M_MAIN) \
+		$(M_ARCHIVES) \
 		-o $(NAME)
 
 vglog_clean: fclean
@@ -221,8 +260,8 @@ norm:
 	@printf "\n$(G)=== No norminette errors found in $(INCLUDES_PATH) ===$(RC)\n\n"
 	norminette $(SOURCES_PATH)
 	@printf "\n$(G)=== No norminette errors found in $(SOURCES_PATH) ===$(RC)\n\n"
-	norminette $(MANDATORY_MAIN)
-	@printf "\n$(G)=== No norminette errors found in $(MANDATORY_MAIN) ===$(RC)\n\n"
+	norminette $(M_MAIN)
+	@printf "\n$(G)=== No norminette errors found in $(M_MAIN) ===$(RC)\n\n"
 
 git:
 	git add -A
@@ -239,16 +278,19 @@ gitm:
 ################################################################################
 
 .PHONY: all clean fclean re \
-	bonus runb \
+\
+	bonus allb cleanb fcleanb reb \
+\
 	initialize make_dirs build_libs \
 \
 	build_libft libft_clean \
+	clean_libs \
 \
 	build_tests test tests_clean \
 	build_example example example_clean \
 	vg vglog vg_build vglog_clean \
 \
-	tclean clean_libs \
+	tclean \
 	norm git gitm
 
 ################################################################################

@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fourex.c                                           :+:      :+:    :+:   */
+/*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/24 06:33:48 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 15:05:24 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/05 20:21:05 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/24 19:12:30 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include <pipex_bonus.h>
 
-int	fourex(int argc, char **argv, char **envp)
+char	**split_command_or_die(char *raw_command)
 {
-	t_pipex	ctl;
+	char	**split_command;
 
-	check_argc(argc);
-	initialize_fourex(&ctl, argc, argv, envp);
-	handle_left(&ctl);
-	handle_right(&ctl);
-	return (EXIT_SUCCESS);
+	split_command = ft_split(raw_command, ' ');
+	die_if_null(split_command);
+	return (split_command);
 }

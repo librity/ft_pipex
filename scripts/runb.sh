@@ -1,40 +1,32 @@
-#!/usr/bin/env bash
-
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    heredoc.sh                                         :+:      :+:    :+:    #
+#    runb.sh                                            :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/02/25 18:34:17 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/03/08 15:10:27 by lpaulo-m         ###   ########.fr        #
+#    Created: 2022/03/12 19:02:23 by lpaulo-m          #+#    #+#              #
+#    Updated: 2022/03/24 20:00:09 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# cmd1 << LIMITER | cmd2 >> outfile
-grep a <<33 | grep d >>outfile
-a
-a
-aa
-a
-d
-f
-t
-e
-sf
-a
-ads
-33a
-333
-33
+make reb || exit
 
-grep a <<k | grep f >>outfile
-a
-b
-cd
-af
-ad
-af
-fbsa
-k
+./pipex
+./pipex here_doc 33 "grep a" "grep d" outfile\
+a\
+a\
+aa\
+a\
+d\
+f\
+t\
+e\
+sf\
+\
+a\
+\
+ads\
+33a\
+333\
+33

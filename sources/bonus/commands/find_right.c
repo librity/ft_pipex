@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   find_right.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 10:34:20 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 19:20:59 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/05 20:21:05 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/24 19:12:30 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include <pipex_bonus.h>
 
-int	main(int argc, char **argv, char **envp)
+char	*find_right_executable_or_die(t_pipex *ctl)
 {
-	check_argc(argc);
-	return (fourex(argc, argv, envp));
+	char	*command_executable;
+
+	command_executable = find_executable(ctl->right.cmd, ctl->paths);
+	if (command_executable == NULL)
+		die_cmd(ctl, ctl->right.cmd);
+	ft_add_lalloc(&ctl->free_me, command_executable);
+	return (command_executable);
 }

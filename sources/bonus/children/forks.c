@@ -1,24 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hdoc_bonus.c                                       :+:      :+:    :+:   */
+/*   forks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/24 06:33:48 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 15:14:30 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/01 19:29:53 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/24 19:12:30 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex_bonus.h>
 
-int	hdoc(int argc, char **argv, char **envp)
+int	fork_or_die(void)
 {
-	t_pipex	ctl;
+	int	pid;
 
-	check_argc_hdoc(argc);
-	initialize_hdoc(&ctl, argc, argv, envp);
-	handle_hdoc(&ctl);
-	handle_right(&ctl);
-	return (EXIT_SUCCESS);
+	pid = fork();
+	if (pid < 0)
+		die();
+	return (pid);
+}
+
+void	wait_for_left(t_pipex *ctl)
+{
+	waitpid(ctl->left.pid, NULL, 0);
+}
+
+void	wait_for_right(t_pipex *ctl)
+{
+	waitpid(ctl->right.pid, NULL, 0);
+}
+
+void	wait_for_children(t_pipex *ctl)
+{
+	wait_for_left(ctl);
+	wait_for_right(ctl);
 }

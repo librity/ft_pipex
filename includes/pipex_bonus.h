@@ -13,7 +13,6 @@
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
 
-# include <defines.h>
 # include <defines_bonus.h>
 # include <fcntl.h>
 # include <libft.h>
@@ -144,8 +143,6 @@ void	handle_hdoc(t_pipex *ctl);
 void	free_memory(t_pipex *ctl);
 
 void	check_argc(int argc);
-void	check_argc_hdoc(int argc);
-void	check_argc_nex(int argc);
 
 void	die_if_null(void *ptr);
 void	die(void);

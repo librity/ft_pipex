@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fourex.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 10:34:20 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 19:20:59 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/24 06:33:48 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/24 19:21:04 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include <pipex_bonus.h>
 
-int	main(int argc, char **argv, char **envp)
+int	fourex(int argc, char **argv, char **envp)
 {
-	check_argc(argc);
-	return (fourex(argc, argv, envp));
+	t_pipex	ctl;
+
+	initialize_fourex(&ctl, argc, argv, envp);
+	handle_left(&ctl);
+	handle_right(&ctl);
+	return (EXIT_SUCCESS);
 }

@@ -1,18 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirections_bonus.c                               :+:      :+:    :+:   */
+/*   right.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/01 19:28:03 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 15:00:01 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/01 20:08:13 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/24 19:12:30 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex_bonus.h>
 
-void	stdin_to_pipe(int pipe_fds[2])
+static void	redirect_descriptors(t_pipex *ctl)
 {
-	dup2(pipe_fds[PIPE_WRITE], STDIN_FILENO);
+	stdout_to_file(ctl->outfile.fd);
+	pipe_to_stdin(ctl->pipe_fds);
+	close_pipes_fds(ctl->pipe_fds);
+	close_or_die(ctl->outfile.fd);
+}
+
+static void	initialize(t_pipex *ctl)
+{
+	initialize_outfile(ctl);
+	initialize_right(ctl);
+}
+
+void	handle_right(t_pipex *ctl)
+{
+	initialize(ctl);
+	redirect_descriptors(ctl);
+	execute_or_die(ctl->right.path, ctl->right.tokens, ctl->envp);
+	free_memory(ctl);
 }

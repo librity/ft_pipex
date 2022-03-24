@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arguments_bonus.c                                  :+:      :+:    :+:   */
+/*   open.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/16 00:17:03 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 15:06:53 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/01 22:04:01 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/24 19:12:30 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex_bonus.h>
 
-static void	help_and_die_nex(void)
+int	open_file_or_die(char *path)
 {
-	ft_putstr(HELP_MSG_NEX);
-	exit(EXIT_SUCCESS);
-}
+	int	open_fd;
+	int	open_flags;
 
-void	check_argc_nex(int argc)
-{
-	if (argc > 5)
-		return ;
-	help_and_die_nex();
-}
-
-static void	help_and_die_hdoc(void)
-{
-	ft_putstr(HELP_MSG_HDOC);
-	exit(EXIT_SUCCESS);
-}
-
-void	check_argc_hdoc(int argc)
-{
-	if (argc > 5)
-		return ;
-	help_and_die_hdoc();
+	open_flags = O_RDONLY;
+	open_fd = open(path, open_flags);
+	if (open_fd < 0)
+		die2(path);
+	return (open_fd);
 }
