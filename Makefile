@@ -6,7 +6,7 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 16:25:08 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/03/24 01:11:02 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/03/24 07:10:16 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,17 +43,17 @@ OBJECT_DIRECTORIES = $(sort $(dir $(OBJECTS)))
 ARCHIVES = $(PIPEX_ARCHIVE) $(LIBFT_ARCHIVE)
 
 ################################################################################
-# REQUIRED
+# MANDATORY
 ################################################################################
 
-REQUIRED_MAIN = ./main.c
+MANDATORY_MAIN = ./main.c
 
 all: $(NAME)
 
 $(NAME): $(PIPEX_ARCHIVE)
 	$(CC_STRICT) $(CCF_DEBUG) \
 		-I $(INCLUDES_PATH) \
-		$(REQUIRED_MAIN) \
+		$(MANDATORY_MAIN) \
 		$(ARCHIVES) \
 		-o $(NAME)
 
@@ -64,6 +64,22 @@ $(OBJECTS_PATH)/%.o: $(SOURCES_PATH)/%.c
 	$(CC_STRICT) -I $(INCLUDES_PATH) -c -o $@ $<
 
 re: fclean all
+
+################################################################################
+# BONUS
+################################################################################
+
+BONUS_MAIN = ./main_bonus.c
+
+bonus: $(PIPEX_ARCHIVE)
+	$(CC_STRICT) $(CCF_DEBUG) \
+		-I $(INCLUDES_PATH) \
+		$(BONUS_MAIN) \
+		$(ARCHIVES) \
+		-o $(NAME)
+
+runb: re bonus
+	./pipex
 
 ################################################################################
 # INITIALIZE
@@ -189,7 +205,7 @@ vglog: vg_build
 vg_build: $(PIPEX_ARCHIVE)
 	$(CC_STRICT) \
 		-I $(INCLUDES_PATH) \
-		$(REQUIRED_MAIN) \
+		$(MANDATORY_MAIN) \
 		$(ARCHIVES) \
 		-o $(NAME)
 
@@ -205,8 +221,8 @@ norm:
 	@printf "\n$(G)=== No norminette errors found in $(INCLUDES_PATH) ===$(RC)\n\n"
 	norminette $(SOURCES_PATH)
 	@printf "\n$(G)=== No norminette errors found in $(SOURCES_PATH) ===$(RC)\n\n"
-	norminette $(REQUIRED_MAIN)
-	@printf "\n$(G)=== No norminette errors found in $(REQUIRED_MAIN) ===$(RC)\n\n"
+	norminette $(MANDATORY_MAIN)
+	@printf "\n$(G)=== No norminette errors found in $(MANDATORY_MAIN) ===$(RC)\n\n"
 
 git:
 	git add -A
@@ -222,7 +238,8 @@ gitm:
 # PHONY
 ################################################################################
 
-.PHONY: all required clean fclean re \
+.PHONY: all clean fclean re \
+	bonus runb \
 	initialize make_dirs build_libs \
 \
 	build_libft libft_clean \

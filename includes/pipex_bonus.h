@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include <defines.h>
 # include <fcntl.h>
@@ -45,20 +45,27 @@ typedef struct s_pipex
 	char	*path;
 	char	**paths;
 
-	int		pipe_fds[2];
-
 	t_file	infile;
-	t_child	left;
 
-	t_child	right;
+	int		pipes_count;
+	t_list	*pipes;
+
+	int		children_count;
+	t_list	*children;
+
 	t_file	outfile;
 
 	t_list	*free_me;
 }		t_pipex;
 
 int		fourex(int argc, char **argv, char **envp);
+int		nex(int argc, char **argv, char **envp);
+int		heredoc(int argc, char **argv, char **envp);
 
 void	initialize_fourex(t_pipex *ctl, int argc, char **argv, char **envp);
+void	initialize_heredoc(t_pipex *ctl, int argc, char **argv, char **envp);
+void	initialize_nex(t_pipex *ctl, int argc, char **argv, char **envp);
+
 void	initialize_environment(t_pipex *ctl);
 
 void	initialize_children(t_pipex *ctl);
@@ -115,6 +122,9 @@ void	free_memory(t_pipex *ctl);
 
 void	help_and_die(void);
 void	check_argc(int argc);
+
+void	help_and_die_b(void);
+void	check_argc_b(int argc);
 
 void	die_if_null(void *ptr);
 void	die(void);

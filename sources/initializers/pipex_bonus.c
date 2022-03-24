@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arguments.c                                        :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/16 00:17:03 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 06:38:19 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/02/17 15:39:11 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/24 07:31:24 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include <pipex_bonus.h>
 
-void	help_and_die(void)
+void	initialize_heredoc(t_pipex *ctl, int argc, char **argv, char **envp)
 {
-	ft_putstr(HELP_MSG);
-	exit(EXIT_SUCCESS);
+	ctl->argc = argc;
+	ctl->argv = argv;
+	ctl->envp = envp;
+	ctl->free_me = NULL;
 }
 
-void	check_argc(int argc)
+void	initialize_nex(t_pipex *ctl, int argc, char **argv, char **envp)
 {
-	if (argc == 5)
-		return ;
-	help_and_die();
+	ctl->argc = argc;
+	ctl->argv = argv;
+	ctl->envp = envp;
+	ctl->free_me = NULL;
 }
