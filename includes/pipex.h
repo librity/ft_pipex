@@ -38,6 +38,9 @@ typedef struct s_child
 
 typedef struct s_pipex
 {
+	int		argc;
+	char	**argv;
+
 	char	**envp;
 	char	*path;
 	char	**paths;
@@ -53,7 +56,7 @@ typedef struct s_pipex
 	t_list	*free_me;
 }		t_pipex;
 
-void	initialize_pipex(t_pipex *ctl);
+void	initialize_pipex(t_pipex *ctl, int argc, char **argv, char **envp);
 void	initialize_environment(t_pipex *ctl, char **envp);
 
 void	initialize_children(t_pipex *ctl, char **argv);

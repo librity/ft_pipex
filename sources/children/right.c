@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 20:08:13 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/11 23:51:51 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/24 00:54:03 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ static void	redirect_descriptors(t_pipex *ctl)
 
 void	handle_right(t_pipex *ctl)
 {
-	ctl->right.pid = fork_or_die();
-	if (ctl->right.pid != CHILD_PROCESS_ID)
-		return ;
+	initialize_outfile(ctl, ctl->argv);
+	initialize_right(ctl, ctl->argv);
 	redirect_descriptors(ctl);
 	close_or_die(ctl->outfile.fd);
 	execute_or_die(ctl->right.path, ctl->right.tokens, ctl->envp);
