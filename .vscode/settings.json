@@ -32,6 +32,7 @@
     "errno.h": "c",
     "ft_printf.h": "c",
     "wait.h": "c",
-    "memory": "c"
+    "memory": "c",
+    "pipex_bonus.h": "c"
   }
 }

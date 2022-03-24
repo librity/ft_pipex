@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_bonus.c                                      :+:      :+:    :+:   */
+/*   redirections_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/17 15:39:11 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 07:44:24 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/01 19:28:03 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/24 15:00:01 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex_bonus.h>
 
-void	initialize_hd(t_pipex *ctl, int argc, char **argv, char **envp)
+void	stdin_to_pipe(int pipe_fds[2])
 {
-	ctl->argc = argc;
-	ctl->argv = argv;
-	ctl->envp = envp;
-	ctl->free_me = NULL;
-}
-
-void	initialize_nex(t_pipex *ctl, int argc, char **argv, char **envp)
-{
-	ctl->argc = argc;
-	ctl->argv = argv;
-	ctl->envp = envp;
-	ctl->free_me = NULL;
+	dup2(pipe_fds[PIPE_WRITE], STDIN_FILENO);
 }
