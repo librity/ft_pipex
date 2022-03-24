@@ -6,7 +6,7 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 18:00:58 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/03/12 20:42:22 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/03/23 22:24:53 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,30 +95,30 @@ compare() {
 
 make --silent re
 
-compare infile "grep a" "wc -w" outfile
+# compare infile "grep a" "wc -w" outfile
 
-compare infile "ls" "wc" outfile
-compare infile "ls -la" "grep *.c" outfile
-compare infile "ls -la" "bad *.c" outfile
-compare infile "ls -l" "wc -l" outfile
-compare infile "ls -l -a -s" "wc -l" outfile
-compare infile "ls -l -a -s" "wc -m" outfile
+# compare infile "ls" "wc" outfile
+# compare infile "ls -la" "grep *.c" outfile
+# compare infile "ls -la" "bad *.c" outfile
+# compare infile "ls -l" "wc -l" outfile
+# compare infile "ls -l -a -s" "wc -l" outfile
+# compare infile "ls -l -a -s" "wc -m" outfile
 
-compare infile "cat" "wc" outfile
-compare infile "cat -E" "wc -l" outfile
-compare infile "cat -E" "wc -m" outfile
+# compare infile "cat" "wc" outfile
+# compare infile "cat -E" "wc -l" outfile
+# compare infile "cat -E" "wc -m" outfile
 
-compare .gitignore "tr a b" "tr b c" outfile
-compare EOF "tr a b" "tr b c" outfile
-compare .gitignore "tr x ' '" "tr i ' '" outfile
+# compare .gitignore "tr a b" "tr b c" outfile
+# compare EOF "tr a b" "tr b c" outfile
+# compare .gitignore "tr x ' '" "tr i ' '" outfile
 
-compare .gitignore "tr ex ' X'" "tr pi 'P '" outfile
-compare "infile" "tr a ' '" "tr ' ' x" "outfile"
+# compare .gitignore "tr ex ' X'" "tr pi 'P '" outfile
+# compare "infile" "tr a ' '" "tr ' ' x" "outfile"
 
 compare infile "notexisting" "wc" outfile
-compare infile "catzado" "wc -w" outfile
+# compare infile "catzado" "wc -w" outfile
 
-compare bad "cat" "grep x" outfile
-compare bad "grep x" "cat" outfile
+# compare bad "cat" "grep x" outfile
+# compare bad "grep x" "cat" outfile
 
 # compare .gitignore "ping 8.8.8.8" "grep ms" outfile
