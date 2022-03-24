@@ -113,7 +113,6 @@ void	handle_right(t_pipex *ctl);
 
 void	free_memory(t_pipex *ctl);
 
-void	help_and_die(void);
 void	check_argc(int argc);
 
 void	die_if_null(void *ptr);

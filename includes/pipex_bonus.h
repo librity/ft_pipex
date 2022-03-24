@@ -63,7 +63,7 @@ int		nex(int argc, char **argv, char **envp);
 int		heredoc(int argc, char **argv, char **envp);
 
 void	initialize_fourex(t_pipex *ctl, int argc, char **argv, char **envp);
-void	initialize_heredoc(t_pipex *ctl, int argc, char **argv, char **envp);
+void	initialize_hd(t_pipex *ctl, int argc, char **argv, char **envp);
 void	initialize_nex(t_pipex *ctl, int argc, char **argv, char **envp);
 
 void	initialize_environment(t_pipex *ctl);
@@ -120,11 +120,9 @@ void	handle_right(t_pipex *ctl);
 
 void	free_memory(t_pipex *ctl);
 
-void	help_and_die(void);
 void	check_argc(int argc);
-
-void	help_and_die_b(void);
-void	check_argc_b(int argc);
+void	check_argc_hd(int argc);
+void	check_argc_nex(int argc);
 
 void	die_if_null(void *ptr);
 void	die(void);
