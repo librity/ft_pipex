@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   files.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/08 17:56:07 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 01:34:17 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/24 02:09:02 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/24 02:09:16 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-void	initialize_outfile(t_pipex *ctl)
+void	command_or_die(t_pipex *ctl, char *raw_cmd)
 {
-	ctl->outfile.path = ctl->argv[4];
-	ctl->outfile.fd = create_outfile_or_die(ctl);
-}
+	char	*str;
 
-void	initialize_infile(t_pipex *ctl)
-{
-	ctl->infile.path = ctl->argv[1];
-	ctl->infile.fd = open_infile_or_die(ctl);
-}
-
-void	initialize_files(t_pipex *ctl)
-{
-	initialize_outfile(ctl);
-	initialize_infile(ctl);
+	str = raw_cmd;
+	str = ft_skip_whitespace(str);
+	if (ft_strlen(str) == 0)
+		die_cmd(ctl, raw_cmd);
 }

@@ -6,40 +6,25 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 10:34:20 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 01:06:19 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/24 02:00:32 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-// static void	initialize(t_pipex *ctl, char **argv, char **envp)
-// {
-// 	initialize_pipex(ctl);
-// 	initialize_files(ctl, argv);
-// 	initialize_environment(ctl, envp);
-// 	initialize_children(ctl, argv);
-// 	pipe_or_die(ctl);
-// 	log_pipex(ctl);
-// }
-
-// static void	handle_children(t_pipex *ctl)
-// {
-// 	handle_left(ctl);
-// 	handle_right(ctl);
-// 	close_pipes_fds(ctl);
-// 	wait_for_children(ctl);
-// }
+static void	initialize(t_pipex *ctl, int argc, char **argv, char **envp)
+{
+	initialize_pipex(ctl, argc, argv, envp);
+	pipe_or_die(ctl->pipe_fds);
+	initialize_environment(ctl);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	ctl;
 
 	check_argc(argc);
-
-	initialize_pipex(&ctl, argc, argv, envp);
-	pipe_or_die(ctl.pipe_fds);
-	initialize_environment(&ctl, envp);
-
+	initialize(&ctl, argc, argv, envp);
 	handle_left(&ctl);
 	handle_right(&ctl);
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 16:25:08 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/03/14 17:12:56 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/03/24 01:11:02 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -178,7 +178,7 @@ VALGRIND_LOG_FLAGS = --log-file=$(VALGRIND_LOG) \
 	--trace-children=yes \
 	--track-origins=yes \
 	--verbose
-VALGRIND_TARGET = ./$(NAME) infile "cat -E" "wc -m" outfile && cat outfile
+VALGRIND_TARGET = ./$(NAME) infile "grep pipex" "wc -lw" outfile && cat outfile
 
 vg: vg_build
 	$(VALGRIND) $(VALGRIND_FLAGS) $(VALGRIND_TARGET)

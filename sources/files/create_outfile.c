@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   files.c                                            :+:      :+:    :+:   */
+/*   create_outfile.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/08 17:56:07 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 01:34:17 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/01 22:04:01 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/24 01:26:17 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex.h>
 
-void	initialize_outfile(t_pipex *ctl)
+int	create_outfile_or_die(t_pipex *ctl)
 {
-	ctl->outfile.path = ctl->argv[4];
-	ctl->outfile.fd = create_outfile_or_die(ctl);
-}
+	int	open_fd;
+	int	create_flags;
 
-void	initialize_infile(t_pipex *ctl)
-{
-	ctl->infile.path = ctl->argv[1];
-	ctl->infile.fd = open_infile_or_die(ctl);
-}
-
-void	initialize_files(t_pipex *ctl)
-{
-	initialize_outfile(ctl);
-	initialize_infile(ctl);
+	create_flags = O_CREAT | O_WRONLY | O_TRUNC;
+	open_fd = open(ctl->outfile.path, create_flags, CREATE_PERMISSION);
+	if (open_fd < 0)
+	{
+		free_memory(ctl);
+		die2(ctl->outfile.path);
+	}
+	return (open_fd);
 }

@@ -57,15 +57,17 @@ typedef struct s_pipex
 }		t_pipex;
 
 void	initialize_pipex(t_pipex *ctl, int argc, char **argv, char **envp);
-void	initialize_environment(t_pipex *ctl, char **envp);
+void	initialize_environment(t_pipex *ctl);
 
-void	initialize_children(t_pipex *ctl, char **argv);
-void	initialize_right(t_pipex *ctl, char **argv);
-void	initialize_left(t_pipex *ctl, char **argv);
+void	initialize_children(t_pipex *ctl);
+void	initialize_right(t_pipex *ctl);
+void	initialize_left(t_pipex *ctl);
 
-void	initialize_files(t_pipex *ctl, char **argv);
-void	initialize_outfile(t_pipex *ctl, char **argv);
-void	initialize_infile(t_pipex *ctl, char **argv);
+void	initialize_files(t_pipex *ctl);
+void	initialize_outfile(t_pipex *ctl);
+void	initialize_infile(t_pipex *ctl);
+
+void	command_or_die(t_pipex *ctl, char *raw_cmd);
 
 char	*get_clean_path_or_die(char **envp);
 char	**get_paths_or_die(char **envp);
@@ -80,6 +82,7 @@ int		open_file_or_die(char *path);
 int		close_or_die(int close_me);
 
 int		open_infile_or_die(t_pipex *ctl);
+int		create_outfile_or_die(t_pipex *ctl);
 
 void	pipe_or_die(int pipe_fds[2]);
 void	close_pipes_fds(int pipe_fds[2]);
@@ -90,6 +93,8 @@ void	file_to_stdin(int infile_fd);
 void	stdout_to_file(int outfile_fd);
 
 int		fork_or_die(void);
+void	wait_for_left(t_pipex *ctl);
+void	wait_for_right(t_pipex *ctl);
 void	wait_for_children(t_pipex *ctl);
 
 char	*find_executable(char *command, char **paths);
@@ -115,6 +120,7 @@ void	die2(char *location);
 void	die3(char *location, int exit_status);
 void	die4(int exit_status);
 void	die5(char *location, char *message, int exit_status);
+void	die_cmd(t_pipex *ctl, char *raw_cmd);
 
 void	print_error(char *location, char *message);
 
