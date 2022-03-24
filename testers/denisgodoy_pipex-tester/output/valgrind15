@@ -1,0 +1,6 @@
+==111543== Memcheck, a memory error detector
+==111543== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==111543== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==111543== Command: ./pipex infile echo\ 'Hi\ 42' tr\ 42\ FT output/valgrind
+==111543== Parent PID: 111309
+==111543== 

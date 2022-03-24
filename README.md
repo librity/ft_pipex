@@ -16,7 +16,9 @@
 [![Build](https://github.com/librity/ft_pipex/actions/workflows/build.yml/badge.svg)](https://github.com/librity/ft_pipex/actions/workflows/build.yml)
 [![Norminette v3](https://github.com/librity/ft_pipex/actions/workflows/norminette_v3.yml/badge.svg)](https://github.com/librity/ft_pipex/actions/workflows/norminette_v3.yml)
 [![denisgodoy_pipex-tester](https://github.com/librity/ft_pipex/actions/workflows/denisgodoy_pipex-tester.yml/badge.svg)](https://github.com/librity/ft_pipex/actions/workflows/denisgodoy_pipex-tester.yml)
+[![gsilva-v_pipextester](https://github.com/librity/ft_pipex/actions/workflows/gsilva-v_pipextester.yml/badge.svg)](https://github.com/librity/ft_pipex/actions/workflows/gsilva-v_pipextester.yml)
 [![vfurmane_pipex-tester](https://github.com/librity/ft_pipex/actions/workflows/vfurmane_pipex-tester.yml/badge.svg)](https://github.com/librity/ft_pipex/actions/workflows/vfurmane_pipex-tester.yml)
+[![yoo0lh_pipex_tester_42](https://github.com/librity/ft_pipex/actions/workflows/yoo0lh_pipex_tester_42.yml/badge.svg)](https://github.com/librity/ft_pipex/actions/workflows/yoo0lh_pipex_tester_42.yml)
 
 </div>
 

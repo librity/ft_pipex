@@ -1,0 +1,6 @@
+==111495== Memcheck, a memory error detector
+==111495== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==111495== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
+==111495== Command: ./pipex /dev/urandom head\ -n\ 10 wc\ -l output/valgrind
+==111495== Parent PID: 111309
+==111495== 
