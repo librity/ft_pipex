@@ -6,11 +6,11 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 20:08:04 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 15:15:18 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/24 18:55:35 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex_bonus.h>
+#include <pipex.h>
 
 // static void	redirect_descriptors(t_pipex *ctl)
 // {

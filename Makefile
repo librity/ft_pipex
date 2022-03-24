@@ -6,7 +6,7 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 16:25:08 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/03/24 07:10:16 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/03/24 16:56:04 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,23 @@ bonus: $(PIPEX_ARCHIVE)
 		-o $(NAME)
 
 runb: re bonus
-	./pipex
+	./pipex here_doc 33 "grep a" "grep d" outfile\
+	a\
+	a\
+	aa\
+	a\
+	d\
+	f\
+	t\
+	e\
+	sf\
+	\
+	a\
+	\
+	ads\
+	33a\
+	333\
+	33
 
 ################################################################################
 # INITIALIZE
