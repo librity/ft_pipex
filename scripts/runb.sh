@@ -6,14 +6,14 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 19:02:23 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/03/24 20:00:09 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/03/25 14:16:32 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 make reb || exit
 
-./pipex
-./pipex here_doc 33 "grep a" "grep d" outfile\
+# ./pipex
+./pipex here_doc 33 "grep a" "grep d" outfile \
 a\
 a\
 aa\

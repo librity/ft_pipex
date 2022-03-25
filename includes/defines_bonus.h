@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:20:45 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 19:20:13 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/25 14:15:58 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define NOT_ASCII -42
 
 # define HDOC_IDENTIFIER "here_doc"
+# define HDOC_FEED "> "
 
 /******************************************************************************\
  * MESSAGES
@@ -63,6 +64,7 @@ EXAMPLES:\n\
 
 # define ERR_GENERIC_RED "\033[0;31mERROR"
 # define ERR_NULL_POINTER "ERROR: critical null pointer"
+# define ERR_GNL "ERROR: couldn't read stdin (GNL)"
 # define ERR_NO_CMD "command not found"
 
 #endif

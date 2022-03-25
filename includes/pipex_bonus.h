@@ -34,20 +34,12 @@ typedef struct s_child
 	char	*cmd;
 	char	**flags;
 	char	*path;
-}		t_child;
-
-typedef struct s_hdoc
-{
-	int		pid;
-
-	char	*raw;
-	char	**tokens;
-	char	*cmd;
-	char	**flags;
-	char	*path;
 
 	char	*limiter;
-}		t_hdoc;
+
+	int		in_pipe[2];
+	int		*out_pipe;
+}		t_child;
 
 typedef struct s_pipex
 {
@@ -58,12 +50,10 @@ typedef struct s_pipex
 	char	*path;
 	char	**paths;
 
-	int		pipe_fds[2];
+	int		pipe[2];
 
 	int		pipes_count;
 	t_list	*pipes;
-
-	t_hdoc	hdoc;
 
 	t_file	infile;
 	t_child	left;
@@ -87,26 +77,25 @@ void	initialize_nex(t_pipex *ctl, int argc, char **argv, char **envp);
 
 void	initialize_environment(t_pipex *ctl);
 
-void	initialize_children(t_pipex *ctl);
 void	initialize_right(t_pipex *ctl);
 void	initialize_left(t_pipex *ctl);
 
 void	initialize_hdoc_left(t_pipex *ctl);
 void	initialize_hdoc_right(t_pipex *ctl);
 
-void	initialize_files(t_pipex *ctl);
-void	initialize_outfile(t_pipex *ctl);
-void	initialize_infile(t_pipex *ctl);
+void	initialize_outfile(t_pipex *ctl, char *file_path);
+void	initialize_infile(t_pipex *ctl, char *file_path);
 
 void	command_or_die(t_pipex *ctl, char *raw_cmd);
 
 char	*get_clean_path_or_die(char **envp);
 char	**get_paths_or_die(char **envp);
 
-void	log_pipex(t_pipex *ctl);
+void	log_fourex(t_pipex *ctl);
 void	log_path(t_pipex *ctl);
 void	log_paths(t_pipex *ctl);
 void	log_command(char *command_executable, char **flags);
+void	log_hdoc(t_pipex *ctl);
 
 int		create_file_or_die(char *path);
 int		open_file_or_die(char *path);
@@ -119,13 +108,14 @@ void	pipe_or_die(int pipe_fds[2]);
 void	close_pipes_fds(int pipe_fds[2]);
 
 void	stdin_to_pipe(int pipe_fds[2]);
+void	pipe_to_stdin(int pipe_fds[2]);
 
 void	stdout_to_pipe(int pipe_fds[2]);
-void	pipe_to_stdin(int pipe_fds[2]);
+
 void	file_to_stdin(int infile_fd);
 void	stdout_to_file(int outfile_fd);
 
-void	redirect_right(t_pipex *ctl);
+void	str_to_pipe(int pipe_fds[2], char *str);
 
 int		fork_or_die(void);
 void	wait_for_left(t_pipex *ctl);
@@ -138,8 +128,7 @@ char	**split_command_or_die(char *raw_command);
 char	**tokenize_or_die(char *raw_command);
 void	execute_or_die(char *command_path, char **split_cmd, char **envp);
 
-char	*find_right_executable_or_die(t_pipex *ctl);
-char	*find_left_executable_or_die(t_pipex *ctl);
+void	set_child_executable_or_die(t_pipex *ctl, t_child *child);
 
 void	handle_left(t_pipex *ctl);
 void	handle_right(t_pipex *ctl);

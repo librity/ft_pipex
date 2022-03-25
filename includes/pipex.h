@@ -74,7 +74,7 @@ void	command_or_die(t_pipex *ctl, char *raw_cmd);
 char	*get_clean_path_or_die(char **envp);
 char	**get_paths_or_die(char **envp);
 
-void	log_pipex(t_pipex *ctl);
+void	log_fourex(t_pipex *ctl);
 void	log_path(t_pipex *ctl);
 void	log_paths(t_pipex *ctl);
 void	log_command(char *command_executable, char **flags);
