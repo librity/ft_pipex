@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   right.c                                            :+:      :+:    :+:   */
+/*   hdoc_right.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 15:39:11 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 22:04:21 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/24 22:11:59 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pipex.h>
+#include <pipex_bonus.h>
 
 static void	set_tokens(t_pipex *ctl)
 {
@@ -18,9 +18,9 @@ static void	set_tokens(t_pipex *ctl)
 	ft_add_lalloc_array(&ctl->free_me, (void **)ctl->right.tokens);
 }
 
-void	initialize_right(t_pipex *ctl)
+void	initialize_hdoc_right(t_pipex *ctl)
 {
-	ctl->right.raw = ctl->argv[3];
+	ctl->right.raw = ctl->argv[4];
 	command_or_die(ctl, ctl->right.raw);
 	set_tokens(ctl);
 	ctl->right.cmd = ctl->right.tokens[0];

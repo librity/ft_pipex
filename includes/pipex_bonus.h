@@ -91,6 +91,9 @@ void	initialize_children(t_pipex *ctl);
 void	initialize_right(t_pipex *ctl);
 void	initialize_left(t_pipex *ctl);
 
+void	initialize_hdoc_left(t_pipex *ctl);
+void	initialize_hdoc_right(t_pipex *ctl);
+
 void	initialize_files(t_pipex *ctl);
 void	initialize_outfile(t_pipex *ctl);
 void	initialize_infile(t_pipex *ctl);
@@ -122,6 +125,8 @@ void	pipe_to_stdin(int pipe_fds[2]);
 void	file_to_stdin(int infile_fd);
 void	stdout_to_file(int outfile_fd);
 
+void	redirect_right(t_pipex *ctl);
+
 int		fork_or_die(void);
 void	wait_for_left(t_pipex *ctl);
 void	wait_for_right(t_pipex *ctl);
@@ -138,7 +143,9 @@ char	*find_left_executable_or_die(t_pipex *ctl);
 
 void	handle_left(t_pipex *ctl);
 void	handle_right(t_pipex *ctl);
-void	handle_hdoc(t_pipex *ctl);
+
+void	handle_hdoc_left(t_pipex *ctl);
+void	handle_hdoc_right(t_pipex *ctl);
 
 void	free_memory(t_pipex *ctl);
 

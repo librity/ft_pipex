@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   right.c                                            :+:      :+:    :+:   */
+/*   hdoc_right.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 20:08:13 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 22:15:20 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/24 22:15:32 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 static void	initialize(t_pipex *ctl)
 {
 	initialize_outfile(ctl);
-	initialize_right(ctl);
+	initialize_hdoc_right(ctl);
 }
 
-void	handle_right(t_pipex *ctl)
+void	handle_hdoc_right(t_pipex *ctl)
 {
 	initialize(ctl);
 	redirect_right(ctl);

@@ -32,5 +32,7 @@ cd ..
 # RUN tt_4
 cd tt_4
 sed -i 's/\"ping\"//g' run.sh # Remove ping
+# Run without timeout checks on codeserver (not necessary on ssh)
+# ./run.sh -t
 ./run.sh
 cd ..

@@ -5,23 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/01 20:08:13 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 22:15:20 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/24 22:14:25 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/24 22:14:46 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex_bonus.h>
 
-static void	initialize(t_pipex *ctl)
+void	redirect_right(t_pipex *ctl)
 {
-	initialize_outfile(ctl);
-	initialize_right(ctl);
-}
-
-void	handle_right(t_pipex *ctl)
-{
-	initialize(ctl);
-	redirect_right(ctl);
-	execute_or_die(ctl->right.path, ctl->right.tokens, ctl->envp);
-	free_memory(ctl);
+	stdout_to_file(ctl->outfile.fd);
+	pipe_to_stdin(ctl->pipe_fds);
+	close_pipes_fds(ctl->pipe_fds);
+	close_or_die(ctl->outfile.fd);
 }

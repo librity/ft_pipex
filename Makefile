@@ -6,7 +6,7 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 16:25:08 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/03/24 19:58:17 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/03/24 20:47:54 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -262,6 +262,8 @@ norm:
 	@printf "\n$(G)=== No norminette errors found in $(SOURCES_PATH) ===$(RC)\n\n"
 	norminette $(M_MAIN)
 	@printf "\n$(G)=== No norminette errors found in $(M_MAIN) ===$(RC)\n\n"
+	norminette $(B_MAIN)
+	@printf "\n$(G)=== No norminette errors found in $(B_MAIN) ===$(RC)\n\n"
 
 git:
 	git add -A
