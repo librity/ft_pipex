@@ -6,7 +6,7 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 16:25:08 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/03/26 01:34:21 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/03/26 15:27:06 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,8 +42,8 @@ M_ARCHIVE = $(ARCHIVES_PATH)/pipex.a
 M_SOURCES_PATH = $(SOURCES_PATH)/mandatory
 M_OBJECTS_PATH = $(OBJECTS_PATH)/mandatory
 
-M_SOURCES = $(wildcard $(M_SOURCES_PATH)/**/*.c) \
-	$(wildcard $(M_SOURCES_PATH)/*.c)
+M_SOURCES = $(wildcard $(M_SOURCES_PATH)/**/*.c) $(wildcard $(M_SOURCES_PATH)/*.c)
+# M_SOURCES = ./sources/mandatory/children/forks.c ./sources/mandatory/children/left.c ./sources/mandatory/children/right.c ./sources/mandatory/cleanup/memory.c ./sources/mandatory/commands/execute.c ./sources/mandatory/commands/find.c ./sources/mandatory/commands/find_left.c ./sources/mandatory/commands/find_right.c ./sources/mandatory/commands/loggers.c ./sources/mandatory/commands/split.c ./sources/mandatory/commands/tokenize.c ./sources/mandatory/environment/loggers.c ./sources/mandatory/environment/path.c ./sources/mandatory/environment/paths.c ./sources/mandatory/errors/arguments.c ./sources/mandatory/errors/die_1.c ./sources/mandatory/errors/die_2.c ./sources/mandatory/errors/print_error.c ./sources/mandatory/files/close.c ./sources/mandatory/files/create.c ./sources/mandatory/files/create_outfile.c ./sources/mandatory/files/open.c ./sources/mandatory/files/open_infile.c ./sources/mandatory/initializers/children.c ./sources/mandatory/initializers/environment.c ./sources/mandatory/initializers/files.c ./sources/mandatory/initializers/fourex.c ./sources/mandatory/initializers/left.c ./sources/mandatory/initializers/right.c ./sources/mandatory/initializers/utils.c ./sources/mandatory/pipes/core.c ./sources/mandatory/pipes/redirections.c ./sources/mandatory/fourex.c
 
 M_OBJECTS = $(patsubst $(M_SOURCES_PATH)/%.c, $(M_OBJECTS_PATH)/%.o, $(M_SOURCES))
 M_OBJECT_DIRECTORIES = $(sort $(dir $(M_OBJECTS)))
@@ -61,7 +61,7 @@ $(NAME): $(M_ARCHIVE)
 		$(M_ARCHIVES) \
 		-o $(NAME)
 
-$(M_ARCHIVE): initialize $(M_HEADER) $(M_OBJECTS)
+$(M_ARCHIVE): $(M_HEADER) $(M_OBJECTS)
 	$(ARCHIVE_AND_INDEX) $(M_ARCHIVE) $(M_OBJECTS)
 
 $(M_OBJECTS_PATH)/%.o: $(M_SOURCES_PATH)/%.c
@@ -86,8 +86,8 @@ B_ARCHIVE = $(ARCHIVES_PATH)/pipex_bonus.a
 B_SOURCES_PATH = $(SOURCES_PATH)/bonus
 B_OBJECTS_PATH = $(OBJECTS_PATH)/bonus
 
-B_SOURCES = $(wildcard $(B_SOURCES_PATH)/**/*.c) \
-	$(wildcard $(B_SOURCES_PATH)/*.c)
+B_SOURCES = $(wildcard $(B_SOURCES_PATH)/**/*.c) $(wildcard $(B_SOURCES_PATH)/*.c)
+# B_SOURCES = ./sources/bonus/children/child.c ./sources/bonus/children/forks.c ./sources/bonus/children/hdoc.c ./sources/bonus/cleanup/memory.c ./sources/bonus/commands/execute.c ./sources/bonus/commands/find.c ./sources/bonus/commands/or_die.c ./sources/bonus/commands/path.c ./sources/bonus/commands/paths.c ./sources/bonus/commands/split.c ./sources/bonus/commands/tokenize.c ./sources/bonus/errors/arguments.c ./sources/bonus/errors/die_1.c ./sources/bonus/errors/die_2.c ./sources/bonus/errors/print_error.c ./sources/bonus/files/close.c ./sources/bonus/files/create.c ./sources/bonus/files/create_outfile.c ./sources/bonus/files/open.c ./sources/bonus/files/open_infile.c ./sources/bonus/initializers/control.c ./sources/bonus/initializers/hdoc.c ./sources/bonus/initializers/nex.c ./sources/bonus/pipes/core.c ./sources/bonus/pipes/file.c ./sources/bonus/pipes/stdin.c ./sources/bonus/pipes/stdout.c ./sources/bonus/pipes/write.c ./sources/bonus/nex.c
 
 B_OBJECTS = $(patsubst $(B_SOURCES_PATH)/%.c, $(B_OBJECTS_PATH)/%.o, $(B_SOURCES))
 B_OBJECT_DIRECTORIES = $(sort $(dir $(B_OBJECTS)))
@@ -107,7 +107,7 @@ bonus: $(B_ARCHIVE)
 		$(B_ARCHIVES) \
 		-o $(NAME)
 
-$(B_ARCHIVES): initialize $(B_HEADER) $(B_OBJECTS)
+$(B_ARCHIVES): $(B_HEADER) $(B_OBJECTS)
 	$(ARCHIVE_AND_INDEX) $(B_ARCHIVE) $(B_OBJECTS)
 
 $(B_OBJECTS_PATH)/%.o: $(B_SOURCES_PATH)/%.c
@@ -133,16 +133,16 @@ make_dirs: $(ARCHIVES_PATH) $(OBJECTS_PATH) \
 	$(M_OBJECT_DIRECTORIES) $(B_OBJECT_DIRECTORIES)
 
 $(ARCHIVES_PATH):
-	$(SAFE_MAKEDIR) $@
+	$(SAFE_MAKEDIR) $@ && touch "$@/.keep"
 
 $(OBJECTS_PATH):
-	$(SAFE_MAKEDIR) $@
+	$(SAFE_MAKEDIR) $@ && touch "$@/.keep"
 
 $(M_OBJECT_DIRECTORIES):
-	$(SAFE_MAKEDIR) $@
+	$(SAFE_MAKEDIR) $@ && touch "$@/.keep"
 
 $(B_OBJECT_DIRECTORIES):
-	$(SAFE_MAKEDIR) $@
+	$(SAFE_MAKEDIR) $@ && touch "$@/.keep"
 
 build_libs: build_libft
 
@@ -275,6 +275,13 @@ gitm:
 	git commit -m $m
 	git push
 
+dump_sources:
+	@echo =========== MANDATORY ===========
+	@echo "M_SOURCES = $(M_SOURCES)"
+	@echo ============= BONUS =============
+	@echo "B_SOURCES = $(B_SOURCES)"
+	@echo =================================
+
 ################################################################################
 # PHONY
 ################################################################################
@@ -293,7 +300,8 @@ gitm:
 	vg vglog vg_build vglog_clean \
 \
 	tclean \
-	norm git gitm
+\
+	norm git gitm dump_sources
 
 ################################################################################
 # Colors
