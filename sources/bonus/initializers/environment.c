@@ -6,22 +6,15 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 15:39:11 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 19:12:30 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/25 23:57:45 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex_bonus.h>
 
-static void	set_paths(t_pipex *ctl)
-{
-	ctl->paths = get_paths_or_die(ctl->envp);
-	ft_add_lalloc_array(&ctl->free_me, (void **)ctl->paths);
-}
-
 void	initialize_environment(t_pipex *ctl)
 {
 	ctl->path = get_clean_path_or_die(ctl->envp);
-	set_paths(ctl);
-	log_path(ctl);
-	log_paths(ctl);
+	ctl->paths = get_paths_or_die(ctl->envp);
+	ft_add_lalloc_array(&ctl->free_me, (void **)ctl->paths);
 }

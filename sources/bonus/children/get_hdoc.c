@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 22:47:21 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/25 23:05:04 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/26 00:04:41 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	get_hdoc_stream(t_pipex *ctl)
 		status = ft_get_next_line(STDIN_FILENO, &line);
 		if (status == GNL_ERROR)
 			die2(ERR_GNL);
-		if (ft_streq(line, ctl->hdoc.limiter))
+		if (ft_streq(line, ctl->limiter))
 		{
 			free(line);
 			exit(EXIT_SUCCESS);

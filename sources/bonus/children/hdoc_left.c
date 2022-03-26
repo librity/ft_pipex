@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 20:08:04 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/25 22:56:04 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/26 00:05:21 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void	handle_hdoc_left(t_pipex *ctl)
 	ctl->left.pid = fork_or_die();
 	if (ctl->left.pid != CHILD_PROCESS_ID)
 		return ;
-	initialize_hdoc_left(ctl);
 	redirect_fds(ctl);
-	execute_or_die(ctl->left.path, ctl->left.tokens, ctl->envp);
+	execute_or_die(ctl, ctl->argv[3]);
 	free_memory(ctl);
 }

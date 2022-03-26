@@ -29,17 +29,19 @@ typedef struct s_child
 {
 	int		pid;
 
-	char	*raw;
-	char	**tokens;
-	char	*cmd;
-	char	**flags;
-	char	*path;
-
-	char	*limiter;
-
 	int		in_pipe[2];
 	int		*out_pipe;
 }		t_child;
+
+typedef struct s_exec
+{
+	char	*raw;
+	char	**tokens;
+	char	*cmd;
+	char	*path;
+
+	int		code;
+}		t_exec;
 
 typedef struct s_pipex
 {
@@ -50,9 +52,9 @@ typedef struct s_pipex
 	char	*path;
 	char	**paths;
 
+	char	*limiter;
+
 	int		pipe[2];
-	int		pipes_count;
-	t_list	*pipes;
 
 	t_child	hdoc;
 
@@ -62,41 +64,44 @@ typedef struct s_pipex
 	t_child	right;
 	t_file	outfile;
 
-	int		children_count;
-	t_list	*children;
-
 	t_list	*free_me;
 }		t_pipex;
 
-int		fourex(int argc, char **argv, char **envp);
 int		nex(int argc, char **argv, char **envp);
 int		hdoc(int argc, char **argv, char **envp);
 
-void	initialize_fourex(t_pipex *ctl, int argc, char **argv, char **envp);
+/******************************************************************************\
+ * INITIALIZERS
+\******************************************************************************/
+
 void	initialize_hdoc(t_pipex *ctl, int argc, char **argv, char **envp);
 void	initialize_nex(t_pipex *ctl, int argc, char **argv, char **envp);
 
 void	initialize_environment(t_pipex *ctl);
 
-void	initialize_right(t_pipex *ctl);
-void	initialize_left(t_pipex *ctl);
-
 void	initialize_hdoc_left(t_pipex *ctl);
 void	initialize_hdoc_right(t_pipex *ctl);
 
-void	initialize_outfile(t_pipex *ctl, char *file_path);
-void	initialize_infile(t_pipex *ctl, char *file_path);
+/******************************************************************************\
+ * COMMANDS
+\******************************************************************************/
 
 void	command_or_die(t_pipex *ctl, char *raw_cmd);
 
 char	*get_clean_path_or_die(char **envp);
 char	**get_paths_or_die(char **envp);
 
-void	log_fourex(t_pipex *ctl);
-void	log_path(t_pipex *ctl);
-void	log_paths(t_pipex *ctl);
-void	log_command(char *command_executable, char **flags);
-void	log_hdoc(t_pipex *ctl);
+char	*find_executable(char *command, char **paths);
+char	*find_executable_or_die(char *command, char **paths);
+
+char	**split_command_or_die(char *raw_command);
+char	**tokenize_or_die(char *raw_command);
+
+void	execute_or_die(t_pipex *ctl, char *raw_cmd);
+
+/******************************************************************************\
+ * FILES
+\******************************************************************************/
 
 int		create_file_or_die(char *path);
 int		open_file_or_die(char *path);
@@ -105,6 +110,10 @@ int		close_or_die(int close_me);
 int		open_infile_or_die(t_pipex *ctl);
 int		create_outfile_or_die(t_pipex *ctl);
 int		open_outfile_or_die(t_pipex *ctl);
+
+/******************************************************************************\
+ * PIPES
+\******************************************************************************/
 
 void	pipe_or_die(int pipe_fds[2]);
 void	close_pipe(int pipe_fds[2]);
@@ -119,27 +128,25 @@ void	stdout_to_file(int outfile_fd);
 
 void	str_to_pipe(int pipe_fds[2], char *str);
 
+/******************************************************************************\
+ * CHILDREN
+\******************************************************************************/
+
 int		fork_or_die(void);
-void	wait_for_left(t_pipex *ctl);
-void	wait_for_right(t_pipex *ctl);
-void	wait_for_children(t_pipex *ctl);
-
-char	*find_executable(char *command, char **paths);
-char	*find_executable_or_die(char *command, char **paths);
-char	**split_command_or_die(char *raw_command);
-char	**tokenize_or_die(char *raw_command);
-void	execute_or_die(char *command_path, char **split_cmd, char **envp);
-
-void	set_child_executable_or_die(t_pipex *ctl, t_child *child);
-
-void	handle_left(t_pipex *ctl);
-void	handle_right(t_pipex *ctl);
 
 void	handle_hdoc(t_pipex *ctl);
 void	handle_hdoc_left(t_pipex *ctl);
 void	handle_hdoc_right(t_pipex *ctl);
 
+/******************************************************************************\
+ * CLEANUP
+\******************************************************************************/
+
 void	free_memory(t_pipex *ctl);
+
+/******************************************************************************\
+ * ERRORS
+\******************************************************************************/
 
 void	check_argc(int argc);
 
@@ -149,6 +156,7 @@ void	die2(char *location);
 void	die3(char *location, int exit_status);
 void	die4(int exit_status);
 void	die5(char *location, char *message, int exit_status);
+void	die6(t_pipex *ctl, char *location);
 void	die_cmd(t_pipex *ctl, char *raw_cmd);
 
 void	print_error(char *location, char *message);

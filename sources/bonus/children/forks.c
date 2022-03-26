@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:29:53 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 19:12:30 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/26 00:06:31 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,4 @@ int	fork_or_die(void)
 	if (pid < 0)
 		die();
 	return (pid);
-}
-
-void	wait_for_left(t_pipex *ctl)
-{
-	waitpid(ctl->left.pid, NULL, 0);
-}
-
-void	wait_for_right(t_pipex *ctl)
-{
-	waitpid(ctl->right.pid, NULL, 0);
-}
-
-void	wait_for_children(t_pipex *ctl)
-{
-	wait_for_left(ctl);
-	wait_for_right(ctl);
 }

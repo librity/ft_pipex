@@ -33,6 +33,7 @@
     "ft_printf.h": "c",
     "wait.h": "c",
     "memory": "c",
-    "pipex_bonus.h": "c"
+    "pipex_bonus.h": "c",
+    "stdio.h": "c"
   }
 }
