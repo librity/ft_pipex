@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 22:47:21 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/26 01:16:26 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/26 14:40:57 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ static void	get_hdoc_stream(t_pipex *ctl, int pipe[2])
 
 void	get_hdoc(t_pipex *ctl)
 {
-	pid_t	hdoc;
+	pid_t	pid;
 	int		pipe[2];
 
 	pipe_or_die(pipe);
-	hdoc = fork_or_die();
-	if (hdoc != CHILD_PROCESS_ID)
+	pid = fork_or_die();
+	if (pid != CHILD_PROCESS_ID)
 	{
 		get_hdoc_stream(ctl, pipe);
 		return ;
