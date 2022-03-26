@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 20:08:13 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/25 14:28:00 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/25 22:55:31 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	redirect_fds(t_pipex *ctl)
 {
 	stdout_to_file(ctl->outfile.fd);
 	pipe_to_stdin(ctl->pipe);
-	close_pipes_fds(ctl->pipe);
+	close_pipe(ctl->pipe);
 	close_or_die(ctl->outfile.fd);
 }
 

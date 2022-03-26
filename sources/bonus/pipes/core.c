@@ -6,7 +6,7 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:28:03 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/24 19:12:30 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/25 22:53:58 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	pipe_or_die(int pipe_fds[2])
 		die();
 }
 
-void	close_pipes_fds(int pipe_fds[2])
+void	close_pipe(int pipe_fds[2])
 {
 	close_or_die(pipe_fds[PIPE_READ]);
 	close_or_die(pipe_fds[PIPE_WRITE]);

@@ -51,9 +51,10 @@ typedef struct s_pipex
 	char	**paths;
 
 	int		pipe[2];
-
 	int		pipes_count;
 	t_list	*pipes;
+
+	t_child	hdoc;
 
 	t_file	infile;
 	t_child	left;
@@ -103,9 +104,10 @@ int		close_or_die(int close_me);
 
 int		open_infile_or_die(t_pipex *ctl);
 int		create_outfile_or_die(t_pipex *ctl);
+int		open_outfile_or_die(t_pipex *ctl);
 
 void	pipe_or_die(int pipe_fds[2]);
-void	close_pipes_fds(int pipe_fds[2]);
+void	close_pipe(int pipe_fds[2]);
 
 void	stdin_to_pipe(int pipe_fds[2]);
 void	pipe_to_stdin(int pipe_fds[2]);
@@ -133,6 +135,7 @@ void	set_child_executable_or_die(t_pipex *ctl, t_child *child);
 void	handle_left(t_pipex *ctl);
 void	handle_right(t_pipex *ctl);
 
+void	handle_hdoc(t_pipex *ctl);
 void	handle_hdoc_left(t_pipex *ctl);
 void	handle_hdoc_right(t_pipex *ctl);
 
