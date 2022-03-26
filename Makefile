@@ -6,7 +6,7 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 16:25:08 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/03/25 23:06:25 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/03/26 01:34:21 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC_STRICT = $(CC) $(CCF_STRICT) $(CCF_OPTIMIZATION)
 
 CCF_STRICT = -Wall -Wextra -Werror
 # CCF_OPTIMIZATION = -O3
-CCF_DEBUG = -g -fsanitize=leak
+# CCF_DEBUG = -g -fsanitize=leak
 
 MAKE_EXTERNAL = make -C
 SAFE_MAKEDIR = mkdir -p
