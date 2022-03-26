@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    demo.sh                                            :+:      :+:    :+:    #
+#    compare.sh                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/12 18:00:58 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/03/24 02:18:07 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/03/26 01:23:44 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,13 +115,13 @@ make --silent re || exit
 # compare .gitignore "tr ex ' X'" "tr pi 'P '" outfile
 # compare "infile" "tr a ' '" "tr ' ' x" "outfile"
 
-# compare infile "grep pipex" "wc -lw" outfile
-compare /dev/urandom "cat" "head -1" outfile
-# compare infile "cat" "trzero a b" outfile
-# compare infile "notexisting" "wc" outfile
-# compare infile "catzado" "wc -w" outfile
+compare infile "grep pipex" "wc -lw" outfile
+compare infile "cat" "trzero a b" outfile
+compare infile "notexisting" "wc" outfile
+compare infile "catzado" "wc -w" outfile
 
-# compare bad "cat" "grep x" outfile
-# compare bad "grep x" "cat" outfile
+compare bad "cat" "grep x" outfile
+compare bad "grep x" "cat" outfile
 
+# compare /dev/urandom "cat" "head -1" outfile
 # compare .gitignore "ping 8.8.8.8" "grep ms" outfile

@@ -6,14 +6,12 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:20:45 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/25 14:15:58 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/26 01:20:54 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_BONUS_H
 # define DEFINES_BONUS_H
-
-# define VERBOSE 0
 
 # define CHILD_PROCESS_ID 0
 
