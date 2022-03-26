@@ -1,0 +1,3 @@
+[submodule "libs/libft"]
+	path = libs/libft
+	url = https://github.com/librity/ft_libft
