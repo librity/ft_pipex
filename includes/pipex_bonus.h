@@ -25,14 +25,6 @@ typedef struct s_file
 	int		fd;
 }		t_file;
 
-typedef struct s_child
-{
-	int		pid;
-
-	int		in_pipe[2];
-	int		*out_pipe;
-}		t_child;
-
 typedef struct s_exec
 {
 	char	*raw;
@@ -46,6 +38,7 @@ typedef struct s_exec
 typedef struct s_pipex
 {
 	int		argc;
+	int		arg;
 	char	**argv;
 
 	char	**envp;
@@ -53,15 +46,9 @@ typedef struct s_pipex
 	char	**paths;
 
 	char	*limiter;
-
-	int		pipe[2];
-
-	t_child	hdoc;
+	char	*last_cmd;
 
 	t_file	infile;
-	t_child	left;
-
-	t_child	right;
 	t_file	outfile;
 
 	t_list	*free_me;
@@ -74,13 +61,20 @@ int		hdoc(int argc, char **argv, char **envp);
  * INITIALIZERS
 \******************************************************************************/
 
-void	initialize_hdoc(t_pipex *ctl, int argc, char **argv, char **envp);
-void	initialize_nex(t_pipex *ctl, int argc, char **argv, char **envp);
+void	initialize_control(t_pipex *ctl, int argc, char **argv, char **envp);
+void	initialize_hdoc(t_pipex *ctl);
+void	initialize_nex(t_pipex *ctl);
 
 void	initialize_environment(t_pipex *ctl);
 
-void	initialize_hdoc_left(t_pipex *ctl);
-void	initialize_hdoc_right(t_pipex *ctl);
+/******************************************************************************\
+ * CHILDREN
+\******************************************************************************/
+
+pid_t	fork_or_die(void);
+
+void	get_hdoc(t_pipex *ctl);
+void	handle_child(t_pipex *ctl, char *raw_cmd);
 
 /******************************************************************************\
  * COMMANDS
@@ -122,21 +116,12 @@ void	stdin_to_pipe(int pipe_fds[2]);
 void	pipe_to_stdin(int pipe_fds[2]);
 
 void	stdout_to_pipe(int pipe_fds[2]);
+void	pipe_to_stdout(int pipe_fds[2]);
 
 void	file_to_stdin(int infile_fd);
 void	stdout_to_file(int outfile_fd);
 
 void	str_to_pipe(int pipe_fds[2], char *str);
-
-/******************************************************************************\
- * CHILDREN
-\******************************************************************************/
-
-int		fork_or_die(void);
-
-void	handle_hdoc(t_pipex *ctl);
-void	handle_hdoc_left(t_pipex *ctl);
-void	handle_hdoc_right(t_pipex *ctl);
 
 /******************************************************************************\
  * CLEANUP

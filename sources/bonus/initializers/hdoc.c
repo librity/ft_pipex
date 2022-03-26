@@ -6,27 +6,22 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 15:39:11 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/26 00:07:59 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/26 01:03:00 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex_bonus.h>
 
-static void	initialize_pipes(t_pipex *ctl)
+static void	initialize_files(t_pipex *ctl)
 {
-	pipe_or_die(ctl->hdoc.in_pipe);
-	pipe_or_die(ctl->left.in_pipe);
-	pipe_or_die(ctl->right.in_pipe);
-	ctl->left.out_pipe = ctl->right.in_pipe;
+	ctl->outfile.path = ctl->argv[ctl->argc - 1];
+	ctl->outfile.fd = open_outfile_or_die(ctl);
 }
 
-void	initialize_hdoc(t_pipex *ctl, int argc, char **argv, char **envp)
+void	initialize_hdoc(t_pipex *ctl)
 {
-	ctl->argc = argc;
-	ctl->argv = argv;
-	ctl->envp = envp;
-	ctl->free_me = NULL;
+	ctl->arg = 3;
 	ctl->limiter = ctl->argv[2];
-	initialize_pipes(ctl);
-	initialize_environment(ctl);
+	initialize_files(ctl);
+	get_hdoc(ctl);
 }

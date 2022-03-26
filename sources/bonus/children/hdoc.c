@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_hdoc.c                                         :+:      :+:    :+:   */
+/*   hdoc.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 22:47:21 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/26 00:04:41 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/26 01:16:26 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex_bonus.h>
 
-static void	get_hdoc_stream(t_pipex *ctl)
+static void	get_hdoc_stream(t_pipex *ctl, int pipe[2])
 {
 	int		status;
 	char	*line;
@@ -26,23 +26,28 @@ static void	get_hdoc_stream(t_pipex *ctl)
 		if (ft_streq(line, ctl->limiter))
 		{
 			free(line);
+			free_memory(ctl);
 			exit(EXIT_SUCCESS);
 		}
 		line = ft_strjoin_free(line, "\n");
-		str_to_pipe(ctl->hdoc.in_pipe, line);
+		str_to_pipe(pipe, line);
 		free(line);
 	}
 }
 
-void	handle_hdoc(t_pipex *ctl)
+void	get_hdoc(t_pipex *ctl)
 {
-	ctl->hdoc.pid = fork_or_die();
-	if (ctl->hdoc.pid != CHILD_PROCESS_ID)
+	pid_t	hdoc;
+	int		pipe[2];
+
+	pipe_or_die(pipe);
+	hdoc = fork_or_die();
+	if (hdoc != CHILD_PROCESS_ID)
 	{
-		get_hdoc_stream(ctl);
+		get_hdoc_stream(ctl, pipe);
 		return ;
 	}
-	pipe_to_stdin(ctl->hdoc.in_pipe);
-	close_pipe(ctl->hdoc.in_pipe);
+	pipe_to_stdin(pipe);
+	close_pipe(pipe);
 	wait(NULL);
 }

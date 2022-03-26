@@ -6,15 +6,15 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:29:53 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/26 00:06:31 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/26 01:01:00 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex_bonus.h>
 
-int	fork_or_die(void)
+pid_t	fork_or_die(void)
 {
-	int	pid;
+	pid_t	pid;
 
 	pid = fork();
 	if (pid < 0)

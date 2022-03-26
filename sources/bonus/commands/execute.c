@@ -6,11 +6,20 @@
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:27 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/25 23:56:45 by lpaulo-m         ###   ########.fr       */
+/*   Updated: 2022/03/26 00:37:44 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex_bonus.h>
+
+void	initialize_environment(t_pipex *ctl)
+{
+	if (ctl->paths != NULL)
+		return ;
+	ctl->path = get_clean_path_or_die(ctl->envp);
+	ctl->paths = get_paths_or_die(ctl->envp);
+	ft_add_lalloc_array(&ctl->free_me, (void **)ctl->paths);
+}
 
 static void	initialize_execute(t_pipex *ctl, char *raw_cmd, t_exec *ex)
 {
@@ -28,6 +37,7 @@ void	execute_or_die(t_pipex *ctl, char *raw_cmd)
 {
 	t_exec	ex;
 
+	initialize_environment(ctl);
 	initialize_execute(ctl, raw_cmd, &ex);
 	ex.code = execve(ex.path, ex.tokens, ctl->envp);
 	if (ex.code < 0)

@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hdoc_right.c                                       :+:      :+:    :+:   */
+/*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/01 20:08:13 by lpaulo-m          #+#    #+#             */
-/*   Updated: 2022/03/26 00:14:36 by lpaulo-m         ###   ########.fr       */
+/*   Created: 2022/03/26 00:52:57 by lpaulo-m          #+#    #+#             */
+/*   Updated: 2022/03/26 01:14:35 by lpaulo-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pipex_bonus.h>
 
-static void	initialize(t_pipex *ctl)
+void	handle_child(t_pipex *ctl, char *raw_cmd)
 {
-	ctl->outfile.path = ctl->argv[5];
-	ctl->outfile.fd = open_outfile_or_die(ctl);
-}
+	pid_t	pid;
+	int		pipe[2];
 
-static void	redirect_fds(t_pipex *ctl)
-{
-	stdout_to_file(ctl->outfile.fd);
-	pipe_to_stdin(ctl->right.in_pipe);
-	close_pipe(ctl->right.in_pipe);
-	close_or_die(ctl->outfile.fd);
-}
-
-void	handle_hdoc_right(t_pipex *ctl)
-{
-	initialize(ctl);
-	redirect_fds(ctl);
-	execute_or_die(ctl, ctl->argv[4]);
-	free_memory(ctl);
+	pipe_or_die(pipe);
+	pid = fork_or_die();
+	if (pid == CHILD_PROCESS_ID)
+	{
+		stdout_to_pipe(pipe);
+		close_pipe(pipe);
+		execute_or_die(ctl, raw_cmd);
+		return ;
+	}
+	pipe_to_stdin(pipe);
+	close_pipe(pipe);
+	waitpid(pid, NULL, 0);
 }
