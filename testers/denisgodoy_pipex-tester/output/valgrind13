@@ -1,6 +1,0 @@
-==111511== Memcheck, a memory error detector
-==111511== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==111511== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
-==111511== Command: ./pipex infile cat tr\ [a-z]\ [A-Z] output/valgrind
-==111511== Parent PID: 111309
-==111511== 

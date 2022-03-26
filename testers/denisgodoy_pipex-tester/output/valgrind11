@@ -1,6 +1,0 @@
-==111480== Memcheck, a memory error detector
-==111480== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==111480== Using Valgrind-3.17.0 and LibVEX; rerun with -h for copyright info
-==111480== Command: ./pipex infile grep\ d cat\ -e output/valgrind
-==111480== Parent PID: 111309
-==111480== 
