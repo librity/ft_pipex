@@ -6,7 +6,7 @@
 #    By: lpaulo-m <lpaulo-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/26 16:25:08 by lpaulo-m          #+#    #+#              #
-#    Updated: 2022/03/26 15:27:06 by lpaulo-m         ###   ########.fr        #
+#    Updated: 2022/03/26 18:30:06 by lpaulo-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CC = gcc
 CC_STRICT = $(CC) $(CCF_STRICT) $(CCF_OPTIMIZATION)
 
 CCF_STRICT = -Wall -Wextra -Werror
+CCF_INCLUDES = -I $(LIBFT_INCLUDES) -I $(INCLUDES_PATH)
 # CCF_OPTIMIZATION = -O3
 # CCF_DEBUG = -g -fsanitize=leak
 
@@ -32,6 +33,12 @@ SOURCES_PATH = ./sources
 INCLUDES_PATH = ./includes
 ARCHIVES_PATH = ./archives
 
+LIBS_PATH = ./libs
+
+LIBFT_PATH = $(LIBS_PATH)/libft
+LIBFT = $(LIBFT_PATH)/libft.a
+LIBFT_INCLUDES = $(LIBFT_PATH)/includes
+
 ################################################################################
 # MANDATORY
 ################################################################################
@@ -42,21 +49,21 @@ M_ARCHIVE = $(ARCHIVES_PATH)/pipex.a
 M_SOURCES_PATH = $(SOURCES_PATH)/mandatory
 M_OBJECTS_PATH = $(OBJECTS_PATH)/mandatory
 
-M_SOURCES = $(wildcard $(M_SOURCES_PATH)/**/*.c) $(wildcard $(M_SOURCES_PATH)/*.c)
-# M_SOURCES = ./sources/mandatory/children/forks.c ./sources/mandatory/children/left.c ./sources/mandatory/children/right.c ./sources/mandatory/cleanup/memory.c ./sources/mandatory/commands/execute.c ./sources/mandatory/commands/find.c ./sources/mandatory/commands/find_left.c ./sources/mandatory/commands/find_right.c ./sources/mandatory/commands/loggers.c ./sources/mandatory/commands/split.c ./sources/mandatory/commands/tokenize.c ./sources/mandatory/environment/loggers.c ./sources/mandatory/environment/path.c ./sources/mandatory/environment/paths.c ./sources/mandatory/errors/arguments.c ./sources/mandatory/errors/die_1.c ./sources/mandatory/errors/die_2.c ./sources/mandatory/errors/print_error.c ./sources/mandatory/files/close.c ./sources/mandatory/files/create.c ./sources/mandatory/files/create_outfile.c ./sources/mandatory/files/open.c ./sources/mandatory/files/open_infile.c ./sources/mandatory/initializers/children.c ./sources/mandatory/initializers/environment.c ./sources/mandatory/initializers/files.c ./sources/mandatory/initializers/fourex.c ./sources/mandatory/initializers/left.c ./sources/mandatory/initializers/right.c ./sources/mandatory/initializers/utils.c ./sources/mandatory/pipes/core.c ./sources/mandatory/pipes/redirections.c ./sources/mandatory/fourex.c
+# M_SOURCES = $(wildcard $(M_SOURCES_PATH)/**/*.c) $(wildcard $(M_SOURCES_PATH)/*.c)
+M_SOURCES = ./sources/mandatory/children/forks.c ./sources/mandatory/children/left.c ./sources/mandatory/children/right.c ./sources/mandatory/cleanup/memory.c ./sources/mandatory/commands/execute.c ./sources/mandatory/commands/find.c ./sources/mandatory/commands/find_left.c ./sources/mandatory/commands/find_right.c ./sources/mandatory/commands/loggers.c ./sources/mandatory/commands/split.c ./sources/mandatory/commands/tokenize.c ./sources/mandatory/environment/loggers.c ./sources/mandatory/environment/path.c ./sources/mandatory/environment/paths.c ./sources/mandatory/errors/arguments.c ./sources/mandatory/errors/die_1.c ./sources/mandatory/errors/die_2.c ./sources/mandatory/errors/print_error.c ./sources/mandatory/files/close.c ./sources/mandatory/files/create.c ./sources/mandatory/files/create_outfile.c ./sources/mandatory/files/open.c ./sources/mandatory/files/open_infile.c ./sources/mandatory/initializers/children.c ./sources/mandatory/initializers/environment.c ./sources/mandatory/initializers/files.c ./sources/mandatory/initializers/fourex.c ./sources/mandatory/initializers/left.c ./sources/mandatory/initializers/right.c ./sources/mandatory/initializers/utils.c ./sources/mandatory/pipes/core.c ./sources/mandatory/pipes/redirections.c ./sources/mandatory/fourex.c
 
 M_OBJECTS = $(patsubst $(M_SOURCES_PATH)/%.c, $(M_OBJECTS_PATH)/%.o, $(M_SOURCES))
 M_OBJECT_DIRECTORIES = $(sort $(dir $(M_OBJECTS)))
 
 M_MAIN = ./main.c
 
-M_ARCHIVES = $(M_ARCHIVE) $(LIBFT_ARCHIVE)
+M_ARCHIVES = $(M_ARCHIVE) $(LIBFT)
 
 all: $(NAME)
 
-$(NAME): $(M_ARCHIVE)
+$(NAME): $(LIBFT) $(M_ARCHIVE)
 	$(CC_STRICT) $(CCF_DEBUG) \
-		-I $(INCLUDES_PATH) \
+		$(CCF_INCLUDES) \
 		$(M_MAIN) \
 		$(M_ARCHIVES) \
 		-o $(NAME)
@@ -65,7 +72,7 @@ $(M_ARCHIVE): $(M_HEADER) $(M_OBJECTS)
 	$(ARCHIVE_AND_INDEX) $(M_ARCHIVE) $(M_OBJECTS)
 
 $(M_OBJECTS_PATH)/%.o: $(M_SOURCES_PATH)/%.c
-	$(CC_STRICT) -I $(INCLUDES_PATH) -c -o $@ $<
+	$(CC_STRICT) $(CCF_INCLUDES) -c -o $@ $<
 
 clean:
 	$(REMOVE) $(M_OBJECTS)
@@ -86,32 +93,30 @@ B_ARCHIVE = $(ARCHIVES_PATH)/pipex_bonus.a
 B_SOURCES_PATH = $(SOURCES_PATH)/bonus
 B_OBJECTS_PATH = $(OBJECTS_PATH)/bonus
 
-B_SOURCES = $(wildcard $(B_SOURCES_PATH)/**/*.c) $(wildcard $(B_SOURCES_PATH)/*.c)
-# B_SOURCES = ./sources/bonus/children/child.c ./sources/bonus/children/forks.c ./sources/bonus/children/hdoc.c ./sources/bonus/cleanup/memory.c ./sources/bonus/commands/execute.c ./sources/bonus/commands/find.c ./sources/bonus/commands/or_die.c ./sources/bonus/commands/path.c ./sources/bonus/commands/paths.c ./sources/bonus/commands/split.c ./sources/bonus/commands/tokenize.c ./sources/bonus/errors/arguments.c ./sources/bonus/errors/die_1.c ./sources/bonus/errors/die_2.c ./sources/bonus/errors/print_error.c ./sources/bonus/files/close.c ./sources/bonus/files/create.c ./sources/bonus/files/create_outfile.c ./sources/bonus/files/open.c ./sources/bonus/files/open_infile.c ./sources/bonus/initializers/control.c ./sources/bonus/initializers/hdoc.c ./sources/bonus/initializers/nex.c ./sources/bonus/pipes/core.c ./sources/bonus/pipes/file.c ./sources/bonus/pipes/stdin.c ./sources/bonus/pipes/stdout.c ./sources/bonus/pipes/write.c ./sources/bonus/nex.c
+# B_SOURCES = $(wildcard $(B_SOURCES_PATH)/**/*.c) $(wildcard $(B_SOURCES_PATH)/*.c)
+B_SOURCES = ./sources/bonus/children/child.c ./sources/bonus/children/forks.c ./sources/bonus/children/hdoc.c ./sources/bonus/cleanup/memory.c ./sources/bonus/commands/execute.c ./sources/bonus/commands/find.c ./sources/bonus/commands/or_die.c ./sources/bonus/commands/path.c ./sources/bonus/commands/paths.c ./sources/bonus/commands/split.c ./sources/bonus/commands/tokenize.c ./sources/bonus/errors/arguments.c ./sources/bonus/errors/die_1.c ./sources/bonus/errors/die_2.c ./sources/bonus/errors/print_error.c ./sources/bonus/files/close.c ./sources/bonus/files/create.c ./sources/bonus/files/create_outfile.c ./sources/bonus/files/open.c ./sources/bonus/files/open_infile.c ./sources/bonus/initializers/control.c ./sources/bonus/initializers/hdoc.c ./sources/bonus/initializers/nex.c ./sources/bonus/pipes/core.c ./sources/bonus/pipes/file.c ./sources/bonus/pipes/stdin.c ./sources/bonus/pipes/stdout.c ./sources/bonus/pipes/write.c ./sources/bonus/nex.c
 
 B_OBJECTS = $(patsubst $(B_SOURCES_PATH)/%.c, $(B_OBJECTS_PATH)/%.o, $(B_SOURCES))
 B_OBJECT_DIRECTORIES = $(sort $(dir $(B_OBJECTS)))
 
-B_ARCHIVES = $(B_ARCHIVE) $(LIBFT_ARCHIVE)
-
 B_MAIN = ./main_bonus.c
 
-B_ARCHIVES = $(B_ARCHIVE) $(LIBFT_ARCHIVE)
+B_ARCHIVES = $(B_ARCHIVE) $(LIBFT)
 
 allb: bonus
 
-bonus: $(B_ARCHIVE)
+bonus: $(LIBFT) $(B_ARCHIVE)
 	$(CC_STRICT) $(CCF_DEBUG) \
-		-I $(INCLUDES_PATH) \
+		$(CCF_INCLUDES) \
 		$(B_MAIN) \
 		$(B_ARCHIVES) \
 		-o $(NAME)
 
-$(B_ARCHIVES): $(B_HEADER) $(B_OBJECTS)
+$(B_ARCHIVE): $(B_HEADER) $(B_OBJECTS)
 	$(ARCHIVE_AND_INDEX) $(B_ARCHIVE) $(B_OBJECTS)
 
 $(B_OBJECTS_PATH)/%.o: $(B_SOURCES_PATH)/%.c
-	$(CC_STRICT) -I $(INCLUDES_PATH) -c -o $@ $<
+	$(CC_STRICT) $(CCF_INCLUDES) -c -o $@ $<
 
 
 cleanb:
@@ -124,10 +129,8 @@ fcleanb: cleanb
 reb: fcleanb bonus
 
 ################################################################################
-# INITIALIZE
+# DIRS
 ################################################################################
-
-initialize: make_dirs build_libs
 
 make_dirs: $(ARCHIVES_PATH) $(OBJECTS_PATH) \
 	$(M_OBJECT_DIRECTORIES) $(B_OBJECT_DIRECTORIES)
@@ -144,8 +147,6 @@ $(M_OBJECT_DIRECTORIES):
 $(B_OBJECT_DIRECTORIES):
 	$(SAFE_MAKEDIR) $@ && touch "$@/.keep"
 
-build_libs: build_libft
-
 ################################################################################
 # CLEAN
 ################################################################################
@@ -156,21 +157,11 @@ tclean: clean_libs fclean fcleanb tests_clean example_clean vglog_clean
 # LIBS
 ################################################################################
 
-LIBS_PATH = ./libs
-
-LIBFT = libft.a
-LIBFT_PATH = $(LIBS_PATH)/libft
-LIBFT_ARCHIVE = $(ARCHIVES_PATH)/$(LIBFT)
-LIBFT_HEADER = $(LIBFT_PATH)/includes/libft.h
-
-build_libft:
+$(LIBFT):
 	$(MAKE_EXTERNAL) $(LIBFT_PATH) all
-	$(COPY) $(LIBFT_PATH)/$(LIBFT) $(LIBFT_ARCHIVE)
-	$(COPY) $(LIBFT_HEADER) $(INCLUDES_PATH)
 
 libft_clean:
 	$(MAKE_EXTERNAL) $(LIBFT_PATH) fclean
-	$(REMOVE) $(LIBFT_ARCHIVE)
 
 clean_libs: libft_clean
 
@@ -186,7 +177,7 @@ EXECUTE_TESTS = ./test
 
 build_tests: re
 	$(CC) $(CCF_DEBUG) \
-		-I $(INCLUDES_PATH) \
+		$(CCF_INCLUDES) \
 		$(TEST_SOURCES) \
 		$(M_ARCHIVES) \
 		$(CCF_TEST_LIBS) \
@@ -213,7 +204,7 @@ example: build_example
 
 build_example: $(M_ARCHIVE)
 	$(CC) $(CCF_DEBUG) \
-		-I $(INCLUDES_PATH) \
+		$(CCF_INCLUDES) \
 		$(EXAMPLE_MAIN) \
 		$(M_ARCHIVES)
 
@@ -243,7 +234,7 @@ vglog: vg_build
 
 vg_build: $(M_ARCHIVE)
 	$(CC_STRICT) \
-		-I $(INCLUDES_PATH) \
+		$(CCF_INCLUDES) \
 		$(M_MAIN) \
 		$(M_ARCHIVES) \
 		-o $(NAME)
@@ -286,22 +277,24 @@ dump_sources:
 # PHONY
 ################################################################################
 
-.PHONY: all clean fclean re \
+.PHONY: \
+all clean fclean re \
 \
-	bonus allb cleanb fcleanb reb \
+allb bonus cleanb fcleanb reb \
 \
-	initialize make_dirs build_libs \
+make_dirs \
 \
-	build_libft libft_clean \
-	clean_libs \
+tclean \
 \
-	build_tests test tests_clean \
-	build_example example example_clean \
-	vg vglog vg_build vglog_clean \
+libft_clean clean_libs \
 \
-	tclean \
+build_tests test tests_clean \
 \
-	norm git gitm dump_sources
+example build_example example_clean \
+\
+vg vglog vg_build vglog_clean \
+\
+norm git gitm dump_sources
 
 ################################################################################
 # Colors
