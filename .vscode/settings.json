@@ -8,32 +8,5 @@
 
   "[c]": {
     "editor.defaultFormatter": "keyhr.42-c-format"
-  },
-  "files.associations": {
-    "*.gohtml": "html",
-    "cstdlib": "c",
-    "cstdio": "c",
-    "unistd.h": "c",
-    "pipex.h": "c",
-    "defines.h": "c",
-    "limits.h": "c",
-    "utils.h": "c",
-    "array": "c",
-    "*.tcc": "c",
-    "deque": "c",
-    "string": "c",
-    "vector": "c",
-    "string_view": "c",
-    "algorithm": "c",
-    "limits": "c",
-    "numeric": "c",
-    "streambuf": "c",
-    "functional": "c",
-    "errno.h": "c",
-    "ft_printf.h": "c",
-    "wait.h": "c",
-    "memory": "c",
-    "pipex_bonus.h": "c",
-    "stdio.h": "c"
   }
 }
