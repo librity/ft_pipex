@@ -50,7 +50,7 @@ it encourages developers to create programs that do one thing well,
 and that work well with other programs.
 It's also extremely modular and versatile.
 
-I learned a lot about child processes, filesystem interfaces,
+I learned about child processes, filesystem interfaces
 and the internals of `bash`, the target of our emulation.
 Since I did both bonuses I'm pretty confident about
 the next big challenge in the 42 curriculum: `minishell`.
